@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="giaothongModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GIAOVIEN">
+          <Key>
+            <PropertyRef Name="MaGV" />
+          </Key>
+          <Property Name="MaGV" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="HoDem" Type="nvarchar" MaxLength="25" />
+          <Property Name="TenGV" Type="nvarchar" MaxLength="15" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="SoCCCD" Type="char" MaxLength="12" />
+          <Property Name="NoiCT" Type="nvarchar" MaxLength="30" />
+          <Property Name="GioiTinh" Type="int" />
+          <Property Name="Phone" Type="char" MaxLength="15" />
+          <Property Name="TuyenDung" Type="nvarchar" MaxLength="10" />
+          <Property Name="TrinhDo_VH" Type="nvarchar" MaxLength="10" />
+          <Property Name="Nganh_CM" Type="nvarchar" MaxLength="20" />
+          <Property Name="TrinhDo_SP" Type="nvarchar" MaxLength="10" />
+          <Property Name="GV_LT" Type="bit" />
+          <Property Name="GV_TH" Type="bit" />
+          <Property Name="SoGCN" Type="char" MaxLength="15" />
+          <Property Name="MaSoGTVT" Type="char" MaxLength="5" />
+          <Property Name="MaCSDT" Type="char" MaxLength="5" />
+          <Property Name="TrangThai" Type="bit" />
+          <Property Name="AnhCD" Type="text" />
+          <Property Name="NguoiCapNhat" Type="nvarchar" MaxLength="20" />
+          <Property Name="NgayCapNhat" Type="date" />
+          <Property Name="NguoiDuyet" Type="nvarchar" MaxLength="20" />
+          <Property Name="NgayDuyet" Type="date" />
+          <Property Name="TrinhDo_CM" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="GIAOVIEN_GCN">
+          <Key>
+            <PropertyRef Name="SoGCN" />
+          </Key>
+          <Property Name="SoGCN" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="QDCap" Type="char" MaxLength="15" />
+          <Property Name="DonViCap" Type="char" MaxLength="5" />
+          <Property Name="NgayCap" Type="date" />
+          <Property Name="HangXe" Type="char" MaxLength="5" />
+          <Property Name="MaDonViTapHuan" Type="char" MaxLength="5" />
+          <Property Name="NgayKiemTra" Type="date" />
+          <Property Name="AnhGCN" Type="text" />
+          <Property Name="NguoiCapNhat" Type="nvarchar" MaxLength="15" />
+          <Property Name="NgayCapNhat" Type="date" />
+          <Property Name="MaDVKiemTra" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HangXe">
+          <Key>
+            <PropertyRef Name="mahx" />
+          </Key>
+          <Property Name="mahx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ten" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="LoaiXe">
+          <Key>
+            <PropertyRef Name="MaLX" />
+          </Key>
+          <Property Name="MaLX" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="province_city">
+          <Key>
+            <PropertyRef Name="matp" />
+          </Key>
+          <Property Name="matp" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="type" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="slug" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_ID" Type="int" />
+          <Property Name="UserName" Type="char" MaxLength="30" />
+          <Property Name="Password" Type="char" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="Phone" Type="char" MaxLength="15" />
+          <Property Name="Email" Type="char" MaxLength="25" />
+          <Property Name="Address" Type="nvarchar" MaxLength="60" />
+          <Property Name="BirthDay" Type="date" />
+        </EntityType>
+        <EntityType Name="USERS_ROLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="XETAPLAI">
+          <Key>
+            <PropertyRef Name="SoDangKy" />
+          </Key>
+          <Property Name="SoDangKy" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TenChuSoHuu" Type="char" MaxLength="30" />
+          <Property Name="SoGPTL" Type="char" MaxLength="15" />
+          <Property Name="NhanHieu" Type="char" MaxLength="15" />
+          <Property Name="KieuLoai" Type="char" MaxLength="20" />
+          <Property Name="HangXe" Type="char" MaxLength="5" />
+          <Property Name="MauXe" Type="nvarchar" MaxLength="20" />
+          <Property Name="SoDongCo" Type="char" MaxLength="20" />
+          <Property Name="SoKhung" Type="char" MaxLength="20" />
+          <Property Name="NamSX" Type="char" MaxLength="10" />
+          <Property Name="LoaiXe" Type="nvarchar" MaxLength="15" />
+          <Property Name="XeSatHach" Type="bit" />
+          <Property Name="TrangThaiHD" Type="bit" />
+          <Property Name="NgayCapNhat" Type="date" />
+          <Property Name="NguoiCapNhat" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="XETAPLAI_GP">
+          <Key>
+            <PropertyRef Name="SoGPXTL" />
+          </Key>
+          <Property Name="SoGPXTL" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="SoDangKy" Type="char" MaxLength="10" />
+          <Property Name="MaDonViCap" Type="char" MaxLength="5" />
+          <Property Name="MaCSDT" Type="char" MaxLength="5" />
+          <Property Name="XeHopDong" Type="bit" />
+          <Property Name="NgayCap" Type="date" />
+          <Property Name="NgayHH" Type="date" />
+          <Property Name="AnhGP" Type="text" />
+          <Property Name="AnhDKiem" Type="text" />
+          <Property Name="AnhDky" Type="text" />
+          <Property Name="NgayCapNhat" Type="date" />
+          <Property Name="NguoiCapNhat" Type="nvarchar" MaxLength="15" />
+          <Property Name="DuongTapLai" Type="char" MaxLength="200" />
+        </EntityType>
+        <Association Name="fk_giaovien_gcn">
+          <End Role="GIAOVIEN_GCN" Type="Self.GIAOVIEN_GCN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GIAOVIEN" Type="Self.GIAOVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAOVIEN_GCN">
+              <PropertyRef Name="SoGCN" />
+            </Principal>
+            <Dependent Role="GIAOVIEN">
+              <PropertyRef Name="SoGCN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_role">
+          <End Role="USERS_ROLE" Type="Self.USERS_ROLE" Multiplicity="0..1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS_ROLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_xetl_gp">
+          <End Role="XETAPLAI_GP" Type="Self.XETAPLAI_GP" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="XETAPLAI" Type="Self.XETAPLAI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XETAPLAI_GP">
+              <PropertyRef Name="SoGPXTL" />
+            </Principal>
+            <Dependent Role="XETAPLAI">
+              <PropertyRef Name="SoGPTL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="giaothongModelStoreContainer">
+          <EntitySet Name="GIAOVIEN" EntityType="Self.GIAOVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GIAOVIEN_GCN" EntityType="Self.GIAOVIEN_GCN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiXe" EntityType="Self.LoaiXe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="province_city" EntityType="Self.province_city" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS_ROLE" EntityType="Self.USERS_ROLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="XETAPLAI" EntityType="Self.XETAPLAI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="XETAPLAI_GP" EntityType="Self.XETAPLAI_GP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HangXe" EntityType="Self.HangXe" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HangXe].[mahx] AS [mahx], 
+    [HangXe].[ten] AS [ten]
+    FROM [dbo].[HangXe] AS [HangXe]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_giaovien_gcn" Association="Self.fk_giaovien_gcn">
+            <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
+            <End Role="GIAOVIEN" EntitySet="GIAOVIEN" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_role" Association="Self.fk_user_role">
+            <End Role="USERS_ROLE" EntitySet="USERS_ROLE" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="fk_xetl_gp" Association="Self.fk_xetl_gp">
+            <End Role="XETAPLAI_GP" EntitySet="XETAPLAI_GP" />
+            <End Role="XETAPLAI" EntitySet="XETAPLAI" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="giaothongModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="giaothongEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GIAOVIENs" EntityType="giaothongModel.GIAOVIEN" />
+          <EntitySet Name="GIAOVIEN_GCN" EntityType="giaothongModel.GIAOVIEN_GCN" />
+          <EntitySet Name="USERS" EntityType="giaothongModel.USER" />
+          <EntitySet Name="USERS_ROLE" EntityType="giaothongModel.USERS_ROLE" />
+          <EntitySet Name="XETAPLAIs" EntityType="giaothongModel.XETAPLAI" />
+          <EntitySet Name="XETAPLAI_GP" EntityType="giaothongModel.XETAPLAI_GP" />
+          <AssociationSet Name="fk_user_role" Association="giaothongModel.fk_user_role">
+            <End Role="USERS_ROLE" EntitySet="USERS_ROLE" />
+            <End Role="USER" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="fk_xetl_gp" Association="giaothongModel.fk_xetl_gp">
+            <End Role="XETAPLAI_GP" EntitySet="XETAPLAI_GP" />
+            <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
+          </AssociationSet>
+          <EntitySet Name="province_city" EntityType="giaothongModel.province_city" />
+          <EntitySet Name="HangXes" EntityType="giaothongModel.HangXe" />
+          <AssociationSet Name="fk_giaovien_gcn" Association="giaothongModel.fk_giaovien_gcn">
+            <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
+            <End Role="GIAOVIEN" EntitySet="GIAOVIENs" />
+          </AssociationSet>
+          <EntitySet Name="LoaiXes" EntityType="giaothongModel.LoaiXe" />
+        </EntityContainer>
+        <EntityType Name="GIAOVIEN">
+          <Key>
+            <PropertyRef Name="MaGV" />
+          </Key>
+          <Property Name="MaGV" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="HoDem" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="TenGV" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="SoCCCD" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Name="NoiCT" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="Int32" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="TuyenDung" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TrinhDo_VH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Nganh_CM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TrinhDo_SP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="GV_LT" Type="Boolean" />
+          <Property Name="GV_TH" Type="Boolean" />
+          <Property Name="SoGCN" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="MaSoGTVT" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="MaCSDT" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <Property Name="AnhCD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NguoiCapNhat" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
+          <Property Name="NguoiDuyet" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDuyet" Type="DateTime" Precision="0" />
+          <Property Name="TrinhDo_CM" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="GIAOVIEN_GCN" Relationship="giaothongModel.fk_giaovien_gcn" FromRole="GIAOVIEN" ToRole="GIAOVIEN_GCN" />
+        </EntityType>
+        <EntityType Name="GIAOVIEN_GCN">
+          <Key>
+            <PropertyRef Name="SoGCN" />
+          </Key>
+          <Property Name="SoGCN" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="QDCap" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="DonViCap" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="NgayCap" Type="DateTime" Precision="0" />
+          <Property Name="HangXe" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="MaDonViTapHuan" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="NgayKiemTra" Type="DateTime" Precision="0" />
+          <Property Name="AnhGCN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NguoiCapNhat" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
+          <Property Name="MaDVKiemTra" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GIAOVIENs" Relationship="giaothongModel.fk_giaovien_gcn" FromRole="GIAOVIEN_GCN" ToRole="GIAOVIEN" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_ID" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDay" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="USERS_ROLE" Relationship="giaothongModel.fk_user_role" FromRole="USER" ToRole="USERS_ROLE" />
+        </EntityType>
+        <EntityType Name="USERS_ROLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="USERS" Relationship="giaothongModel.fk_user_role" FromRole="USERS_ROLE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="XETAPLAI">
+          <Key>
+            <PropertyRef Name="SoDangKy" />
+          </Key>
+          <Property Name="SoDangKy" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="TenChuSoHuu" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="SoGPTL" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="NhanHieu" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="KieuLoai" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="HangXe" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="MauXe" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SoDongCo" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="SoKhung" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="NamSX" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="LoaiXe" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="XeSatHach" Type="Boolean" />
+          <Property Name="TrangThaiHD" Type="Boolean" />
+          <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
+          <Property Name="NguoiCapNhat" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="XETAPLAI_GP" Relationship="giaothongModel.fk_xetl_gp" FromRole="XETAPLAI" ToRole="XETAPLAI_GP" />
+        </EntityType>
+        <EntityType Name="XETAPLAI_GP">
+          <Key>
+            <PropertyRef Name="SoGPXTL" />
+          </Key>
+          <Property Name="SoGPXTL" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="SoDangKy" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="MaDonViCap" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="MaCSDT" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="XeHopDong" Type="Boolean" />
+          <Property Name="NgayCap" Type="DateTime" Precision="0" />
+          <Property Name="NgayHH" Type="DateTime" Precision="0" />
+          <Property Name="AnhGP" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AnhDKiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AnhDky" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
+          <Property Name="NguoiCapNhat" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="DuongTapLai" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="XETAPLAIs" Relationship="giaothongModel.fk_xetl_gp" FromRole="XETAPLAI_GP" ToRole="XETAPLAI" />
+        </EntityType>
+        <Association Name="fk_user_role">
+          <End Type="giaothongModel.USERS_ROLE" Role="USERS_ROLE" Multiplicity="0..1" />
+          <End Type="giaothongModel.USER" Role="USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS_ROLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_xetl_gp">
+          <End Type="giaothongModel.XETAPLAI_GP" Role="XETAPLAI_GP" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="giaothongModel.XETAPLAI" Role="XETAPLAI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XETAPLAI_GP">
+              <PropertyRef Name="SoGPXTL" />
+            </Principal>
+            <Dependent Role="XETAPLAI">
+              <PropertyRef Name="SoGPTL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="province_city">
+          <Key>
+            <PropertyRef Name="matp" />
+          </Key>
+          <Property Name="matp" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="slug" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HangXe">
+          <Key>
+            <PropertyRef Name="mahx" />
+          </Key>
+          <Property Name="mahx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ten" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_giaovien_gcn">
+          <End Type="giaothongModel.GIAOVIEN_GCN" Role="GIAOVIEN_GCN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="giaothongModel.GIAOVIEN" Role="GIAOVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAOVIEN_GCN">
+              <PropertyRef Name="SoGCN" />
+            </Principal>
+            <Dependent Role="GIAOVIEN">
+              <PropertyRef Name="SoGCN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LoaiXe">
+          <Key>
+            <PropertyRef Name="MaLX" />
+          </Key>
+          <Property Name="MaLX" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="giaothongModelStoreContainer" CdmEntityContainer="giaothongEntities">
+          <EntitySetMapping Name="GIAOVIENs">
+            <EntityTypeMapping TypeName="giaothongModel.GIAOVIEN">
+              <MappingFragment StoreEntitySet="GIAOVIEN">
+                <ScalarProperty Name="TrinhDo_CM" ColumnName="TrinhDo_CM" />
+                <ScalarProperty Name="NgayDuyet" ColumnName="NgayDuyet" />
+                <ScalarProperty Name="NguoiDuyet" ColumnName="NguoiDuyet" />
+                <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+                <ScalarProperty Name="NguoiCapNhat" ColumnName="NguoiCapNhat" />
+                <ScalarProperty Name="AnhCD" ColumnName="AnhCD" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="MaCSDT" ColumnName="MaCSDT" />
+                <ScalarProperty Name="MaSoGTVT" ColumnName="MaSoGTVT" />
+                <ScalarProperty Name="SoGCN" ColumnName="SoGCN" />
+                <ScalarProperty Name="GV_TH" ColumnName="GV_TH" />
+                <ScalarProperty Name="GV_LT" ColumnName="GV_LT" />
+                <ScalarProperty Name="TrinhDo_SP" ColumnName="TrinhDo_SP" />
+                <ScalarProperty Name="Nganh_CM" ColumnName="Nganh_CM" />
+                <ScalarProperty Name="TrinhDo_VH" ColumnName="TrinhDo_VH" />
+                <ScalarProperty Name="TuyenDung" ColumnName="TuyenDung" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NoiCT" ColumnName="NoiCT" />
+                <ScalarProperty Name="SoCCCD" ColumnName="SoCCCD" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="TenGV" ColumnName="TenGV" />
+                <ScalarProperty Name="HoDem" ColumnName="HoDem" />
+                <ScalarProperty Name="MaGV" ColumnName="MaGV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GIAOVIEN_GCN">
+            <EntityTypeMapping TypeName="giaothongModel.GIAOVIEN_GCN">
+              <MappingFragment StoreEntitySet="GIAOVIEN_GCN">
+                <ScalarProperty Name="MaDVKiemTra" ColumnName="MaDVKiemTra" />
+                <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+                <ScalarProperty Name="NguoiCapNhat" ColumnName="NguoiCapNhat" />
+                <ScalarProperty Name="AnhGCN" ColumnName="AnhGCN" />
+                <ScalarProperty Name="NgayKiemTra" ColumnName="NgayKiemTra" />
+                <ScalarProperty Name="MaDonViTapHuan" ColumnName="MaDonViTapHuan" />
+                <ScalarProperty Name="HangXe" ColumnName="HangXe" />
+                <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
+                <ScalarProperty Name="DonViCap" ColumnName="DonViCap" />
+                <ScalarProperty Name="QDCap" ColumnName="QDCap" />
+                <ScalarProperty Name="SoGCN" ColumnName="SoGCN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="giaothongModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS_ROLE">
+            <EntityTypeMapping TypeName="giaothongModel.USERS_ROLE">
+              <MappingFragment StoreEntitySet="USERS_ROLE">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="XETAPLAIs">
+            <EntityTypeMapping TypeName="giaothongModel.XETAPLAI">
+              <MappingFragment StoreEntitySet="XETAPLAI">
+                <ScalarProperty Name="NguoiCapNhat" ColumnName="NguoiCapNhat" />
+                <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+                <ScalarProperty Name="TrangThaiHD" ColumnName="TrangThaiHD" />
+                <ScalarProperty Name="XeSatHach" ColumnName="XeSatHach" />
+                <ScalarProperty Name="LoaiXe" ColumnName="LoaiXe" />
+                <ScalarProperty Name="NamSX" ColumnName="NamSX" />
+                <ScalarProperty Name="SoKhung" ColumnName="SoKhung" />
+                <ScalarProperty Name="SoDongCo" ColumnName="SoDongCo" />
+                <ScalarProperty Name="MauXe" ColumnName="MauXe" />
+                <ScalarProperty Name="HangXe" ColumnName="HangXe" />
+                <ScalarProperty Name="KieuLoai" ColumnName="KieuLoai" />
+                <ScalarProperty Name="NhanHieu" ColumnName="NhanHieu" />
+                <ScalarProperty Name="SoGPTL" ColumnName="SoGPTL" />
+                <ScalarProperty Name="TenChuSoHuu" ColumnName="TenChuSoHuu" />
+                <ScalarProperty Name="SoDangKy" ColumnName="SoDangKy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="XETAPLAI_GP">
+            <EntityTypeMapping TypeName="giaothongModel.XETAPLAI_GP">
+              <MappingFragment StoreEntitySet="XETAPLAI_GP">
+                <ScalarProperty Name="DuongTapLai" ColumnName="DuongTapLai" />
+                <ScalarProperty Name="NguoiCapNhat" ColumnName="NguoiCapNhat" />
+                <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+                <ScalarProperty Name="AnhDky" ColumnName="AnhDky" />
+                <ScalarProperty Name="AnhDKiem" ColumnName="AnhDKiem" />
+                <ScalarProperty Name="AnhGP" ColumnName="AnhGP" />
+                <ScalarProperty Name="NgayHH" ColumnName="NgayHH" />
+                <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
+                <ScalarProperty Name="XeHopDong" ColumnName="XeHopDong" />
+                <ScalarProperty Name="MaCSDT" ColumnName="MaCSDT" />
+                <ScalarProperty Name="MaDonViCap" ColumnName="MaDonViCap" />
+                <ScalarProperty Name="SoDangKy" ColumnName="SoDangKy" />
+                <ScalarProperty Name="SoGPXTL" ColumnName="SoGPXTL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="province_city">
+            <EntityTypeMapping TypeName="giaothongModel.province_city">
+              <MappingFragment StoreEntitySet="province_city">
+                <ScalarProperty Name="slug" ColumnName="slug" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="matp" ColumnName="matp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HangXes">
+            <EntityTypeMapping TypeName="giaothongModel.HangXe">
+              <MappingFragment StoreEntitySet="HangXe">
+                <ScalarProperty Name="ten" ColumnName="ten" />
+                <ScalarProperty Name="mahx" ColumnName="mahx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiXes">
+            <EntityTypeMapping TypeName="giaothongModel.LoaiXe">
+              <MappingFragment StoreEntitySet="LoaiXe">
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MaLX" ColumnName="MaLX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

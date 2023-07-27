@@ -1,0 +1,342 @@
+﻿<Window x:Class="giaothong.InsertTeacher"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:giaothong"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext="{StaticResource teachervm}"
+        Name="insertTeacherWindow"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" 
+        AllowsTransparency="True" 
+        Background="Transparent"
+        Title="Teacher Window" 
+        Height="650" 
+        Width="1180">
+    <Border CornerRadius="10" Background="#ffffff">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="50" Command="{Binding closeInsertTeacherWindow}" CommandParameter="{Binding ElementName=insertTeacherWindow}">
+                <materialDesign:PackIcon Width="20" Height="20" Foreground="#08bf96" Kind="Logout" />
+            </Button>
+
+            <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="THÊM THÔNG TIN GIÁO VIÊN" FontWeight="SemiBold"></TextBlock>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Border BorderThickness="0 0 1 0" BorderBrush="Gray">
+                    <StackPanel>
+                        <Border CornerRadius="100" Height="150" Width="150" BorderBrush="Gray" BorderThickness="1" Margin="0 15 0 15">
+                            <Image Source="{Binding SelectedImage, UpdateSourceTrigger=PropertyChanged}" Height="150" Width="150" ></Image>
+                        </Border>
+                        
+                        <Button
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Command="{Binding selectedImage}"
+                            Width="100"
+                            ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Content="Chọn ảnh"
+                            BorderThickness="0"
+                            Background="#08bf96"
+                            Foreground="#ffffff">
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <StackPanel Margin="10 0">
+                                <TextBlock Text="Mã giáo viên" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                    <TextBox
+                                      Text="{Binding maGV, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                      IsEnabled="False"
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Mã giáo viên"/>
+                                </Border>
+                            </StackPanel>
+
+                            <WrapPanel>
+                                <StackPanel Margin="10 0">
+                                    <TextBlock Text="Họ đệm" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                    <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                        <TextBox
+                                        Width="219"
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Họ đệm"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Margin="10 0">
+                                    <TextBlock Text="Tên" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                    <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                        <TextBox
+                                      Width="219"
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Tên"/>
+                                    </Border>
+                                </StackPanel>
+                            </WrapPanel>
+
+                            <StackPanel Margin="10 0">
+                                <TextBlock Text="Ngày sinh" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                    <DatePicker
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Ngày sinh" />
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel Margin="10 0">
+                                <TextBlock Text="Số CCCD/CMND" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                    <TextBox
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Số CCCD/CMND"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel Margin="10 0">
+                                <TextBlock Text="Nơi CT" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                    <ComboBox
+                                    Height="30"
+                                    Padding="5 0"
+                                    materialDesign:HintAssist.Hint="Nơi CT"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                        <ComboBoxItem Content="Bình Định"></ComboBoxItem>
+                                        <ComboBoxItem Content="Hồ Chí Minh"></ComboBoxItem>
+                                        <ComboBoxItem Content="Hà Nội"></ComboBoxItem>
+                                        <ComboBoxItem Content="Lâm Đồng"></ComboBoxItem>
+                                        <ComboBoxItem Content="Đồng Nai"></ComboBoxItem>
+                                    </ComboBox>
+                                </Border>
+                            </StackPanel>
+
+
+                            <StackPanel Margin="10 0">
+                                <TextBlock Text="Hình thức tuyển dụng" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                    <ComboBox
+                                    Height="30"
+                                    Padding="5 0"
+                                    materialDesign:HintAssist.Hint="Nơi CT"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                        <ComboBoxItem Content="Hợp đồng"></ComboBoxItem>
+                                        <ComboBoxItem Content="Biên chế"></ComboBoxItem>
+                                        <ComboBoxItem Content="Thời vụ"></ComboBoxItem>
+                                    </ComboBox>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel Margin="10 0">
+                                <TextBlock Text="Số điện thoại" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                    <TextBox
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Số điện thoại"/>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+    
+                        <StackPanel Grid.Column="1">
+                            <WrapPanel Margin="10 0">
+                                <StackPanel >
+                                    <TextBlock Text="Trình độ văn hóa" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                    <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                        <TextBox
+                                        Width="219"
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Trình độ văn hóa"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Margin="10 0">
+                                    <TextBlock Text="Trình độ sư phạm" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                    <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                        <TextBox
+                                      Width="219"
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Trình độ sư phạm"/>
+                                    </Border>
+                                </StackPanel>
+                            </WrapPanel>
+
+
+                            <WrapPanel Margin="10 0">
+                                <StackPanel>
+                                    <TextBlock Text="Trình độ chuyên môn" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                    <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                        <TextBox
+                                      Width="219"
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Trình độ chuyên môn"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Margin="10 0">
+                                    <TextBlock Text="Ngành chuyên môn đào tạo" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                    <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                        <TextBox
+                                      Width="219"
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Ngành chuyên môn đào tạo"/>
+                                    </Border>
+                                </StackPanel>
+                            </WrapPanel>
+
+                            <StackPanel Margin="10 0">
+                                <TextBlock Text="Số giấy chứng nhận giáo viên" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                    <TextBox
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Số giấy chứng nhận giáo viên"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel Margin="10 0">
+                                <TextBlock Text="Mã sở giao thông vận tải" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                    <TextBox
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Mã sở giao thông vận tải"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel Margin="10 0">
+                                <TextBlock Text="Mã cơ sở đào tạo" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                    <TextBox
+                                      Height="30"
+                                      FontSize="14"
+                                      Margin="2 0"
+                                      Padding="5 0"
+                                      materialDesign:HintAssist.Hint="Mã cơ sở đào tạo"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel Margin="10 0">
+                                <TextBlock Text="Trạng thái" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
+                                    <ComboBox
+                                    Height="30"
+                                    Padding="5 0"
+                                    materialDesign:HintAssist.Hint="Trạng thái"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                        <ComboBoxItem Content="Họat động"></ComboBoxItem>
+                                        <ComboBoxItem Content="Không hoạt động"></ComboBoxItem>
+                                    </ComboBox>
+                                </Border>
+                            </StackPanel>
+
+                            <WrapPanel Margin="10 0">
+                                <StackPanel Width="219">
+                                    <TextBlock Text="Giáo viên dạy" Margin="0 0 0 15" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                    <WrapPanel Height="30">
+                                        <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Content="Lý thuyết" Margin="0 0 10 0"></CheckBox>
+                                        <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Content="Thực hành"></CheckBox>
+                                    </WrapPanel>
+                                </StackPanel>
+
+                                <StackPanel Width="219">
+                                    <TextBlock Text="Giới tính" Margin="0 0 0 15" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                    <WrapPanel>
+                                        <RadioButton Style="{StaticResource MaterialDesignRadioButton}" Content="Nam" Margin="0 0 10 0"></RadioButton>
+                                        <RadioButton Style="{StaticResource MaterialDesignRadioButton}" Content="Nữ"></RadioButton>
+                                    </WrapPanel>
+                                </StackPanel>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
+                            <Button
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Width="100"
+                                    ToolTip="Resource name: MaterialDesignRaisedButton"
+                                    Content="Thêm giáo viên"
+                                    BorderThickness="0"
+                                    Background="Gray"
+                                    Margin="0 0 10 0"
+                                    Foreground="#ffffff">
+                            </Button>
+                            <Button
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Width="130"
+                                    ToolTip="Resource name: MaterialDesignRaisedButton"
+                                    Content="Thêm giáo viên"
+                                    BorderThickness="0"
+                                    Background="#08bf96"
+                                    Foreground="#ffffff">
+                            </Button>
+                        </StackPanel>
+
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

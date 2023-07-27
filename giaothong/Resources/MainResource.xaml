@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewmodel="clr-namespace:giaothong.ViewModel">
+    <viewmodel:HomeViewModel x:Key="homevm"></viewmodel:HomeViewModel>
+    <viewmodel:MainViewModel x:Key="mainvm"></viewmodel:MainViewModel>
+    <viewmodel:TeacherViewModel x:Key="teachervm"></viewmodel:TeacherViewModel>
+    <viewmodel:VehicleViewModel x:Key="vehiclevm"></viewmodel:VehicleViewModel>
+
+</ResourceDictionary>

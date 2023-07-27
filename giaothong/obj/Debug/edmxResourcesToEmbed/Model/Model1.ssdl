@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="giaothongModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="GIAOVIEN">
+    <Key>
+      <PropertyRef Name="MaGV" />
+    </Key>
+    <Property Name="MaGV" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="HoDem" Type="nvarchar" MaxLength="25" />
+    <Property Name="TenGV" Type="nvarchar" MaxLength="15" />
+    <Property Name="NgaySinh" Type="date" />
+    <Property Name="SoCCCD" Type="char" MaxLength="12" />
+    <Property Name="NoiCT" Type="nvarchar" MaxLength="30" />
+    <Property Name="GioiTinh" Type="int" />
+    <Property Name="Phone" Type="char" MaxLength="15" />
+    <Property Name="TuyenDung" Type="nvarchar" MaxLength="10" />
+    <Property Name="TrinhDo_VH" Type="nvarchar" MaxLength="10" />
+    <Property Name="Nganh_CM" Type="nvarchar" MaxLength="20" />
+    <Property Name="TrinhDo_SP" Type="nvarchar" MaxLength="10" />
+    <Property Name="GV_LT" Type="bit" />
+    <Property Name="GV_TH" Type="bit" />
+    <Property Name="SoGCN" Type="char" MaxLength="15" />
+    <Property Name="MaSoGTVT" Type="char" MaxLength="5" />
+    <Property Name="MaCSDT" Type="char" MaxLength="5" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="AnhCD" Type="text" />
+    <Property Name="NguoiCapNhat" Type="nvarchar" MaxLength="20" />
+    <Property Name="NgayCapNhat" Type="date" />
+    <Property Name="NguoiDuyet" Type="nvarchar" MaxLength="20" />
+    <Property Name="NgayDuyet" Type="date" />
+    <Property Name="TrinhDo_CM" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="GIAOVIEN_GCN">
+    <Key>
+      <PropertyRef Name="SoGCN" />
+    </Key>
+    <Property Name="SoGCN" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="QDCap" Type="char" MaxLength="15" />
+    <Property Name="DonViCap" Type="char" MaxLength="5" />
+    <Property Name="NgayCap" Type="date" />
+    <Property Name="HangXe" Type="char" MaxLength="5" />
+    <Property Name="MaDonViTapHuan" Type="char" MaxLength="5" />
+    <Property Name="NgayKiemTra" Type="date" />
+    <Property Name="AnhGCN" Type="text" />
+    <Property Name="NguoiCapNhat" Type="nvarchar" MaxLength="15" />
+    <Property Name="NgayCapNhat" Type="date" />
+    <Property Name="MaDVKiemTra" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="HangXe">
+    <Key>
+      <PropertyRef Name="mahx" />
+    </Key>
+    <Property Name="mahx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ten" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="LoaiXe">
+    <Key>
+      <PropertyRef Name="MaLX" />
+    </Key>
+    <Property Name="MaLX" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ten" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="province_city">
+    <Key>
+      <PropertyRef Name="matp" />
+    </Key>
+    <Property Name="matp" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="type" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="slug" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role_ID" Type="int" />
+    <Property Name="UserName" Type="char" MaxLength="30" />
+    <Property Name="Password" Type="char" MaxLength="20" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Phone" Type="char" MaxLength="15" />
+    <Property Name="Email" Type="char" MaxLength="25" />
+    <Property Name="Address" Type="nvarchar" MaxLength="60" />
+    <Property Name="BirthDay" Type="date" />
+  </EntityType>
+  <EntityType Name="USERS_ROLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="XETAPLAI">
+    <Key>
+      <PropertyRef Name="SoDangKy" />
+    </Key>
+    <Property Name="SoDangKy" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="TenChuSoHuu" Type="char" MaxLength="30" />
+    <Property Name="SoGPTL" Type="char" MaxLength="15" />
+    <Property Name="NhanHieu" Type="char" MaxLength="15" />
+    <Property Name="KieuLoai" Type="char" MaxLength="20" />
+    <Property Name="HangXe" Type="char" MaxLength="5" />
+    <Property Name="MauXe" Type="nvarchar" MaxLength="20" />
+    <Property Name="SoDongCo" Type="char" MaxLength="20" />
+    <Property Name="SoKhung" Type="char" MaxLength="20" />
+    <Property Name="NamSX" Type="char" MaxLength="10" />
+    <Property Name="LoaiXe" Type="nvarchar" MaxLength="15" />
+    <Property Name="XeSatHach" Type="bit" />
+    <Property Name="TrangThaiHD" Type="bit" />
+    <Property Name="NgayCapNhat" Type="date" />
+    <Property Name="NguoiCapNhat" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="XETAPLAI_GP">
+    <Key>
+      <PropertyRef Name="SoGPXTL" />
+    </Key>
+    <Property Name="SoGPXTL" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="SoDangKy" Type="char" MaxLength="10" />
+    <Property Name="MaDonViCap" Type="char" MaxLength="5" />
+    <Property Name="MaCSDT" Type="char" MaxLength="5" />
+    <Property Name="XeHopDong" Type="bit" />
+    <Property Name="NgayCap" Type="date" />
+    <Property Name="NgayHH" Type="date" />
+    <Property Name="AnhGP" Type="text" />
+    <Property Name="AnhDKiem" Type="text" />
+    <Property Name="AnhDky" Type="text" />
+    <Property Name="NgayCapNhat" Type="date" />
+    <Property Name="NguoiCapNhat" Type="nvarchar" MaxLength="15" />
+    <Property Name="DuongTapLai" Type="char" MaxLength="200" />
+  </EntityType>
+  <Association Name="fk_giaovien_gcn">
+    <End Role="GIAOVIEN_GCN" Type="Self.GIAOVIEN_GCN" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GIAOVIEN" Type="Self.GIAOVIEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GIAOVIEN_GCN">
+        <PropertyRef Name="SoGCN" />
+      </Principal>
+      <Dependent Role="GIAOVIEN">
+        <PropertyRef Name="SoGCN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_user_role">
+    <End Role="USERS_ROLE" Type="Self.USERS_ROLE" Multiplicity="0..1" />
+    <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS_ROLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="USERS">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_xetl_gp">
+    <End Role="XETAPLAI_GP" Type="Self.XETAPLAI_GP" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="XETAPLAI" Type="Self.XETAPLAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="XETAPLAI_GP">
+        <PropertyRef Name="SoGPXTL" />
+      </Principal>
+      <Dependent Role="XETAPLAI">
+        <PropertyRef Name="SoGPTL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="giaothongModelStoreContainer">
+    <EntitySet Name="GIAOVIEN" EntityType="Self.GIAOVIEN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GIAOVIEN_GCN" EntityType="Self.GIAOVIEN_GCN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoaiXe" EntityType="Self.LoaiXe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="province_city" EntityType="Self.province_city" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERS_ROLE" EntityType="Self.USERS_ROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="XETAPLAI" EntityType="Self.XETAPLAI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="XETAPLAI_GP" EntityType="Self.XETAPLAI_GP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HangXe" EntityType="Self.HangXe" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [HangXe].[mahx] AS [mahx], 
+    [HangXe].[ten] AS [ten]
+    FROM [dbo].[HangXe] AS [HangXe]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="fk_giaovien_gcn" Association="Self.fk_giaovien_gcn">
+      <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
+      <End Role="GIAOVIEN" EntitySet="GIAOVIEN" />
+    </AssociationSet>
+    <AssociationSet Name="fk_user_role" Association="Self.fk_user_role">
+      <End Role="USERS_ROLE" EntitySet="USERS_ROLE" />
+      <End Role="USERS" EntitySet="USERS" />
+    </AssociationSet>
+    <AssociationSet Name="fk_xetl_gp" Association="Self.fk_xetl_gp">
+      <End Role="XETAPLAI_GP" EntitySet="XETAPLAI_GP" />
+      <End Role="XETAPLAI" EntitySet="XETAPLAI" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
