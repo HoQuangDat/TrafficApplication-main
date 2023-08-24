@@ -54,6 +54,8 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
     <Property Name="mahx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ten" Type="varchar" MaxLength="5" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="LoaiXe">
     <Key>
       <PropertyRef Name="MaLX" />
@@ -69,6 +71,16 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
     <Property Name="name" Type="nvarchar" MaxLength="100" />
     <Property Name="type" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="slug" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="USERS">
     <Key>
@@ -172,8 +184,8 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
   <EntityContainer Name="giaothongModelStoreContainer">
     <EntitySet Name="GIAOVIEN" EntityType="Self.GIAOVIEN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GIAOVIEN_GCN" EntityType="Self.GIAOVIEN_GCN" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="LoaiXe" EntityType="Self.LoaiXe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="province_city" EntityType="Self.province_city" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USERS_ROLE" EntityType="Self.USERS_ROLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="XETAPLAI" EntityType="Self.XETAPLAI" Schema="dbo" store:Type="Tables" />
@@ -183,6 +195,12 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
     [HangXe].[mahx] AS [mahx], 
     [HangXe].[ten] AS [ten]
     FROM [dbo].[HangXe] AS [HangXe]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="LoaiXe" EntityType="Self.LoaiXe" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [LoaiXe].[MaLX] AS [MaLX], 
+    [LoaiXe].[Ten] AS [Ten]
+    FROM [dbo].[LoaiXe] AS [LoaiXe]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="fk_giaovien_gcn" Association="Self.fk_giaovien_gcn">
       <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />

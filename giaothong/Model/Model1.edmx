@@ -59,6 +59,8 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
           <Property Name="mahx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ten" Type="varchar" MaxLength="5" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="LoaiXe">
           <Key>
             <PropertyRef Name="MaLX" />
@@ -74,6 +76,16 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
           <Property Name="name" Type="nvarchar" MaxLength="100" />
           <Property Name="type" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="slug" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -177,8 +189,8 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
         <EntityContainer Name="giaothongModelStoreContainer">
           <EntitySet Name="GIAOVIEN" EntityType="Self.GIAOVIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GIAOVIEN_GCN" EntityType="Self.GIAOVIEN_GCN" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LoaiXe" EntityType="Self.LoaiXe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="province_city" EntityType="Self.province_city" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS_ROLE" EntityType="Self.USERS_ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="XETAPLAI" EntityType="Self.XETAPLAI" Schema="dbo" store:Type="Tables" />
@@ -188,6 +200,12 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
     [HangXe].[mahx] AS [mahx], 
     [HangXe].[ten] AS [ten]
     FROM [dbo].[HangXe] AS [HangXe]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LoaiXe" EntityType="Self.LoaiXe" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LoaiXe].[MaLX] AS [MaLX], 
+    [LoaiXe].[Ten] AS [Ten]
+    FROM [dbo].[LoaiXe] AS [LoaiXe]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="fk_giaovien_gcn" Association="Self.fk_giaovien_gcn">
             <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
@@ -209,10 +227,18 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
         <EntityContainer Name="giaothongEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="GIAOVIENs" EntityType="giaothongModel.GIAOVIEN" />
           <EntitySet Name="GIAOVIEN_GCN" EntityType="giaothongModel.GIAOVIEN_GCN" />
+          <EntitySet Name="province_city" EntityType="giaothongModel.province_city" />
+          <EntitySet Name="sysdiagrams" EntityType="giaothongModel.sysdiagram" />
           <EntitySet Name="USERS" EntityType="giaothongModel.USER" />
           <EntitySet Name="USERS_ROLE" EntityType="giaothongModel.USERS_ROLE" />
           <EntitySet Name="XETAPLAIs" EntityType="giaothongModel.XETAPLAI" />
           <EntitySet Name="XETAPLAI_GP" EntityType="giaothongModel.XETAPLAI_GP" />
+          <EntitySet Name="HangXes" EntityType="giaothongModel.HangXe" />
+          <EntitySet Name="LoaiXes" EntityType="giaothongModel.LoaiXe" />
+          <AssociationSet Name="fk_giaovien_gcn" Association="giaothongModel.fk_giaovien_gcn">
+            <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
+            <End Role="GIAOVIEN" EntitySet="GIAOVIENs" />
+          </AssociationSet>
           <AssociationSet Name="fk_user_role" Association="giaothongModel.fk_user_role">
             <End Role="USERS_ROLE" EntitySet="USERS_ROLE" />
             <End Role="USER" EntitySet="USERS" />
@@ -221,13 +247,6 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
             <End Role="XETAPLAI_GP" EntitySet="XETAPLAI_GP" />
             <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
           </AssociationSet>
-          <EntitySet Name="province_city" EntityType="giaothongModel.province_city" />
-          <EntitySet Name="HangXes" EntityType="giaothongModel.HangXe" />
-          <AssociationSet Name="fk_giaovien_gcn" Association="giaothongModel.fk_giaovien_gcn">
-            <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
-            <End Role="GIAOVIEN" EntitySet="GIAOVIENs" />
-          </AssociationSet>
-          <EntitySet Name="LoaiXes" EntityType="giaothongModel.LoaiXe" />
         </EntityContainer>
         <EntityType Name="GIAOVIEN">
           <Key>
@@ -275,6 +294,25 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
           <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
           <Property Name="MaDVKiemTra" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="GIAOVIENs" Relationship="giaothongModel.fk_giaovien_gcn" FromRole="GIAOVIEN_GCN" ToRole="GIAOVIEN" />
+        </EntityType>
+        <EntityType Name="province_city">
+          <Key>
+            <PropertyRef Name="matp" />
+          </Key>
+          <Property Name="matp" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="slug" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -339,6 +377,34 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
           <Property Name="DuongTapLai" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="XETAPLAIs" Relationship="giaothongModel.fk_xetl_gp" FromRole="XETAPLAI_GP" ToRole="XETAPLAI" />
         </EntityType>
+        <EntityType Name="HangXe">
+          <Key>
+            <PropertyRef Name="mahx" />
+          </Key>
+          <Property Name="mahx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ten" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LoaiXe">
+          <Key>
+            <PropertyRef Name="MaLX" />
+          </Key>
+          <Property Name="MaLX" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_giaovien_gcn">
+          <End Type="giaothongModel.GIAOVIEN_GCN" Role="GIAOVIEN_GCN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="giaothongModel.GIAOVIEN" Role="GIAOVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAOVIEN_GCN">
+              <PropertyRef Name="SoGCN" />
+            </Principal>
+            <Dependent Role="GIAOVIEN">
+              <PropertyRef Name="SoGCN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_user_role">
           <End Type="giaothongModel.USERS_ROLE" Role="USERS_ROLE" Multiplicity="0..1" />
           <End Type="giaothongModel.USER" Role="USER" Multiplicity="*" />
@@ -365,44 +431,7 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="province_city">
-          <Key>
-            <PropertyRef Name="matp" />
-          </Key>
-          <Property Name="matp" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="slug" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="HangXe">
-          <Key>
-            <PropertyRef Name="mahx" />
-          </Key>
-          <Property Name="mahx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ten" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="fk_giaovien_gcn">
-          <End Type="giaothongModel.GIAOVIEN_GCN" Role="GIAOVIEN_GCN" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="giaothongModel.GIAOVIEN" Role="GIAOVIEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GIAOVIEN_GCN">
-              <PropertyRef Name="SoGCN" />
-            </Principal>
-            <Dependent Role="GIAOVIEN">
-              <PropertyRef Name="SoGCN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="LoaiXe">
-          <Key>
-            <PropertyRef Name="MaLX" />
-          </Key>
-          <Property Name="MaLX" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ten" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -452,6 +481,27 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
                 <ScalarProperty Name="DonViCap" ColumnName="DonViCap" />
                 <ScalarProperty Name="QDCap" ColumnName="QDCap" />
                 <ScalarProperty Name="SoGCN" ColumnName="SoGCN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="province_city">
+            <EntityTypeMapping TypeName="giaothongModel.province_city">
+              <MappingFragment StoreEntitySet="province_city">
+                <ScalarProperty Name="slug" ColumnName="slug" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="matp" ColumnName="matp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="giaothongModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -515,16 +565,6 @@ warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key 
                 <ScalarProperty Name="MaDonViCap" ColumnName="MaDonViCap" />
                 <ScalarProperty Name="SoDangKy" ColumnName="SoDangKy" />
                 <ScalarProperty Name="SoGPXTL" ColumnName="SoGPXTL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="province_city">
-            <EntityTypeMapping TypeName="giaothongModel.province_city">
-              <MappingFragment StoreEntitySet="province_city">
-                <ScalarProperty Name="slug" ColumnName="slug" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="matp" ColumnName="matp" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

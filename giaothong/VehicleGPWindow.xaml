@@ -1,0 +1,152 @@
+﻿<Window x:Class="giaothong.VehicleGPWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:giaothong"
+        mc:Ignorable="d"
+        Title="VehicleGPWindow"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.FontWeight="Regular"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext="{StaticResource vehiclegpvm}"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Name="vehicleGPWindow"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" 
+        AllowsTransparency="True" 
+        Background="Transparent"
+        Height="650" 
+        Width="1180">
+
+    <Border CornerRadius="10" Background="#ffffff">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="50" Command="{Binding closeVehiceGPWindow}"  CommandParameter="{Binding ElementName=vehicleGPWindow}">
+                <materialDesign:PackIcon Width="20" Height="20" Foreground="#08bf96" Kind="Logout" />
+            </Button>
+
+            <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="DANH SÁCH GIẤY PHÉP XE TẬP LÁI" FontWeight="SemiBold"></TextBlock>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <WrapPanel Margin="10 0 0 0" VerticalAlignment="Center">
+                    <TextBox
+                          Width="200"
+                          Text="{Binding SearchGPXTL, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          materialDesign:HintAssist.Hint="Tìm kiếm theo số giấy phép.."
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding textChanged}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+
+                <WrapPanel Margin="0 0 10 0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="150"
+                        ToolTip="Resource name: MaterialDesignRaisedButton"
+                        Content="Thêm giấy phép"
+                        BorderThickness="0"
+                        Background="#08bf96"
+                        Foreground="#ffffff"
+                        Command="{Binding viewInsertGPXTL}"
+                        CommandParameter="{Binding ElementName=vehicleGPWindow}">
+                    </Button>
+                </WrapPanel>
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="10 0 10 0">
+                <ListView Height="auto" ItemsSource="{Binding ListGPXTL}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.ColumnSpan="2">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumn.Header>
+                                    <TextBlock Text="AnhGP" HorizontalAlignment="Left"></TextBlock>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Margin="25 0 0 0" HorizontalAlignment="Center" Source="{Binding AnhGP, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="70" Height="70" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumn.Header>
+                                    <TextBlock Text="AnhGiayDKiem" HorizontalAlignment="Left"></TextBlock>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Margin="25 0 0 0" HorizontalAlignment="Center" Source="{Binding AnhDKiem, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="70" Height="70" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumn.Header>
+                                    <TextBlock Text="AnhDKy" HorizontalAlignment="Left"></TextBlock>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Margin="25 0 0 0" HorizontalAlignment="Center" Source="{Binding AnhDky, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="70" Height="70" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding SoDangKy}" Header="SoDangKy"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding SoGPXTL}" Header="SoGPXTL"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding MaDonViCap}" Header="MaDonViCap"></GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding MaCSDT}" Header="MaCSDT"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding XeHopDong}" Header="XeHopDong"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding NgayCap}" Header="NgayCap"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding NgayHH}" Header="NgayHH"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding NgayCapNhat}" Header="NgayCapNhat"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding NguoiCapNhat}" Header="NguoiCapNhat"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding DuongTapLai}" Header="DuongTapLai"/>
+                        </GridView>
+                    </ListView.View>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                            <i:InvokeCommandAction CommandParameter="{Binding ElementName=vehicleGPWindow}" Command="{Binding previewMouseLeftButtonUp}"></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListView>
+            </Grid>
+
+            <Grid Grid.Row="4" Margin="10 0 10 0">
+                <WrapPanel>
+                    <TextBlock HorizontalAlignment="Left" FontSize="16" Text="Trang" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" FontSize="16" Text="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" FontSize="16" Text="/" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" FontSize="16" Text="{Binding TotalPages, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
+                </WrapPanel>
+
+                <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Command="{Binding previousPage}" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
+                        <materialDesign:PackIcon HorizontalAlignment="Center" Width="30" Height="25"  Foreground="#08bf96" Kind="ChevronLeft" />
+                    </Button>
+                    <Button Command="{Binding nextPage}" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
+                        <materialDesign:PackIcon HorizontalAlignment="Center" Width="30" Height="25"   Foreground="#08bf96" Kind="ChevronRight" />
+                    </Button>
+                </WrapPanel>
+            </Grid>
+        </Grid>
+    </Border>
+
+</Window>

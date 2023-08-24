@@ -121,17 +121,13 @@
                                 <TextBlock Text="Hạng xe" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <ComboBox
-                                    Text="{Binding HangXe, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                    Height="30"
-                                    Padding="5 0"
-                                    materialDesign:HintAssist.Hint="Hạng xe"
-                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                                        <ComboBoxItem Content="A1"></ComboBoxItem>
-                                        <ComboBoxItem Content="A2"></ComboBoxItem>
-                                        <ComboBoxItem Content="B"></ComboBoxItem>
-                                        <ComboBoxItem Content="C"></ComboBoxItem>
-                                        <ComboBoxItem Content="D"></ComboBoxItem>
-                                        <ComboBoxItem Content="FC"></ComboBoxItem>
+                                        ItemsSource="{Binding ListHangXe}"
+                                        DisplayMemberPath="ten"
+                                        SelectedValuePath="ten"
+                                        SelectedIndex="{Binding SelectedIndexHX, UpdateSourceTrigger=PropertyChanged}"
+                                        Height="30"
+                                        Padding="5 6"
+                                        materialDesign:HintAssist.Hint="Hạng xe">
                                     </ComboBox>
                                 </Border>
                             </StackPanel>
@@ -195,16 +191,13 @@
                                 <TextBlock Text="Loại xe" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <ComboBox
-                                    Height="30"
-                                    Padding="5 0"
-                                    materialDesign:HintAssist.Hint="Loại xe"
-                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                                        <ComboBoxItem Content="Mô tô"></ComboBoxItem>
-                                        <ComboBoxItem Content="Xe tải B"></ComboBoxItem>
-                                        <ComboBoxItem Content="Xe tải C"></ComboBoxItem>
-                                        <ComboBoxItem Content="Xe con"></ComboBoxItem>
-                                        <ComboBoxItem Content="Xe tự động"></ComboBoxItem>
-                                        <ComboBoxItem Content="Xe đầu kéo"></ComboBoxItem>
+                                        ItemsSource="{Binding ListLoaiXe}"
+                                        DisplayMemberPath="Ten"
+                                        SelectedValuePath="Ten"
+                                        SelectedIndex="{Binding SelectedIndexLX, UpdateSourceTrigger=PropertyChanged}"
+                                        Height="30"
+                                        Padding="5 6"
+                                        materialDesign:HintAssist.Hint="Loai xe">
                                     </ComboBox>
                                 </Border>
                             </StackPanel>
@@ -245,6 +238,21 @@
                                     Foreground="#ffffff">
                                 
                             </Button>
+                            
+                            <Button
+                                    IsEnabled="{Binding IsEnable}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Width="100"
+                                    Command="{Binding AgreeVehicleWindow}" 
+                                    CommandParameter="{Binding ElementName=editVehicleWindow}"
+                                    ToolTip="Resource name: MaterialDesignRaisedButton"
+                                    Content="Duyệt"
+                                    BorderThickness="0"
+                                    Background="#FF6FD1E8"
+                                    Margin="0 0 10 0"
+                                    Foreground="#ffffff">
+                            </Button>
+                            
                             <Button
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
@@ -261,7 +269,7 @@
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Width="130"
                                     ToolTip="Resource name: MaterialDesignRaisedButton"
-                                    Content="Thêm xe"
+                                    Content="Chỉnh sửa"
                                     BorderThickness="0"
                                     Background="#08bf96"
                                     Foreground="#ffffff"

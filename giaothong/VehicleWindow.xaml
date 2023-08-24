@@ -78,6 +78,8 @@
 
                     <WrapPanel Margin="0 0 10 0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
                         <Button
+                        IsEnabled="true"
+                        Command="{Binding ExportExcel}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Width="100"
                         Margin="0 0 10 0"
@@ -86,6 +88,19 @@
                         Background="#FFB4B4B4"
                         BorderThickness="0"
                         Foreground="#ffffff">
+                        </Button>
+
+                        <Button
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="145"
+                        ToolTip="Resource name: MaterialDesignRaisedButton"
+                        Content="Giấy chứng nhận"
+                        Margin="0 0 10 0"
+                        BorderThickness="0"
+                        Background="#08bf96"
+                        Foreground="#ffffff"
+                        Command="{Binding viewGPXTL}"
+                        CommandParameter="{Binding ElementName=vehicleWindow}">
                         </Button>
 
                         <Button
@@ -104,7 +119,7 @@
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="10 0 10 0">
-                    <ListView ItemsSource="{Binding ListVehicle}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListView ItemsSource="{Binding ListVehicle}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn  DisplayMemberBinding="{Binding SoDangKy}" Header="SoDangKy"/>

@@ -1,8 +1,10 @@
 ﻿using giaothong.Model;
+using LiveCharts;
+using LiveCharts.Wpf;
 using QuanLyShop.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,38 +13,61 @@ using System.Windows.Input;
 
 namespace giaothong.ViewModel
 {
-    public class HomeViewModel : BaseViewModel
+    class HomeViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        public ICommand closeViewTeacher { get; set; }
+        private USER _user;
+        public USER User { get => _user; set { _user = value; OnPropertyChanged(); } }
 
-        public ICommand closeViewVehicle { get; set; }
-        public ICommand viewTeacherWindow { get; set; }
-
-        public ICommand viewVehicleWindow { get; set; }
+        public ICommand LogoutCommand { get; set; }
+        public ICommand OpenTeacherCommand { get; set; }
+        public ICommand OpenVehicleCommand { get; set; }
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] Labels { get; set; }
+        public Func<string, string> Values { get; set; }
 
         public HomeViewModel()
         {
-            closeViewVehicle = new RelayCommand<Window>((p) => { return true; }, (p) => {
-                p.Close();   
-            });
+            User = MainViewModel.User;
 
-            closeViewTeacher = new RelayCommand<Window>((p) => { return true; }, (p) => {
+            LogoutCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
                 p.Close();
             });
 
-            viewTeacherWindow = new RelayCommand<Window>((p) => { return true; }, (p) => {
+            OpenTeacherCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
                 p.Hide();
-                TeacherWindow viewTeacher = new TeacherWindow();
-                viewTeacher.ShowDialog();
+                TeacherWindow teacher = new TeacherWindow();
+                teacher.ShowDialog();
                 p.ShowDialog();
             });
 
-            viewVehicleWindow = new RelayCommand<Window>((p) => { return true; }, (p) => {
+            OpenVehicleCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
                 p.Hide();
-                VehicleWindow viewVehicle = new VehicleWindow();
-                viewVehicle.ShowDialog();
+                VehicleWindow vehicle = new VehicleWindow();
+                vehicle.ShowDialog();
                 p.ShowDialog();
             });
+
+            SeriesCollection = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "Venta 2021",
+                    Values = new ChartValues<double>() {20, 15, 30 ,25, 6, 7, 2, 3 ,5 , 9 ,11 ,12}
+                }
+            };
+
+            SeriesCollection.Add(new ColumnSeries
+            {
+                Title = "Venta 2021",
+                Values = new ChartValues<double>() { 22, 9, 45, 88 }
+            });
+
+            SeriesCollection[1].Values.Add(48d);
+            Labels = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+
         }
     }
 }

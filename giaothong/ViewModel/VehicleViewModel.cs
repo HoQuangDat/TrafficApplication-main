@@ -1,13 +1,23 @@
 ﻿using giaothong.Model;
+using Microsoft.Win32;
 using QuanLyShop.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+
+using System.Windows.Documents;
+using System.Data;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using folder = System.Windows.Forms;
 
 
 
@@ -20,8 +30,13 @@ namespace giaothong.ViewModel
         private ObservableCollection<HangXe> _listHangXe;
         private ObservableCollection<XETAPLAI_GP> _listGPTL;
         private ObservableCollection<LoaiXe> _listLoaiXe;
+        private USER _user;
+        public USER User { get => _user; set { _user = value; OnPropertyChanged(); } }
+        private static bool _isEnable;
+        public static bool IsEnable { get => _isEnable; set { _isEnable = value; } }
 
-
+        private ObservableCollection<XETAPLAI_GP> _listAllGPXTL;
+        public ObservableCollection<XETAPLAI_GP> ListAllGPXTL { get => _listAllGPXTL; set => _listAllGPXTL = value; }
         public ObservableCollection<XETAPLAI> ListVehicle { get => _listVehicle; set => _listVehicle = value; }
         public ObservableCollection<HangXe> ListHangXe { get => _listHangXe; set => _listHangXe = value; }
 
@@ -197,19 +212,19 @@ namespace giaothong.ViewModel
                 OnPropertyChanged();
                 reset();
 
-                if (SelectedItem == null)
+                if (SelectedItem != null)
                 {
-                    SoDangKy = SelectedItem.SoDangKy;
-                    TenChuSoHuu = SelectedItem.TenChuSoHuu;
-                    SoGPTL = SelectedItem.SoGPTL;
-                    NhanHieu = SelectedItem.NhanHieu;
-                    KieuLoai = SelectedItem.KieuLoai;
-                    HangXe = SelectedItem.HangXe;
-                    MauXe = SelectedItem.MauXe;
-                    SoDongCo = SelectedItem.SoDongCo;
-                    SoKhung = SelectedItem.SoKhung;
-                    NamSX = SelectedItem.NamSX;
-                    LoaiXe = SelectedItem.LoaiXe;
+                    SoDangKy = SelectedItem.SoDangKy.Trim();
+                    TenChuSoHuu = SelectedItem.TenChuSoHuu.Trim();
+                    SoGPTL = SelectedItem.SoGPTL.Trim();
+                    NhanHieu = SelectedItem.NhanHieu.Trim();
+                    KieuLoai = SelectedItem.KieuLoai.Trim();
+                    HangXe = SelectedItem.HangXe.Trim();
+                    MauXe = SelectedItem.MauXe.Trim();
+                    SoDongCo = SelectedItem.SoDongCo.Trim();
+                    SoKhung = SelectedItem.SoKhung.Trim();
+                    NamSX = SelectedItem.NamSX.Trim();
+                    LoaiXe = SelectedItem.LoaiXe.Trim();
                     XeSatHach = SelectedItem.XeSatHach.Value;
                     TrangThaiHD = SelectedItem.TrangThaiHD.Value;
                     NgayCapNhat = SelectedItem.NgayCapNhat.Value;
@@ -226,6 +241,10 @@ namespace giaothong.ViewModel
         public ICommand removeVehicle { get; set; }
         public ICommand editVehicle { get; set; }
         public ICommand previewMouseLeftButtonUp { get; set; }
+        public ICommand AgreeVehicleWindow { get; set; }
+        public ICommand viewGPXTL { get; set; }
+        public ICommand ExportExcel { get; set; }
+
 
         public VehicleViewModel()
         {
@@ -233,11 +252,342 @@ namespace giaothong.ViewModel
             ListHangXe = new ObservableCollection<HangXe>();
             ListGPTL = new ObservableCollection<XETAPLAI_GP>();
             ListLoaiXe = new ObservableCollection<LoaiXe>();
+            ListAllGPXTL = new ObservableCollection<XETAPLAI_GP>();
 
             vehicles();
             listGPTL();
             listHangXe();
             listLoaiXe();
+            listAllGPXTL();
+            //export file excel
+            ExportExcel = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                //string filePath = "";
+                // tạo SaveFileDialog để lưu file excel
+                //SaveFileDialog dialog = new SaveFileDialog();
+                folder.FolderBrowserDialog folderBrowserDialog = new folder.FolderBrowserDialog();
+
+                // chỉ lọc ra các file có định dạng Excel
+                //dialog.Filter = "Excel | *.xlsx | Excel 2003 | *.xls";
+
+                // Nếu mở file và chọn nơi lưu file thành công sẽ lưu tên đường dẫn
+                //if (dialog.ShowDialog() == true)
+                //{
+                //    filePath = dialog.FileName;
+                //}
+
+                string folderPath = "";
+
+                if (folderBrowserDialog.ShowDialog() == folder.DialogResult.OK)
+                {
+                    folderPath = folderBrowserDialog.SelectedPath;
+                }
+
+                // nếu đường dẫn null hoặc rỗng thì báo không hợp lệ và return hàm
+                //if (string.IsNullOrEmpty(filePath))
+                //{
+                //    MessageBox.Show("Đường dẫn không hợp lệ");
+                //    return;
+                //}
+
+                //Không phải doanh nghiệp tránh bản quyền
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+                using (ExcelPackage u = new ExcelPackage())
+                {
+                    try
+                    {
+                        // đặt tên người tạo file
+                        //u.Workbook.Properties.Author = "Nguyễn Quốc Anh";
+
+                        // đặt tiêu đề cho file
+                        u.Workbook.Properties.Title = "DANH SÁCH XE TẬP LÁI";
+
+                        //Tạo một sheet để làm việc trên đó
+                        u.Workbook.Worksheets.Add("CTDV");
+
+                        // lấy sheet vừa add ra để thao tác
+                        ExcelWorksheet ws = u.Workbook.Worksheets[0];
+
+                        // đặt tên cho sheet
+                        ws.Name = "Xe";
+                        // fontsize mặc định cho cả sheet
+                        ws.Cells.Style.Font.Size = 11;
+                        // font family mặc định cho cả sheet
+                        ws.Cells.Style.Font.Name = "Calibri";
+
+                        // Tạo danh sách các column header
+                        string[] arrColumnHeader = { "STT", "Biển số", "Xe hợp đồng", "Xe chủ sở hữu", "Nhãn hiệu", "Kiểu loại", "Năm SX", "Loại xe tập lái", "Hạng xe dạy lái", "Mục đích sử dụng tập lái ( trong hình, trên đường, số tự động, xe sát hạch)", "Số imei thiết bị DAT", "Ghi chú", "Ghi chú" };
+
+                        // lấy ra số lượng cột cần dùng dựa vào số lượng header
+                        var countColHeader = arrColumnHeader.Count();
+
+                        // merge gộp các column lại từ column 1 đến số column header
+                        // đặt tên cho bảng excel
+                        ws.Cells[1, 2].Value = "TRƯỜNG CAO ĐẲNG CĐ-XD&NL";
+                        ws.Cells[1, 2, 1, 4].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                        ws.Cells[1, 11].Value = "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM";
+                        ws.Cells[1, 11, 1, 14].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        ws.Cells[1, 11, 1, 14].Style.Font.Bold = true;
+
+                        ws.Cells[2, 11].Value = "Độc lập - Tự do - Hạnh phúc";
+                        ws.Cells[2, 11, 2, 14].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        ws.Cells[2, 11, 2, 14].Style.Font.Bold = true;
+                        ws.Cells[2, 11, 2, 14].Style.Font.UnderLine = true;
+
+                        ws.Cells[2, 2].Value = "TRUNG BỘ";
+                        ws.Cells[2, 2, 2, 4].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                        ws.Cells[3, 2].Value = "TRUNG TÂM ĐT&SH LÁI XE";
+                        ws.Cells[3, 2, 3, 4].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        ws.Cells[3, 2, 3, 4].Style.Font.Bold = true;
+                        ws.Cells[3, 2, 3, 4].Style.Font.UnderLine = true;
+
+
+                        ws.Cells[4, 1].Value = "DANH SÁCH XE TẬP LÁI";
+                        ws.Cells[4, 1, 4, countColHeader].Merge = true;
+                        // in đậm
+                        ws.Cells[4, 1, 4, countColHeader].Style.Font.Bold = true;
+                        // căn giữa
+                        ws.Cells[4, 1, 4, countColHeader].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                        int colIndex = 1;
+                        int rowIndex = 5;
+
+                        //tạo các cột excel từ mảng cột đã tạo từ bên trên
+                        foreach (var item in arrColumnHeader)
+                        {
+                            var cell = ws.Cells[rowIndex, colIndex];
+
+                            //set màu thành gray
+                            var fill = cell.Style.Fill;
+                            fill.PatternType = ExcelFillStyle.Solid;
+                            fill.BackgroundColor.SetColor(System.Drawing.Color.Transparent);
+
+                            if (colIndex == 2)
+                            {
+                                ws.Column(colIndex).Width = 25;
+                            }
+                            else if (colIndex >= 3 && colIndex <= 11 && colIndex != 7 && colIndex != 8 && colIndex != 9)
+                            {
+                                ws.Column(colIndex).Width = 15;
+                            }
+                            else if (colIndex == 7 || colIndex == 8 || colIndex == 9)
+                            {
+                                ws.Column(colIndex).Width = 13;
+                            }
+                            else if (colIndex == 12)
+                            {
+                                ws.Column(colIndex).Width = 25;
+                            }
+
+                            //căn chỉnh các border
+                            var border = cell.Style.Border;
+                            border.Bottom.Style = ExcelBorderStyle.Thin;
+                            border.Top.Style = ExcelBorderStyle.Thin;
+                            border.Left.Style = ExcelBorderStyle.Thin;
+                            border.Right.Style = ExcelBorderStyle.Thin;
+
+                            //gán giá trị
+                            cell.Value = item;
+
+                            colIndex++;
+                        }
+
+                        // lấy ra danh sách CTDV từ ItemSource của ListView
+
+                        if (ListVehicle.Count > 0)
+                        {
+                            double? sum = 0.0d;
+
+
+                            // với mỗi item trong danh sách sẽ ghi trên 1 dòng
+                            List<XETAPLAI> vehicles = ListVehicle.Cast<XETAPLAI>().ToList();
+                            var stt = 1;
+
+                            foreach (var item in vehicles)
+                            {
+                                // bắt đầu ghi từ cột 1. Excel bắt đầu từ 1 không phải từ 0
+                                colIndex = 1;
+
+                                // rowIndex tương ứng từng dòng dữ liệu
+                                rowIndex++;
+
+                                //gán giá trị cho từng cell
+
+                                // Stt
+                                ws.Cells[rowIndex, colIndex++].Value = stt;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+
+                                // So Dang Ky
+                                ws.Cells[rowIndex, colIndex++].Value = item.SoDangKy;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+
+                                foreach (var gpxtl in ListAllGPXTL)
+                                {
+                                    // Xe Hop Dong
+                                    if(gpxtl.XeHopDong != null)
+                                    {
+                                        if (gpxtl.XeHopDong == true)
+                                        {
+                                            ws.Cells[rowIndex, colIndex++].Value = "X";
+                                            ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                            ws.Cells[rowIndex, colIndex - 1].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                                            ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                           
+                                            colIndex++;
+                                        }
+
+                                        // Xe chu so huu
+                                        else
+                                        {
+                                            colIndex++;
+                                            ws.Cells[rowIndex, colIndex++].Value = "X";
+                                            ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                            ws.Cells[rowIndex, colIndex - 1].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                                            ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                        }
+                                    }
+                                    if (vehicles.Count - stt == 0)
+                                    {
+                                        ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                    }
+                                    break;
+                                }
+
+                                // Nhan hieu
+                                ws.Cells[rowIndex, colIndex++].Value = item.NhanHieu;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+
+                                // Kieu Loai
+                                ws.Cells[rowIndex, colIndex++].Value = item.KieuLoai;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+
+
+                                // Nam SX
+                                ws.Cells[rowIndex, colIndex++].Value = item.NamSX;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+
+                                // Loai xe
+                                ws.Cells[rowIndex, colIndex++].Value = item.LoaiXe;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+
+                                // Hang Loai
+                                ws.Cells[rowIndex, colIndex++].Value = item.HangXe;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+
+                                // Muc dich su dung
+                                ws.Cells[rowIndex, colIndex++].Value = "Tạm thời không có trong db";
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+
+                                //So imei
+                                ws.Cells[rowIndex, colIndex++].Value = "Tạm thời không có trong db";
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+
+                                //Ghi chu
+                                ws.Cells[rowIndex, colIndex++].Value = "";
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+
+                                //Ghi chu ten chu so huu
+                                ws.Cells[rowIndex, colIndex++].Value = item.TenChuSoHuu;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                                if (vehicles.Count - stt == 0)
+                                {
+                                    ws.Cells[rowIndex, colIndex - 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                                }
+                                ws.Cells[rowIndex, colIndex - 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                               
+                                //Tự căn độ dài cột
+                                ws.Cells.AutoFitColumns();
+                                // In đậm chữ cho hàng tiêu đề
+                                ws.Cells[5, 1, 5, 14].Style.Font.Bold = true;
+                                stt++;
+
+                            }
+
+                            ws.Cells[rowIndex + 1, 11].Value = DateTime.Now;
+                            ws.Cells[rowIndex + 1, 11].Style.Numberformat.Format = "\"Ngày\" dd\" tháng \"MM\" năm \"yyyy";
+                            ws.Cells[rowIndex + 1, 11, rowIndex + 1, 14].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                            ws.Cells[rowIndex + 2, 11].Value = "Trung tâm ĐT & SHLX";
+                            ws.Cells[rowIndex + 2, 11, rowIndex + 2, 14].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                            ws.Cells[rowIndex + 2, 11, rowIndex + 2, 14].Style.Font.Bold = true;
+
+                            ws.Cells[rowIndex + 2, 2].Value = "Hiệu trưởng";
+                            ws.Cells[rowIndex + 2, 2, rowIndex + 2, 4].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                            ws.Cells[rowIndex + 2, 2, rowIndex + 2, 4].Style.Font.Bold = true;
+
+
+                            //Lưu file lại
+                            // Xây dựng đường dẫn tới file mới
+                            string fileName = "dsxetaplai.xlsx";
+                            string filePath = Path.Combine(folderPath, fileName);
+
+                            Byte[] bin = u.GetAsByteArray();
+
+                            File.WriteAllBytes(filePath, bin);
+                        }
+                        MessageBox.Show("Xuất File Excel Thành Công!", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Lỗi Xuất File!", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+
+            });
 
             // Đóng cửa sổ danh sách xe tập lái
             closeVehicleWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -250,6 +600,7 @@ namespace giaothong.ViewModel
             closeInsertVehicleWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Close();
+                SelectedItem = null;
             });
 
             // Load view insert vehicle
@@ -274,6 +625,17 @@ namespace giaothong.ViewModel
                 p.Hide();
                 InsertVehicle inserVehicle = new InsertVehicle();
                 inserVehicle.ShowDialog();
+                p.ShowDialog();
+            });
+
+            //view gpxtl
+            viewGPXTL = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.Hide();
+                HomeWindow vehicleGP = new HomeWindow();
+                vehicleGP.ShowDialog();
+                vehicles();
+                listGPTL();
                 p.ShowDialog();
             });
 
@@ -398,19 +760,18 @@ namespace giaothong.ViewModel
             // Chinh sua thong tin xe
             editVehicle = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                using (db = new giaothongEntities())
-                {
                     try
                     {
                         var check = validation();
-
+                        //MessageBox.Show("Show check" + check);
                         if (check)
+                        {
+                        using (db = new giaothongEntities())
                         {
                             var xe = db.XETAPLAIs.Find(SoDangKy.Trim());
 
                             if (xe != null)
                             {
-                                xe.SoDangKy = SoDangKy.Trim();
                                 xe.TenChuSoHuu = TenChuSoHuu.Trim();
                                 xe.SoGPTL = SoGPTL.Trim();
                                 xe.NhanHieu = NhanHieu.Trim();
@@ -429,7 +790,35 @@ namespace giaothong.ViewModel
                                 vehicles();
 
                                 p.Close();
+                                }
                             }
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Cập nhật thông tin xe thất bại", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+            });
+
+            AgreeVehicleWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                using (db = new giaothongEntities())
+                {
+                    try
+                    {
+
+                        var xe = db.XETAPLAIs.Find(SoDangKy.Trim());
+
+                        if (xe != null)
+                        {
+                            xe.TrangThaiHD = true;
+                            xe.NgayCapNhat = DateTime.Now;
+                            xe.NguoiCapNhat = User.Name;
+
+                            db.SaveChanges();
+                            vehicles();
+
+                            p.Close();
                         }
                     }
                     catch
@@ -438,7 +827,6 @@ namespace giaothong.ViewModel
                     }
                 }
             });
-
         }
 
         //validate information teacher
@@ -672,14 +1060,23 @@ namespace giaothong.ViewModel
         {
             using (db = new giaothongEntities())
             {
-                var gptl = from gp in db.XETAPLAI_GP
-                           where !db.XETAPLAIs.Any(xe => xe.SoGPTL == gp.SoGPXTL)
-                           select gp;
-
-                gptl.ToList().ForEach(p =>
+                ListGPTL.Clear();
+                try
                 {
-                    ListGPTL.Add(p);
-                });
+                    var gptl = from gp in db.XETAPLAI_GP
+                               where !db.XETAPLAIs.Any(xe => xe.SoGPTL == gp.SoGPXTL)
+                               select gp;
+
+                    gptl.ToList().ForEach(p =>
+                    {
+                        ListGPTL.Add(p);
+                    });
+                }
+                catch
+                {
+
+                }
+                
 
                 return ListGPTL;
             }
@@ -704,6 +1101,25 @@ namespace giaothong.ViewModel
                 catch { }
 
                 return ListHangXe;
+            }
+        }
+
+        //get list vehicle GPXTL
+        public ObservableCollection<XETAPLAI_GP> listAllGPXTL()
+        {
+            using (db = new giaothongEntities())
+            {
+                ListAllGPXTL.Clear();
+
+                var gpxtl = from c in db.XETAPLAI_GP
+                          select c;
+
+                gpxtl.ToList().ForEach(p =>
+                {
+                    ListAllGPXTL.Add(p);
+                });
+
+                return ListAllGPXTL;
             }
         }
 

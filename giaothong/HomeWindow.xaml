@@ -4,19 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:giaothong"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.FontWeight="Regular"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         FontFamily="{DynamicResource MaterialDesignFont}"
         DataContext="{StaticResource homevm}"
+        x:Name="homeWindow"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
         AllowsTransparency="True" 
         Background="Transparent"
-        Title="HomeWindow" Height="650" Width="1180">
+        Title="HomeWindow" Height="650" Width="1180"
+        SizeChanged="Window_SizeChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"></ColumnDefinition>
@@ -43,63 +46,126 @@
                     </Border>
 
                     <StackPanel VerticalAlignment="Center" Margin="5 0 0 0">
-                        <TextBlock Text="Nguyen Quoc Anh" FontWeight="SemiBold" FontSize="18" Margin="0 0 0 5" Foreground="#ffffff"></TextBlock>
-                        <TextBlock Text="Admin" FontSize="13" Foreground="#ffffff"></TextBlock>
+                        <TextBlock Text="{Binding User.Name}" FontWeight="SemiBold" FontSize="18" Margin="0 0 0 5" Foreground="#ffffff"></TextBlock>
+                        <TextBlock Text="{Binding User.USERS_ROLE.name}" FontSize="13" Foreground="#ffffff"></TextBlock>
                     </StackPanel>
                 </WrapPanel>
 
                 <StackPanel Grid.Row="1">
-                    <WrapPanel Margin="10 0 0 0" Cursor="Hand">
-                        <materialDesign:PackIcon Kind="Home" Foreground="#ffffff" Height="30" Width="30" />
-                        <TextBlock Text="Tổng quan" FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" VerticalAlignment="Center" Margin="5 5 0 0"></TextBlock>
-                    </WrapPanel>
+                    <ListView Cursor="Hand">
+                        <WrapPanel Margin="0 5 0 0">
+                            <materialDesign:PackIcon Kind="Home" Foreground="#ffffff" Height="30" Width="30" />
+                            <ListViewItem  FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" Content="Tổng quan">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding LogoutCommand}"
+                                                           CommandParameter="{Binding ElementName=homeWindow}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListViewItem>
+                        </WrapPanel>
 
-                    <WrapPanel Margin="10 15 0 0" Cursor="Hand">
-                        <materialDesign:PackIcon Kind="Settings" Foreground="#ffffff" Height="30" Width="30" />
-                        <TextBlock Text="Quản lý đào tạo" FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" VerticalAlignment="Center" Margin="5 5 0 0"></TextBlock>
-                    </WrapPanel>
+                        <WrapPanel Margin="0 5 0 0">
+                            <materialDesign:PackIcon Kind="Settings" Foreground="#ffffff" Height="30" Width="30" />
+                            <ListViewItem  FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" Content="Quản lý đào tạo">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding LogoutCommand}"
+                                                           CommandParameter="{Binding ElementName=homeWindow}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListViewItem>
+                        </WrapPanel>
 
-                    <WrapPanel Margin="10 15 0 0" Cursor="Hand">
-                        <materialDesign:PackIcon Kind="SeatReclineNormal" Foreground="#ffffff" Height="30" Width="30" />
-                        <TextBlock Text="Quản lý sát hạch" FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" VerticalAlignment="Center" Margin="5 5 0 0"></TextBlock>
-                    </WrapPanel>
+                        <WrapPanel Margin="0 5 0 0">
+                            <materialDesign:PackIcon Kind="SeatReclineNormal" Foreground="#ffffff" Height="30" Width="30" />
+                            <ListViewItem  FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" Content="Quản lý sát hạch">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding LogoutCommand}"
+                                                           CommandParameter="{Binding ElementName=homeWindow}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListViewItem>
+                        </WrapPanel>
 
-                    <WrapPanel Margin="10 15 0 0" Cursor="Hand">
-                        <materialDesign:PackIcon Kind="AccountEdit" Foreground="#ffffff" Height="30" Width="30" />
-                        <TextBlock Text="Quản lý giáo viên" FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" VerticalAlignment="Center" Margin="5 5 0 0">
-                            <TextBlock.InputBindings>
-                                <MouseBinding Command="{Binding viewTeacherWindow}" MouseAction="LeftClick" />
-                            </TextBlock.InputBindings>
-                        </TextBlock>
-                    </WrapPanel>
+                        <WrapPanel Margin="0 5 0 0">
+                            <materialDesign:PackIcon Kind="AccountEdit" Foreground="#ffffff" Height="30" Width="30" />
+                            <ListViewItem  FontSize="17" FontWeight="SemiBold" Width="200" Foreground="#ffffff" Content="Quản lý giáo viên">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding OpenTeacherCommand}"
+                                                           CommandParameter="{Binding ElementName=homeWindow}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListViewItem>
+                        </WrapPanel>
 
-                    <WrapPanel Margin="10 15 0 0" Cursor="Hand">
-                        <materialDesign:PackIcon Kind="Motorbike" Foreground="#ffffff" Height="30" Width="30" />
-                        <TextBlock Text="Quản lý xe tập lái" FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" VerticalAlignment="Center" Margin="5 5 0 0"></TextBlock>
-                    </WrapPanel>
+                        <WrapPanel Margin="0 5 0 0">
+                            <materialDesign:PackIcon Kind="Motorbike" Foreground="#ffffff" Height="30" Width="30" />
+                            <ListViewItem  FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" Content="Quản lý xe tập lái">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding OpenVehicleCommand}"
+                                                           CommandParameter="{Binding ElementName=homeWindow}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListViewItem>
+                        </WrapPanel>
 
-                    <WrapPanel Margin="10 15 0 0" Cursor="Hand">
-                        <materialDesign:PackIcon Kind="CreditCard" Foreground="#ffffff" Height="30" Width="30" />
-                        <TextBlock Text="Quản lý giấy phép lái xe" FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" VerticalAlignment="Center" Margin="5 5 0 0"></TextBlock>
-                    </WrapPanel>
+                        <WrapPanel Margin="0 5 0 0">
+                            <materialDesign:PackIcon Kind="CreditCard" Foreground="#ffffff" Height="30" Width="30" />
+                            <ListViewItem  FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" Content="Quản lý giấy phép lái xe">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding LogoutCommand}"
+                                                           CommandParameter="{Binding ElementName=homeWindow}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListViewItem>
+                        </WrapPanel>
 
-                    <WrapPanel Margin="10 15 0 0" Cursor="Hand">
-                        <materialDesign:PackIcon Kind="Logout" Foreground="#ffffff" Height="30" Width="30" />
-                        <TextBlock Text="Đăng xuất" FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" VerticalAlignment="Center" Margin="5 5 0 0"></TextBlock>
-                    </WrapPanel>
+                        <WrapPanel Margin="0 5 0 0" >
+                            <materialDesign:PackIcon Kind="Logout" Foreground="#ffffff" Height="30" Width="30"></materialDesign:PackIcon>
+                            <ListViewItem FontSize="17" FontWeight="SemiBold" Foreground="#ffffff"  Width="200" Content="Đăng xuất">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding LogoutCommand}" 
+                                                               CommandParameter="{Binding ElementName=homeWindow}">
+
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListViewItem>
+                        </WrapPanel>
+                    </ListView>
                 </StackPanel>
             </Grid>
         </Border>
 
+
         <Border CornerRadius="0 10 10 0" Grid.Column="1" Background="#ffffff">
             <Grid Margin="15">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="60"></RowDefinition>
-                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition x:Name="thirdRow" Height="150"></RowDefinition>
+                    
                     <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
 
+                </Grid.RowDefinitions>
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Grid.Column="1" Kind="WindowMinimize" Margin="0 0 10 0"  MouseLeftButtonDown="MinimizeIcon_MouseLeftButtonDown" Cursor="Hand"/>
+                    <materialDesign:PackIcon Grid.Column="2" Kind="WindowMaximize" Margin="0 0 10 0" MouseLeftButtonDown="MaximizeIcon_MouseLeftButtonDown" Cursor="Hand"/>
+                    <materialDesign:PackIcon Grid.Column="3" Kind="WindowClose" MouseLeftButtonDown="CloseIcon_MouseLeftButtonDown" Cursor="Hand"/>
+                </Grid>
+                <Grid Grid.Row="1">
                     <TextBlock Text="Quản lý đào tạo lái xe" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center"></TextBlock>
 
                     <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Right">
@@ -136,45 +202,30 @@
                     </WrapPanel>
                 </Grid>
 
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-
-                    <Border CornerRadius="10" Width="290">
+                    <Border CornerRadius="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                                 <GradientStop Color="#FF8080FF" Offset="0"></GradientStop>
                                 <GradientStop Color="#ffffff" Offset="1"></GradientStop>
                             </LinearGradientBrush>
                         </Border.Background>
-
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="15" RadiusY="15" Rect="0,0, 280,150"></RectangleGeometry>
-                        </Border.Clip>
-
                         <Grid>
-                            <Ellipse Width="230" Height="200" Margin="0 -130 -90 0" HorizontalAlignment="Right">
-                                <Ellipse.Fill>
-                                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                                        <GradientStop Color="#ffffff" Offset="0" ></GradientStop>
-                                        <GradientStop Color="#FF8085FF" Offset="1" ></GradientStop>
-                                    </LinearGradientBrush>
-                                </Ellipse.Fill>
-                            </Ellipse>
-
-                            <materialDesign:PackIcon Kind="Eye" Width="50" Height="50" Foreground="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 25 30 0"/>
+                            <materialDesign:PackIcon x:Name="iconsize1" Kind="Eye" Width="50" Height="50" Foreground="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 25 30 0"/>
 
                             <StackPanel VerticalAlignment="Bottom" Margin="10 0 0 20">
-                                <TextBlock Text="Tổng giáo viên" Foreground="#ffffff" FontSize="16" FontWeight="SemiBold"></TextBlock>
-                                <TextBlock Text="34" Foreground="#ffffff" FontSize="22" FontWeight="SemiBold"></TextBlock>
+                                <TextBlock x:Name="titlesize1" Text="Tổng giáo viên" Foreground="#ffffff" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <TextBlock x:Name="numbersize1" Text="34" Foreground="#ffffff" FontSize="22" FontWeight="SemiBold"></TextBlock>
                             </StackPanel>
                         </Grid>
                     </Border>
 
-                    <Border CornerRadius="10" Width="290" Grid.Column="1" Margin="10 0 0 0">
+                    <Border CornerRadius="10" Grid.Column="1" Margin="10 0 0 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                                 <GradientStop Color="#FFBF80FF" Offset="0"></GradientStop>
@@ -182,30 +233,16 @@
                             </LinearGradientBrush>
                         </Border.Background>
 
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="15" RadiusY="15" Rect="0,0, 280,150"></RectangleGeometry>
-                        </Border.Clip>
-
                         <Grid>
-                            <Ellipse Width="230" Height="200" Margin="0 -130 -90 0" HorizontalAlignment="Right">
-                                <Ellipse.Fill>
-                                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                                        <GradientStop Color="#ffffff" Offset="0" ></GradientStop>
-                                        <GradientStop Color="#FFBF80FF" Offset="1" ></GradientStop>
-                                    </LinearGradientBrush>
-                                </Ellipse.Fill>
-                            </Ellipse>
-
-                            <materialDesign:PackIcon Kind="Motorbike" Width="50" Height="50" Foreground="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 25 30 0"/>
-
+                            <materialDesign:PackIcon x:Name="iconsize2" Kind="Motorbike" Width="50" Height="50" Foreground="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 25 30 0"/>
                             <StackPanel VerticalAlignment="Bottom" Margin="10 0 0 20">
-                                <TextBlock Text="Tổng xe tập lái" Foreground="#ffffff" FontSize="16" FontWeight="SemiBold"></TextBlock>
-                                <TextBlock Text="108" Foreground="#ffffff" FontSize="22" FontWeight="SemiBold"></TextBlock>
+                                <TextBlock x:Name="titlesize2" Text="Tổng xe tập lái" Foreground="#ffffff" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <TextBlock x:Name="numbersize2" Text="108" Foreground="#ffffff" FontSize="22" FontWeight="SemiBold"></TextBlock>
                             </StackPanel>
                         </Grid>
                     </Border>
 
-                    <Border CornerRadius="10" Grid.Column="2" Width="290" Margin="20 0 0 0">
+                    <Border CornerRadius="10" Grid.Column="2" Margin="20 0 0 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                                 <GradientStop Color="#FFFF80E2" Offset="0"></GradientStop>
@@ -213,32 +250,19 @@
                             </LinearGradientBrush>
                         </Border.Background>
 
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="15" RadiusY="15" Rect="0,0, 280,150"></RectangleGeometry>
-                        </Border.Clip>
-
                         <Grid>
-                            <Ellipse Width="230" Height="200" Margin="0 -130 -90 0" HorizontalAlignment="Right">
-                                <Ellipse.Fill>
-                                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                                        <GradientStop Color="#ffffff" Offset="0" ></GradientStop>
-                                        <GradientStop Color="#FFFF80E2" Offset="1" ></GradientStop>
-                                    </LinearGradientBrush>
-                                </Ellipse.Fill>
-                            </Ellipse>
-
-                            <materialDesign:PackIcon Kind="School" Width="50" Height="50" Foreground="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 25 30 0"/>
+                            <materialDesign:PackIcon x:Name="iconsize3" Kind="School" Width="50" Height="50" Foreground="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 25 30 0"/>
 
                             <StackPanel VerticalAlignment="Bottom" Margin="10 0 0 20">
-                                <TextBlock Text="Tổng học viên" Foreground="#ffffff" FontSize="16" FontWeight="SemiBold"></TextBlock>
-                                <TextBlock Text="228" Foreground="#ffffff" FontSize="22" FontWeight="SemiBold"></TextBlock>
+                                <TextBlock x:Name="titlesize3" Text="Tổng học viên" Foreground="#ffffff" FontSize="16" FontWeight="SemiBold"></TextBlock>
+                                <TextBlock x:Name="numbersize3" Text="228" Foreground="#ffffff" FontSize="22" FontWeight="SemiBold"></TextBlock>
                             </StackPanel>
                         </Grid>
                     </Border>
                 </Grid>
 
-                <Grid Grid.Row="2" Margin="0 15 0 0">
-                    <lvc:CartesianChart LegendLocation="Bottom">
+                <Grid Grid.Row="3" Margin="0 15 0 0">
+                    <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Bottom">
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis Title="Vendedor" Labels="{Binding Labels}"></lvc:Axis>
                         </lvc:CartesianChart.AxisX>

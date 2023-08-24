@@ -4,6 +4,7 @@
     <viewmodel:HomeViewModel x:Key="homevm"></viewmodel:HomeViewModel>
     <viewmodel:MainViewModel x:Key="mainvm"></viewmodel:MainViewModel>
     <viewmodel:TeacherViewModel x:Key="teachervm"></viewmodel:TeacherViewModel>
+    <viewmodel:TeacherGCNViewModel x:Key="teachergcnvm"></viewmodel:TeacherGCNViewModel>
     <viewmodel:VehicleViewModel x:Key="vehiclevm"></viewmodel:VehicleViewModel>
-
+    <viewmodel:VehicleGPViewModel x:Key="vehiclegpvm"></viewmodel:VehicleGPViewModel>
 </ResourceDictionary>
