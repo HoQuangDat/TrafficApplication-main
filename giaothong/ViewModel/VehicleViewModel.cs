@@ -632,7 +632,7 @@ namespace giaothong.ViewModel
             viewGPXTL = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Hide();
-                HomeWindow vehicleGP = new HomeWindow();
+                VehicleGPWindow vehicleGP = new VehicleGPWindow();
                 vehicleGP.ShowDialog();
                 vehicles();
                 listGPTL();

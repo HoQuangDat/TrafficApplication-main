@@ -23,5 +23,24 @@ namespace giaothong
         {
             InitializeComponent();
         }
+
+        // Icon ẩn ứng dụng
+        private void MinimizeIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        // Icon phóng to thu nhỏ
+        private void MaximizeIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                WindowState = WindowState.Normal;
+            }
+        }
     }
 }

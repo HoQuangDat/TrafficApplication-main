@@ -21,6 +21,10 @@ namespace giaothong.ViewModel
         public ICommand LogoutCommand { get; set; }
         public ICommand OpenTeacherCommand { get; set; }
         public ICommand OpenVehicleCommand { get; set; }
+        public ICommand miniWindow { get; set; }
+        public ICommand mouseLeftButtonDowWindow { get; set; }
+        public ICommand maximizeIconWindow { get; set; }
+
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<string, string> Values { get; set; }
@@ -28,6 +32,32 @@ namespace giaothong.ViewModel
         public HomeViewModel()
         {
             User = MainViewModel.User;
+
+            //thu nhỏ window
+            miniWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.WindowState = WindowState.Minimized;
+            });
+
+
+            //duy chuyển uiwndow
+            mouseLeftButtonDowWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.DragMove();
+            });
+
+            //Phong to thu nho
+            maximizeIconWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                if (p.WindowState == WindowState.Normal)
+                {
+                    p.WindowState = WindowState.Maximized;
+                }
+                else
+                {
+                    p.WindowState = WindowState.Normal;
+                }
+            });
 
             LogoutCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {

@@ -181,6 +181,20 @@
                     </Grid>
 
                     <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 0 0 0">
+                            <Button
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="100"
+                                Margin="0 0 10 0"
+                                ToolTip="Xóa giáo viên khỏi danh sách"
+                                Content="Xóa"
+                                BorderThickness="0"
+                                Background="#B31312"
+                                Foreground="#ffffff"
+                                Command="{Binding removeGCN}"
+                                CommandParameter="{Binding ElementName=insertTeacherWindow}">
+                            </Button>
+                        </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
                             <Button
                                     Style="{StaticResource MaterialDesignRaisedButton}"
@@ -195,18 +209,7 @@
                                     Foreground="#ffffff">
                             </Button>
 
-                            <Button
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                Width="100"
-                                Margin="0 0 10 0"
-                                ToolTip="Xóa giáo viên khỏi danh sách"
-                                Content="Xóa"
-                                BorderThickness="0"
-                                Background="#B31312"
-                                Foreground="#ffffff"
-                                Command="{Binding removeGCN}"
-                                CommandParameter="{Binding ElementName=insertTeacherWindow}">
-                            </Button>
+                            
 
                             <Button
                                     Style="{StaticResource MaterialDesignRaisedButton}"

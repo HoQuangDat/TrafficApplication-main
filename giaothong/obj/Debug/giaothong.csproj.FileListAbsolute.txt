@@ -196,6 +196,7 @@ C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\InsertVehicleGPWindow.g.cs
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\InsertVehicleWindow.g.cs
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\MainWindow.g.cs
+C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\QLDaoTaoWindow.g.cs
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\TeacherGCNWindow.g.cs
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\TeacherWindow.g.cs
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\VehicleGPWindow.g.cs
@@ -216,6 +217,7 @@ C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\InsertVehicleGPWindow.baml
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\InsertVehicleWindow.baml
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\MainWindow.baml
+C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\QLDaoTaoWindow.baml
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\Resources\MainResource.baml
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\TeacherGCNWindow.baml
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\TeacherWindow.baml

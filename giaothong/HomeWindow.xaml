@@ -20,6 +20,12 @@
         Background="Transparent"
         Title="HomeWindow" Height="650" Width="1180"
         SizeChanged="Window_SizeChanged">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding mouseLeftButtonDowWindow}"
+                                   CommandParameter="{Binding ElementName=homeWindow}"></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"></ColumnDefinition>
@@ -157,14 +163,46 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="30"/>
+
                     </Grid.ColumnDefinitions>
-                    <materialDesign:PackIcon Grid.Column="1" Kind="WindowMinimize" Margin="0 0 10 0"  MouseLeftButtonDown="MinimizeIcon_MouseLeftButtonDown" Cursor="Hand"/>
-                    <materialDesign:PackIcon Grid.Column="2" Kind="WindowMaximize" Margin="0 0 10 0" MouseLeftButtonDown="MaximizeIcon_MouseLeftButtonDown" Cursor="Hand"/>
-                    <materialDesign:PackIcon Grid.Column="3" Kind="WindowClose" MouseLeftButtonDown="CloseIcon_MouseLeftButtonDown" Cursor="Hand"/>
+                    <Grid Width="30"
+                                    Height="30" HorizontalAlignment="Right" Grid.Column="1">
+                        <Button         
+                                    Command="{Binding miniWindow}"
+                                    CommandParameter="{Binding ElementName=homeWindow}"
+                                    Panel.ZIndex="1"
+                                    Width="30"
+                                    Height="30"
+                                    Opacity="0"
+                                    Background="{x:Null}"
+                                    BorderThickness="0"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton"></Button>
+
+                        <materialDesign:PackIcon Grid.Column="1" Kind="WindowMinimize" Margin="0 0 10 0" Cursor="Hand"/>
+                    </Grid>
+                    <Grid Width="30"
+                                    Height="30" HorizontalAlignment="Right" Grid.Column="2">
+                        <Button         
+                                    Command="{Binding maximizeIconWindow}"
+                                    CommandParameter="{Binding ElementName=homeWindow}"
+                                    Panel.ZIndex="1"
+                                    Width="30"
+                                    Height="30"
+                                    Opacity="0"
+                                    Background="{x:Null}"
+                                    BorderThickness="0"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton"></Button>
+
+                        <materialDesign:PackIcon Grid.Column="2" Kind="WindowMaximize" Margin="0 0 10 0" MouseLeftButtonDown="MaximizeIcon_MouseLeftButtonDown" Cursor="Hand"/>
+                    </Grid>
+                    <!--<materialDesign:PackIcon Grid.Column="1" Kind="WindowMinimize" Margin="0 0 10 0"  MouseLeftButtonDown="MinimizeIcon_MouseLeftButtonDown" Cursor="Hand"/>
+                    <materialDesign:PackIcon Grid.Column="2" Kind="WindowMaximize" Margin="0 0 10 0" MouseLeftButtonDown="MaximizeIcon_MouseLeftButtonDown" Cursor="Hand"/>-->
                 </Grid>
+
                 <Grid Grid.Row="1">
                     <TextBlock Text="Quản lý đào tạo lái xe" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center"></TextBlock>
 

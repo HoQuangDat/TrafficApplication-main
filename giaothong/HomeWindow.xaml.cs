@@ -25,23 +25,7 @@ namespace giaothong
         {
             InitializeComponent();
         }
-        // Icon đóng ứng dụng
-        private void CloseIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("Bạn có muốn thoát khỏi ứng dụng?", "Xác nhận thoát", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                Application.Current.Shutdown();
-            }
-        }
         
-        // Icon ẩn ứng dụng
-        private void MinimizeIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
         // Icon phóng to thu nhỏ
         private void MaximizeIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
