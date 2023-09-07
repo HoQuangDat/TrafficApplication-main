@@ -12,9 +12,15 @@ namespace giaothong.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class HangXe
+    public partial class NguoiLXHS_GiayTo
     {
-        public int mahx { get; set; }
-        public string ten { get; set; }
+        public int MaGT { get; set; }
+        public string MaDK { get; set; }
+        public string SoHoSo { get; set; }
+        public string TenGT { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
+        public string MADK2 { get; set; }
+    
+        public virtual NguoiLX_HoSo NguoiLX_HoSo { get; set; }
     }
 }

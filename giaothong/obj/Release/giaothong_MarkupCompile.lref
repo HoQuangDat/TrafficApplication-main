@@ -1,7 +1,19 @@
-﻿F:\WPF\giaothong\giaothong\obj\Release\GeneratedInternalTypeHelper.g.cs
-FF:\WPF\giaothong\giaothong\App.xaml;;
-FF:\WPF\giaothong\giaothong\HomeWindow.xaml;;
-FF:\WPF\giaothong\giaothong\MainWindow.xaml;;
-FF:\WPF\giaothong\giaothong\Resources\MainResource.xaml;;
-FF:\WPF\giaothong\giaothong\TeacherWindow.xaml;;
+﻿F:\WPF\TrafficApplication-main\giaothong\obj\Release\GeneratedInternalTypeHelper.g.cs
+FF:\WPF\TrafficApplication-main\giaothong\App.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\EditTeacherGCNWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\EditTeacherWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\EditVehicleGPWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\EditVehicleWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\HomeWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\InsertTeacherGCNWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\InsertTeacherWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\InsertVehicleGPWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\InsertVehicleWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\MainWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\QLDaoTaoWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\Resources\MainResource.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\TeacherGCNWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\TeacherWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\VehicleGPWindow.xaml;;
+FF:\WPF\TrafficApplication-main\giaothong\VehicleWindow.xaml;;
 

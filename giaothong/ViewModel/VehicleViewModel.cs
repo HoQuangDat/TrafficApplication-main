@@ -1,4 +1,4 @@
-﻿using giaothong.Model;
+﻿    using giaothong.Model;
 using Microsoft.Win32;
 using QuanLyShop.ViewModel;
 using System;
@@ -27,9 +27,9 @@ namespace giaothong.ViewModel
     {
         private giaothongEntities db;
         private ObservableCollection<XETAPLAI> _listVehicle;
-        private ObservableCollection<HangXe> _listHangXe;
+        //private ObservableCollection<HangXe> _listHangXe;
         private ObservableCollection<XETAPLAI_GP> _listGPTL;
-        private ObservableCollection<LoaiXe> _listLoaiXe;
+        //private ObservableCollection<LoaiXe> _listLoaiXe;
         private USER _user;
         public USER User { get => _user; set { _user = value; OnPropertyChanged(); } }
         private static bool _isEnable;
@@ -38,10 +38,10 @@ namespace giaothong.ViewModel
         private ObservableCollection<XETAPLAI_GP> _listAllGPXTL;
         public ObservableCollection<XETAPLAI_GP> ListAllGPXTL { get => _listAllGPXTL; set => _listAllGPXTL = value; }
         public ObservableCollection<XETAPLAI> ListVehicle { get => _listVehicle; set => _listVehicle = value; }
-        public ObservableCollection<HangXe> ListHangXe { get => _listHangXe; set => _listHangXe = value; }
+        //public ObservableCollection<HangXe> ListHangXe { get => _listHangXe; set => _listHangXe = value; }
 
         public ObservableCollection<XETAPLAI_GP> ListGPTL { get => _listGPTL; set => _listGPTL = value; }
-        public ObservableCollection<LoaiXe> ListLoaiXe { get => _listLoaiXe; set => _listLoaiXe = value; }
+        //public ObservableCollection<LoaiXe> ListLoaiXe { get => _listLoaiXe; set => _listLoaiXe = value; }
 
         private string _soDangKy;
         public string SoDangKy { get => _soDangKy; set { _soDangKy = value; OnPropertyChanged(); } }
@@ -169,14 +169,14 @@ namespace giaothong.ViewModel
 
                 int index = 0;
 
-                for (index = 0; index < ListHangXe.Count(); index++)
-                {
-                    if (index == SelectedIndexHX)
-                    {
-                        HangXe = ListHangXe[index].ten.Trim();
-                        break;
-                    }
-                }
+                //for (index = 0; index < ListHangXe.Count(); index++)
+                //{
+                //    if (index == SelectedIndexHX)
+                //    {
+                //        HangXe = ListHangXe[index].ten.Trim();
+                //        break;
+                //    }
+                //}
             }
         }
 
@@ -192,14 +192,14 @@ namespace giaothong.ViewModel
 
                 int index = 0;
 
-                for (index = 0; index < ListLoaiXe.Count(); index++)
-                {
-                    if (index == SelectedIndexLX)
-                    {
-                        LoaiXe = ListLoaiXe[index].Ten.Trim();
-                        break;
-                    }
-                }
+                //for (index = 0; index < ListLoaiXe.Count(); index++)
+                //{
+                //    if (index == SelectedIndexLX)
+                //    {
+                //        LoaiXe = ListLoaiXe[index].Ten.Trim();
+                //        break;
+                //    }
+                //}
             }
         }
 
@@ -249,15 +249,15 @@ namespace giaothong.ViewModel
         public VehicleViewModel()
         {
             ListVehicle = new ObservableCollection<XETAPLAI>();
-            ListHangXe = new ObservableCollection<HangXe>();
+            //ListHangXe = new ObservableCollection<HangXe>();
             ListGPTL = new ObservableCollection<XETAPLAI_GP>();
-            ListLoaiXe = new ObservableCollection<LoaiXe>();
+            //ListLoaiXe = new ObservableCollection<LoaiXe>();
             ListAllGPXTL = new ObservableCollection<XETAPLAI_GP>();
 
             vehicles();
             listGPTL();
-            listHangXe();
-            listLoaiXe();
+            //listHangXe();
+            //listLoaiXe();
             listAllGPXTL();
             //export file excel
             ExportExcel = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -612,15 +612,15 @@ namespace giaothong.ViewModel
                     SoGPTL = ListGPTL[0].SoGPXTL.Trim();
                 }
 
-                if (ListHangXe.Count > 0)
-                {
-                    HangXe = ListHangXe[0].ten.Trim();
-                }
+                //if (ListHangXe.Count > 0)
+                //{
+                //    HangXe = ListHangXe[0].ten.Trim();
+                //}
 
-                if (ListLoaiXe.Count > 0)
-                {
-                    LoaiXe = ListLoaiXe[0].Ten.Trim();
-                }
+                //if (ListLoaiXe.Count > 0)
+                //{
+                //    LoaiXe = ListLoaiXe[0].Ten.Trim();
+                //}
 
                 p.Hide();
                 InsertVehicle inserVehicle = new InsertVehicle();
@@ -1083,26 +1083,26 @@ namespace giaothong.ViewModel
         }
 
         //get list hang xe
-        public ObservableCollection<HangXe> listHangXe()
-        {
-            using (db = new giaothongEntities())
-            {
-                ListHangXe.Clear();
+        //public ObservableCollection<HangXe> listHangXe()
+        //{
+        //    using (db = new giaothongEntities())
+        //    {
+        //        ListHangXe.Clear();
 
-                try
-                {
-                    var hangxes = from c in db.HangXes select c;
+        //        try
+        //        {
+        //            var hangxes = from c in db.HangXes select c;
 
-                    hangxes.ToList().ForEach(p =>
-                    {
-                        ListHangXe.Add(p);
-                    });
-                }
-                catch { }
+        //            hangxes.ToList().ForEach(p =>
+        //            {
+        //                ListHangXe.Add(p);
+        //            });
+        //        }
+        //        catch { }
 
-                return ListHangXe;
-            }
-        }
+        //        return ListHangXe;
+        //    }
+        //}
 
         //get list vehicle GPXTL
         public ObservableCollection<XETAPLAI_GP> listAllGPXTL()
@@ -1124,26 +1124,26 @@ namespace giaothong.ViewModel
         }
 
         //get list LoaiXe
-        public ObservableCollection<LoaiXe> listLoaiXe()
-        {
-            using (db = new giaothongEntities())
-            {
-                ListLoaiXe.Clear();
+        //public ObservableCollection<LoaiXe> listLoaiXe()
+        //{
+        //    using (db = new giaothongEntities())
+        //    {
+        //        ListLoaiXe.Clear();
 
-                try
-                {
-                    var loaixe = from lx in db.LoaiXes select lx;
+        //        try
+        //        {
+        //            var loaixe = from lx in db.LoaiXes select lx;
 
-                    loaixe.ToList().ForEach(p =>
-                    {
-                        ListLoaiXe.Add(p);
-                    });
-                }
-                catch { }
+        //            loaixe.ToList().ForEach(p =>
+        //            {
+        //                ListLoaiXe.Add(p);
+        //            });
+        //        }
+        //        catch { }
 
-                return ListLoaiXe;
-            }
-        }
+        //        return ListLoaiXe;
+        //    }
+        //}
 
 
     }

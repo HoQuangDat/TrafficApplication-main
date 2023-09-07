@@ -24,7 +24,7 @@ namespace giaothong.ViewModel
         public ICommand miniWindow { get; set; }
         public ICommand mouseLeftButtonDowWindow { get; set; }
         public ICommand maximizeIconWindow { get; set; }
-
+        public ICommand OpenManagerTrainCommand { get; set; }
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<string, string> Values { get; set; }
@@ -69,6 +69,14 @@ namespace giaothong.ViewModel
                 p.Hide();
                 TeacherWindow teacher = new TeacherWindow();
                 teacher.ShowDialog();
+                p.ShowDialog();
+            });
+
+            OpenManagerTrainCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.Hide();
+                TrainingWindow train = new TrainingWindow();
+                train.ShowDialog();
                 p.ShowDialog();
             });
 

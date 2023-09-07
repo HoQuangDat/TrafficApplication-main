@@ -1,0 +1,125 @@
+﻿<Window x:Class="giaothong.InsertPracticeTeacherTrainingrWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:giaothong"
+        mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.FontWeight="Regular"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext="{StaticResource trainingpracticevm}"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Name="TrainingCenterWD"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" 
+        AllowsTransparency="True" 
+        Background="Transparent"
+        Title="Teacher Training Practice Window" Height="650" Width="1400">
+    <Grid>
+        <Border CornerRadius="10" Background="#ffffff">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="50" Command="{Binding closeVehicleWindow}"  CommandParameter="{Binding ElementName=vehicleWindow}">
+                    <materialDesign:PackIcon Width="20" Height="20" Foreground="#08bf96" Kind="Logout" />
+                </Button>
+
+                <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="THÊM GIÁO VIÊN DẠY KHÓA HỌC: 5823" FontWeight="SemiBold"></TextBlock>
+
+                <Grid Grid.Row="2" Margin="0 10 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" BorderBrush="#08bf96" BorderThickness="0 0 1 0">
+                        <StackPanel>
+                            <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Thông Tin Giáo Viên Dạy Thực Hành" FontWeight="SemiBold"></TextBlock>
+
+                            <WrapPanel Margin="0 0 0 0" VerticalAlignment="Center">
+                                <TextBox
+                                      Margin="10 5 0 5"
+                                      Width="200"
+                                      Text="{Binding SearchVehicle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                      materialDesign:HintAssist.Hint="Tìm kiếm theo tên giáo viên..."
+                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding textChanged}"></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+                            </WrapPanel>
+
+                            <ListView SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding MaGV}" Header="Mã"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding MaGV}" Header="Cơ sở"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding TenGV}" Header="Tên"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding MaCSDT}" Header="Loại dạy"/>
+                                    </GridView>
+                                </ListView.View>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction CommandParameter="{Binding ElementName=TrainingCenterWD}" Command="{Binding previewMouseLeftButtonUp}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListView>
+                        </StackPanel>
+                    </Border>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Thông Tin Giáo Viên Trong Khóa Học" FontWeight="SemiBold"></TextBlock>
+
+                            <ListView Margin="0 43 0 0" ItemsSource="{Binding ListVehicle}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding MaKH}" Header="STT"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding MaCSDT}" Header="Họ Tên"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding MaCSDT}" Header="Hạng"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding MaSoGTVT}" Header="Xe"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding TenKH}" Header="Sân Tập"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding HangGPLX}" Header="Số HV"/>
+                                    </GridView>
+                                </ListView.View>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction CommandParameter="{Binding ElementName=TrainingCenterWD}" Command="{Binding previewMouseLeftButtonUp}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListView>
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <TextBlock HorizontalAlignment="Left" FontSize="16" Text="Trang 4/10" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
+
+                            <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
+                                    <materialDesign:PackIcon HorizontalAlignment="Center" Width="30" Height="25"  Foreground="#08bf96" Kind="ChevronLeft" />
+                                </Button>
+                                <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
+                                    <materialDesign:PackIcon HorizontalAlignment="Center" Width="30" Height="25"   Foreground="#08bf96" Kind="ChevronRight" />
+                                </Button>
+                            </WrapPanel>
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+
+</Window>

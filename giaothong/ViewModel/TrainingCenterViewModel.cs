@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace giaothong.ViewModel
 {
-    internal class QLDaoTaoViewModel
+    class TrainingCenterViewModel
     {
     }
 }

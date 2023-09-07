@@ -17,11 +17,12 @@ namespace giaothong
     /// <summary>
     /// Interaction logic for QLDaoTaoWindow.xaml
     /// </summary>
-    public partial class QLDaoTaoWindow : Window
+    public partial class TrainingWindow : Window
     {
-        public QLDaoTaoWindow()
+        public TrainingWindow()
         {
             InitializeComponent();
+
         }
     }
 }

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\WPF\giaothong\giaothong\obj\Release\
+F:\WPF\TrafficApplication-main\giaothong\obj\Release\
 giaothong
 none
 false
 TRACE
-F:\WPF\giaothong\giaothong\App.xaml
-41440314228
+F:\WPF\TrafficApplication-main\giaothong\App.xaml
+16-1594281194
 2-1556844510
-21806960565
-23283746708
-HomeWindow.xaml;MainWindow.xaml;Resources\MainResource.xaml;TeacherWindow.xaml;
+40236960126
+1671824724049
+EditTeacherGCNWindow.xaml;EditTeacherWindow.xaml;EditVehicleGPWindow.xaml;EditVehicleWindow.xaml;HomeWindow.xaml;InsertTeacherGCNWindow.xaml;InsertTeacherWindow.xaml;InsertVehicleGPWindow.xaml;InsertVehicleWindow.xaml;MainWindow.xaml;QLDaoTaoWindow.xaml;Resources\MainResource.xaml;TeacherGCNWindow.xaml;TeacherWindow.xaml;VehicleGPWindow.xaml;VehicleWindow.xaml;
 
 True
 

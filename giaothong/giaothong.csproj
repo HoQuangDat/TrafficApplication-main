@@ -239,6 +239,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ArrangePracticeTeacherWindow.xaml.cs">
+      <DependentUpon>ArrangePracticeTeacherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArrangeTeacherWindow.xaml.cs">
+      <DependentUpon>ArrangeTeacherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArrangeTheoryTeacherWindow.xaml.cs">
+      <DependentUpon>ArrangeTheoryTeacherWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditTeacherGCNWindow.xaml.cs">
       <DependentUpon>EditTeacherGCNWindow.xaml</DependentUpon>
     </Compile>
@@ -254,6 +263,12 @@
     <Compile Include="InsertTeacherGCNWindow.xaml.cs">
       <DependentUpon>InsertTeacherGCNWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InsertPracticeTeacherTrainingWindow.xaml.cs">
+      <DependentUpon>InsertPracticeTeacherTrainingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InsertTheoryTeacherTrainingWindow.xaml.cs">
+      <DependentUpon>InsertTheoryTeacherTrainingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InsertTeacherWindow.xaml.cs">
       <DependentUpon>InsertTeacherWindow.xaml</DependentUpon>
     </Compile>
@@ -263,10 +278,37 @@
     <Compile Include="InsertVehicleWindow.xaml.cs">
       <DependentUpon>InsertVehicleWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\HangXe.cs">
+    <Compile Include="Model\DM_DonViGTVT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\LoaiXe.cs">
+    <Compile Include="Model\DM_HangDT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DM_HangGPLX.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InHangDoiGPLX.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\KhoaHoc.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\KhoaHoc_GiaoVien.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\KySH.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NguoiLXHS_GiayTo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NguoiLXHS_KQSH.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NguoiLX_GPLX.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NguoiLX_HoSo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\province_city.cs">
@@ -275,8 +317,11 @@
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="QLDaoTaoWindow.xaml.cs">
-      <DependentUpon>QLDaoTaoWindow.xaml</DependentUpon>
+    <Compile Include="TrainingCenterWindow.xaml.cs">
+      <DependentUpon>TrainingCenterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TrainingWindow.xaml.cs">
+      <DependentUpon>TrainingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TeacherGCNWindow.xaml.cs">
       <DependentUpon>TeacherGCNWindow.xaml</DependentUpon>
@@ -290,14 +335,30 @@
     <Compile Include="VehicleWindow.xaml.cs">
       <DependentUpon>VehicleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ArrangTeacherViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\QLDaoTaoViewModel.cs" />
+    <Compile Include="ViewModel\TrainingPracticeTeacherViewModel.cs" />
+    <Compile Include="ViewModel\TrainingTheoryTeacherViewModel.cs" />
+    <Compile Include="ViewModel\TrainingCenterViewModel.cs" />
+    <Compile Include="ViewModel\TrainingViewModel.cs" />
     <Compile Include="ViewModel\TeacherGCNViewModel.cs" />
     <Compile Include="ViewModel\TeacherViewModel.cs" />
     <Compile Include="ViewModel\VehicleGPViewModel.cs" />
     <Compile Include="ViewModel\VehicleViewModel.cs" />
+    <Page Include="ArrangePracticeTeacherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ArrangeTeacherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ArrangeTheoryTeacherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditTeacherGCNWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -319,6 +380,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InsertTeacherGCNWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InsertPracticeTeacherTrainingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InsertTheoryTeacherTrainingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -349,7 +418,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="QLDaoTaoWindow.xaml">
+    <Page Include="TrainingCenterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrainingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

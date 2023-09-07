@@ -76,7 +76,7 @@
                             <ListViewItem  FontSize="17" FontWeight="SemiBold" Foreground="#ffffff" Content="Quản lý đào tạo">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                        <i:InvokeCommandAction Command="{Binding LogoutCommand}"
+                                        <i:InvokeCommandAction Command="{Binding OpenManagerTrainCommand}"
                                                            CommandParameter="{Binding ElementName=homeWindow}"></i:InvokeCommandAction>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>

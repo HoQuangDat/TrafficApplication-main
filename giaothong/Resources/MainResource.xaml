@@ -7,4 +7,9 @@
     <viewmodel:TeacherGCNViewModel x:Key="teachergcnvm"></viewmodel:TeacherGCNViewModel>
     <viewmodel:VehicleViewModel x:Key="vehiclevm"></viewmodel:VehicleViewModel>
     <viewmodel:VehicleGPViewModel x:Key="vehiclegpvm"></viewmodel:VehicleGPViewModel>
+    <viewmodel:TrainingViewModel x:Key="trainingvm"></viewmodel:TrainingViewModel>
+    <viewmodel:TrainingCenterViewModel x:Key="trainingcentervm"></viewmodel:TrainingCenterViewModel>
+    <viewmodel:TrainingPracticeTeacherViewModel x:Key="trainingpracticevm"></viewmodel:TrainingPracticeTeacherViewModel>
+    <viewmodel:TrainingTheoryTeacherViewModel x:Key="trainingtheoryvm"></viewmodel:TrainingTheoryTeacherViewModel>
+    <viewmodel:ArrangTeacherViewModel x:Key="arrangetcvm"></viewmodel:ArrangTeacherViewModel>
 </ResourceDictionary>
