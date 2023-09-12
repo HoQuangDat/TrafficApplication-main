@@ -18,6 +18,7 @@ namespace giaothong.Model
         public KhoaHoc()
         {
             this.KhoaHoc_GiaoVien = new HashSet<KhoaHoc_GiaoVien>();
+            this.LichHocs = new HashSet<LichHoc>();
         }
     
         public string MaKH { get; set; }
@@ -55,5 +56,7 @@ namespace giaothong.Model
         public virtual DM_HangGPLX DM_HangGPLX { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KhoaHoc_GiaoVien> KhoaHoc_GiaoVien { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LichHoc> LichHocs { get; set; }
     }
 }

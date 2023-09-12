@@ -28,9 +28,16 @@ namespace giaothong.Model
         public string NguoiSua { get; set; }
         public System.DateTime NgayTao { get; set; }
         public System.DateTime NgaySua { get; set; }
+        public string MaPD { get; set; }
+        public string MaCD { get; set; }
+        public string MaST { get; set; }
+        public int ID { get; set; }
     
+        public virtual CaDay CaDay { get; set; }
         public virtual GIAOVIEN GIAOVIEN { get; set; }
         public virtual KhoaHoc KhoaHoc { get; set; }
+        public virtual PhongDay PhongDay { get; set; }
+        public virtual SanTap SanTap { get; set; }
         public virtual XETAPLAI XETAPLAI { get; set; }
     }
 }

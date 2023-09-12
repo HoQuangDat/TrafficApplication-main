@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="giaothongModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CaDay">
+          <Key>
+            <PropertyRef Name="MaCD" />
+          </Key>
+          <Property Name="MaCD" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="CaDay" Type="nvarchar" MaxLength="80" />
+        </EntityType>
         <EntityType Name="DM_DonViGTVT">
           <Key>
             <PropertyRef Name="MaDV" />
@@ -212,20 +219,9 @@
           <Property Name="NgaySua" Type="datetime" Nullable="false" />
           <Property Name="TT_Xuly" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="KhoaHoc_GiaoVien">
           <Key>
-            <PropertyRef Name="MaKH" />
-            <PropertyRef Name="MaGV" />
-            <PropertyRef Name="TenGV" />
-            <PropertyRef Name="LoaiGV" />
-            <PropertyRef Name="NgayHL" />
-            <PropertyRef Name="NgayHetHL" />
-            <PropertyRef Name="GhiChu" />
-            <PropertyRef Name="TrangThai" />
-            <PropertyRef Name="NgayTao" />
-            <PropertyRef Name="NgaySua" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="MaKH" Type="char" MaxLength="13" Nullable="false" />
           <Property Name="MaGV" Type="char" MaxLength="20" Nullable="false" />
@@ -241,6 +237,10 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
           <Property Name="NgayTao" Type="datetime" Nullable="false" />
           <Property Name="NgaySua" Type="datetime" Nullable="false" />
+          <Property Name="MaPD" Type="char" MaxLength="25" />
+          <Property Name="MaCD" Type="char" MaxLength="25" />
+          <Property Name="MaST" Type="char" MaxLength="25" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="KySH">
           <Key>
@@ -290,6 +290,21 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <Property Name="NgayQDTT" Type="datetime" />
           <Property Name="TenKySH" Type="nvarchar" MaxLength="50" />
           <Property Name="TT_Xuly" Type="int" />
+        </EntityType>
+        <EntityType Name="LichHoc">
+          <Key>
+            <PropertyRef Name="MaLichHoc" />
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaLichHoc" Type="bigint" Nullable="false" />
+          <Property Name="MaKH" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="Thang" Type="int" Nullable="false" />
+          <Property Name="Tuan" Type="int" Nullable="false" />
+          <Property Name="TuNgay" Type="datetime" Nullable="false" />
+          <Property Name="DenNgay" Type="datetime" Nullable="false" />
+          <Property Name="GiaiDoan" Type="char" MaxLength="2" />
+          <Property Name="KiemTra" Type="char" MaxLength="2" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="NguoiLX_GPLX">
           <Key>
@@ -490,6 +505,13 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <Property Name="VangSH" Type="bit" Nullable="false" />
           <Property Name="DiemToiThieu" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PhongDay">
+          <Key>
+            <PropertyRef Name="MaPD" />
+          </Key>
+          <Property Name="MaPD" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="PhongDay" Type="nvarchar" MaxLength="80" />
+        </EntityType>
         <EntityType Name="province_city">
           <Key>
             <PropertyRef Name="matp" />
@@ -498,6 +520,13 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <Property Name="name" Type="nvarchar" MaxLength="100" />
           <Property Name="type" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="slug" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="SanTap">
+          <Key>
+            <PropertyRef Name="MaST" />
+          </Key>
+          <Property Name="MaST" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="SanTap" Type="nvarchar" MaxLength="80" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -594,6 +623,42 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_KH_GV_CD">
+          <End Role="CaDay" Type="Self.CaDay" Multiplicity="0..1" />
+          <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaDay">
+              <PropertyRef Name="MaCD" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="MaCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KH_GV_PD">
+          <End Role="PhongDay" Type="Self.PhongDay" Multiplicity="0..1" />
+          <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhongDay">
+              <PropertyRef Name="MaPD" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="MaPD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KH_GV_ST">
+          <End Role="SanTap" Type="Self.SanTap" Multiplicity="0..1" />
+          <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanTap">
+              <PropertyRef Name="MaST" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="MaST" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_KhoaHoc_DM_DonViGTVT">
           <End Role="DM_DonViGTVT" Type="Self.DM_DonViGTVT" Multiplicity="1" />
           <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
@@ -675,6 +740,18 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
             </Principal>
             <Dependent Role="KySH">
               <PropertyRef Name="MaTTSH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LichHoc_KhoaHoc">
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
+          <End Role="LichHoc" Type="Self.LichHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaHoc">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="LichHoc">
+              <PropertyRef Name="MaKH" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -839,6 +916,7 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="giaothongModelStoreContainer">
+          <EntitySet Name="CaDay" EntityType="Self.CaDay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_DonViGTVT" EntityType="Self.DM_DonViGTVT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_HangDT" EntityType="Self.DM_HangDT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_HangGPLX" EntityType="Self.DM_HangGPLX" Schema="dbo" store:Type="Tables" />
@@ -846,35 +924,21 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <EntitySet Name="GIAOVIEN_GCN" EntityType="Self.GIAOVIEN_GCN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InHangDoiGPLX" EntityType="Self.InHangDoiGPLX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhoaHoc" EntityType="Self.KhoaHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhoaHoc_GiaoVien" EntityType="Self.KhoaHoc_GiaoVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KySH" EntityType="Self.KySH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LichHoc" EntityType="Self.LichHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiLX_GPLX" EntityType="Self.NguoiLX_GPLX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiLX_HoSo" EntityType="Self.NguoiLX_HoSo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiLXHS_GiayTo" EntityType="Self.NguoiLXHS_GiayTo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiLXHS_KQSH" EntityType="Self.NguoiLXHS_KQSH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhongDay" EntityType="Self.PhongDay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="province_city" EntityType="Self.province_city" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SanTap" EntityType="Self.SanTap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS_ROLE" EntityType="Self.USERS_ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="XETAPLAI" EntityType="Self.XETAPLAI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="XETAPLAI_GP" EntityType="Self.XETAPLAI_GP" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KhoaHoc_GiaoVien" EntityType="Self.KhoaHoc_GiaoVien" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [KhoaHoc_GiaoVien].[MaKH] AS [MaKH], 
-    [KhoaHoc_GiaoVien].[MaGV] AS [MaGV], 
-    [KhoaHoc_GiaoVien].[TenGV] AS [TenGV], 
-    [KhoaHoc_GiaoVien].[BienSoXe] AS [BienSoXe], 
-    [KhoaHoc_GiaoVien].[LoaiGV] AS [LoaiGV], 
-    [KhoaHoc_GiaoVien].[SoHV] AS [SoHV], 
-    [KhoaHoc_GiaoVien].[NgayHL] AS [NgayHL], 
-    [KhoaHoc_GiaoVien].[NgayHetHL] AS [NgayHetHL], 
-    [KhoaHoc_GiaoVien].[GhiChu] AS [GhiChu], 
-    [KhoaHoc_GiaoVien].[TrangThai] AS [TrangThai], 
-    [KhoaHoc_GiaoVien].[NguoiTao] AS [NguoiTao], 
-    [KhoaHoc_GiaoVien].[NguoiSua] AS [NguoiSua], 
-    [KhoaHoc_GiaoVien].[NgayTao] AS [NgayTao], 
-    [KhoaHoc_GiaoVien].[NgaySua] AS [NgaySua]
-    FROM [dbo].[KhoaHoc_GiaoVien] AS [KhoaHoc_GiaoVien]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__KhoaHoc_Gi__MaKH__76619304" Association="Self.FK__KhoaHoc_Gi__MaKH__76619304">
             <End Role="KhoaHoc" EntitySet="KhoaHoc" />
             <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
@@ -882,6 +946,18 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <AssociationSet Name="fk_giaovien_gcn" Association="Self.fk_giaovien_gcn">
             <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
             <End Role="GIAOVIEN" EntitySet="GIAOVIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KH_GV_CD" Association="Self.FK_KH_GV_CD">
+            <End Role="CaDay" EntitySet="CaDay" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KH_GV_PD" Association="Self.FK_KH_GV_PD">
+            <End Role="PhongDay" EntitySet="PhongDay" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KH_GV_ST" Association="Self.FK_KH_GV_ST">
+            <End Role="SanTap" EntitySet="SanTap" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
           </AssociationSet>
           <AssociationSet Name="FK_KhoaHoc_DM_DonViGTVT" Association="Self.FK_KhoaHoc_DM_DonViGTVT">
             <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
@@ -910,6 +986,10 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <AssociationSet Name="FK_KySH_DM_DonViGTVT" Association="Self.FK_KySH_DM_DonViGTVT">
             <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
             <End Role="KySH" EntitySet="KySH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LichHoc_KhoaHoc" Association="Self.FK_LichHoc_KhoaHoc">
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+            <End Role="LichHoc" EntitySet="LichHoc" />
           </AssociationSet>
           <AssociationSet Name="FK_NguoiLX_GPLX_DM_DonViGTVT" Association="Self.FK_NguoiLX_GPLX_DM_DonViGTVT">
             <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
@@ -969,6 +1049,7 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
     <edmx:ConceptualModels>
       <Schema Namespace="giaothongModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="giaothongEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CaDays" EntityType="giaothongModel.CaDay" />
           <EntitySet Name="DM_DonViGTVT" EntityType="giaothongModel.DM_DonViGTVT" />
           <EntitySet Name="DM_HangDT" EntityType="giaothongModel.DM_HangDT" />
           <EntitySet Name="DM_HangGPLX" EntityType="giaothongModel.DM_HangGPLX" />
@@ -976,18 +1057,25 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <EntitySet Name="GIAOVIEN_GCN" EntityType="giaothongModel.GIAOVIEN_GCN" />
           <EntitySet Name="InHangDoiGPLXes" EntityType="giaothongModel.InHangDoiGPLX" />
           <EntitySet Name="KhoaHocs" EntityType="giaothongModel.KhoaHoc" />
+          <EntitySet Name="KhoaHoc_GiaoVien" EntityType="giaothongModel.KhoaHoc_GiaoVien" />
           <EntitySet Name="KySHes" EntityType="giaothongModel.KySH" />
+          <EntitySet Name="LichHocs" EntityType="giaothongModel.LichHoc" />
           <EntitySet Name="NguoiLX_GPLX" EntityType="giaothongModel.NguoiLX_GPLX" />
           <EntitySet Name="NguoiLX_HoSo" EntityType="giaothongModel.NguoiLX_HoSo" />
           <EntitySet Name="NguoiLXHS_GiayTo" EntityType="giaothongModel.NguoiLXHS_GiayTo" />
           <EntitySet Name="NguoiLXHS_KQSH" EntityType="giaothongModel.NguoiLXHS_KQSH" />
+          <EntitySet Name="PhongDays" EntityType="giaothongModel.PhongDay" />
           <EntitySet Name="province_city" EntityType="giaothongModel.province_city" />
+          <EntitySet Name="SanTaps" EntityType="giaothongModel.SanTap" />
           <EntitySet Name="sysdiagrams" EntityType="giaothongModel.sysdiagram" />
           <EntitySet Name="USERS" EntityType="giaothongModel.USER" />
           <EntitySet Name="USERS_ROLE" EntityType="giaothongModel.USERS_ROLE" />
           <EntitySet Name="XETAPLAIs" EntityType="giaothongModel.XETAPLAI" />
           <EntitySet Name="XETAPLAI_GP" EntityType="giaothongModel.XETAPLAI_GP" />
-          <EntitySet Name="KhoaHoc_GiaoVien" EntityType="giaothongModel.KhoaHoc_GiaoVien" />
+          <AssociationSet Name="FK_KH_GV_CD" Association="giaothongModel.FK_KH_GV_CD">
+            <End Role="CaDay" EntitySet="CaDays" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
           <AssociationSet Name="FK_KhoaHoc_DM_DonViGTVT" Association="giaothongModel.FK_KhoaHoc_DM_DonViGTVT">
             <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
             <End Role="KhoaHoc" EntitySet="KhoaHocs" />
@@ -1056,6 +1144,22 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
             <End Role="KhoaHoc" EntitySet="KhoaHocs" />
             <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
           </AssociationSet>
+          <AssociationSet Name="FK_LichHoc_KhoaHoc" Association="giaothongModel.FK_LichHoc_KhoaHoc">
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+            <End Role="LichHoc" EntitySet="LichHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KH_GV_PD" Association="giaothongModel.FK_KH_GV_PD">
+            <End Role="PhongDay" EntitySet="PhongDays" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KH_GV_ST" Association="giaothongModel.FK_KH_GV_ST">
+            <End Role="SanTap" EntitySet="SanTaps" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_GiaoVien_XeTap" Association="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap">
+            <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
           <AssociationSet Name="FK_NguoiLX_HoSo_KySH" Association="giaothongModel.FK_NguoiLX_HoSo_KySH">
             <End Role="KySH" EntitySet="KySHes" />
             <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
@@ -1068,15 +1172,19 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
             <End Role="USERS_ROLE" EntitySet="USERS_ROLE" />
             <End Role="USER" EntitySet="USERS" />
           </AssociationSet>
-          <AssociationSet Name="FK_KhoaHoc_GiaoVien_XeTap" Association="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap">
-            <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
-            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
-          </AssociationSet>
           <AssociationSet Name="fk_xetl_gp" Association="giaothongModel.fk_xetl_gp">
             <End Role="XETAPLAI_GP" EntitySet="XETAPLAI_GP" />
             <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CaDay">
+          <Key>
+            <PropertyRef Name="MaCD" />
+          </Key>
+          <Property Name="MaCD" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="CaDay1" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK_KH_GV_CD" FromRole="CaDay" ToRole="KhoaHoc_GiaoVien" />
+        </EntityType>
         <EntityType Name="DM_DonViGTVT">
           <Key>
             <PropertyRef Name="MaDV" />
@@ -1305,6 +1413,36 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <NavigationProperty Name="DM_HangDT" Relationship="giaothongModel.FK_KhoaHoc_DM_HangDT" FromRole="KhoaHoc" ToRole="DM_HangDT" />
           <NavigationProperty Name="DM_HangGPLX" Relationship="giaothongModel.FK_KhoaHoc_DM_HangGPLX" FromRole="KhoaHoc" ToRole="DM_HangGPLX" />
           <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304" FromRole="KhoaHoc" ToRole="KhoaHoc_GiaoVien" />
+          <NavigationProperty Name="LichHocs" Relationship="giaothongModel.FK_LichHoc_KhoaHoc" FromRole="KhoaHoc" ToRole="LichHoc" />
+        </EntityType>
+        <EntityType Name="KhoaHoc_GiaoVien">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="MaKH" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="MaGV" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="TenGV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BienSoXe" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="LoaiGV" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="SoHV" Type="Int32" />
+          <Property Name="NgayHL" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgayHetHL" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GhiChu" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaPD" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="MaCD" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="MaST" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="CaDay" Relationship="giaothongModel.FK_KH_GV_CD" FromRole="KhoaHoc_GiaoVien" ToRole="CaDay" />
+          <NavigationProperty Name="GIAOVIEN" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_GiaoVien" FromRole="KhoaHoc_GiaoVien" ToRole="GIAOVIEN" />
+          <NavigationProperty Name="KhoaHoc" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304" FromRole="KhoaHoc_GiaoVien" ToRole="KhoaHoc" />
+          <NavigationProperty Name="PhongDay" Relationship="giaothongModel.FK_KH_GV_PD" FromRole="KhoaHoc_GiaoVien" ToRole="PhongDay" />
+          <NavigationProperty Name="SanTap" Relationship="giaothongModel.FK_KH_GV_ST" FromRole="KhoaHoc_GiaoVien" ToRole="SanTap" />
+          <NavigationProperty Name="XETAPLAI" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap" FromRole="KhoaHoc_GiaoVien" ToRole="XETAPLAI" />
         </EntityType>
         <EntityType Name="KySH">
           <Key>
@@ -1356,6 +1494,22 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <Property Name="TT_Xuly" Type="Int32" />
           <NavigationProperty Name="DM_DonViGTVT" Relationship="giaothongModel.FK_KySH_DM_DonViGTVT" FromRole="KySH" ToRole="DM_DonViGTVT" />
           <NavigationProperty Name="NguoiLX_HoSo" Relationship="giaothongModel.FK_NguoiLX_HoSo_KySH" FromRole="KySH" ToRole="NguoiLX_HoSo" />
+        </EntityType>
+        <EntityType Name="LichHoc">
+          <Key>
+            <PropertyRef Name="MaLichHoc" />
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaLichHoc" Type="Int64" Nullable="false" />
+          <Property Name="MaKH" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="Thang" Type="Int32" Nullable="false" />
+          <Property Name="Tuan" Type="Int32" Nullable="false" />
+          <Property Name="TuNgay" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DenNgay" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GiaiDoan" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="KiemTra" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KhoaHoc" Relationship="giaothongModel.FK_LichHoc_KhoaHoc" FromRole="LichHoc" ToRole="KhoaHoc" />
         </EntityType>
         <EntityType Name="NguoiLX_GPLX">
           <Key>
@@ -1568,6 +1722,14 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <Property Name="VangSH" Type="Boolean" Nullable="false" />
           <Property Name="DiemToiThieu" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="PhongDay">
+          <Key>
+            <PropertyRef Name="MaPD" />
+          </Key>
+          <Property Name="MaPD" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="PhongDay1" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK_KH_GV_PD" FromRole="PhongDay" ToRole="KhoaHoc_GiaoVien" />
+        </EntityType>
         <EntityType Name="province_city">
           <Key>
             <PropertyRef Name="matp" />
@@ -1576,6 +1738,14 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="slug" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SanTap">
+          <Key>
+            <PropertyRef Name="MaST" />
+          </Key>
+          <Property Name="MaST" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="SanTap1" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK_KH_GV_ST" FromRole="SanTap" ToRole="KhoaHoc_GiaoVien" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1651,37 +1821,18 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
           <Property Name="DuongTapLai" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="XETAPLAIs" Relationship="giaothongModel.fk_xetl_gp" FromRole="XETAPLAI_GP" ToRole="XETAPLAI" />
         </EntityType>
-        <EntityType Name="KhoaHoc_GiaoVien">
-          <Key>
-            <PropertyRef Name="MaKH" />
-            <PropertyRef Name="MaGV" />
-            <PropertyRef Name="TenGV" />
-            <PropertyRef Name="LoaiGV" />
-            <PropertyRef Name="NgayHL" />
-            <PropertyRef Name="NgayHetHL" />
-            <PropertyRef Name="GhiChu" />
-            <PropertyRef Name="TrangThai" />
-            <PropertyRef Name="NgayTao" />
-            <PropertyRef Name="NgaySua" />
-          </Key>
-          <Property Name="MaKH" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
-          <Property Name="MaGV" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="TenGV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BienSoXe" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="LoaiGV" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Name="SoHV" Type="Int32" />
-          <Property Name="NgayHL" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="NgayHetHL" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="GhiChu" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
-          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="GIAOVIEN" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_GiaoVien" FromRole="KhoaHoc_GiaoVien" ToRole="GIAOVIEN" />
-          <NavigationProperty Name="KhoaHoc" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304" FromRole="KhoaHoc_GiaoVien" ToRole="KhoaHoc" />
-          <NavigationProperty Name="XETAPLAI" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap" FromRole="KhoaHoc_GiaoVien" ToRole="XETAPLAI" />
-        </EntityType>
+        <Association Name="FK_KH_GV_CD">
+          <End Type="giaothongModel.CaDay" Role="CaDay" Multiplicity="0..1" />
+          <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaDay">
+              <PropertyRef Name="MaCD" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="MaCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_KhoaHoc_DM_DonViGTVT">
           <End Type="giaothongModel.DM_DonViGTVT" Role="DM_DonViGTVT" Multiplicity="1" />
           <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="*" />
@@ -1888,6 +2039,54 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LichHoc_KhoaHoc">
+          <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="1" />
+          <End Type="giaothongModel.LichHoc" Role="LichHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaHoc">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="LichHoc">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KH_GV_PD">
+          <End Type="giaothongModel.PhongDay" Role="PhongDay" Multiplicity="0..1" />
+          <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhongDay">
+              <PropertyRef Name="MaPD" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="MaPD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KH_GV_ST">
+          <End Type="giaothongModel.SanTap" Role="SanTap" Multiplicity="0..1" />
+          <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanTap">
+              <PropertyRef Name="MaST" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="MaST" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_GiaoVien_XeTap">
+          <End Type="giaothongModel.XETAPLAI" Role="XETAPLAI" Multiplicity="0..1" />
+          <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XETAPLAI">
+              <PropertyRef Name="SoDangKy" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="BienSoXe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NguoiLX_HoSo_KySH">
           <End Type="giaothongModel.KySH" Role="KySH" Multiplicity="0..1" />
           <End Type="giaothongModel.NguoiLX_HoSo" Role="NguoiLX_HoSo" Multiplicity="*" />
@@ -1926,18 +2125,6 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_KhoaHoc_GiaoVien_XeTap">
-          <End Type="giaothongModel.XETAPLAI" Role="XETAPLAI" Multiplicity="0..1" />
-          <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="XETAPLAI">
-              <PropertyRef Name="SoDangKy" />
-            </Principal>
-            <Dependent Role="KhoaHoc_GiaoVien">
-              <PropertyRef Name="BienSoXe" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_xetl_gp">
           <End Type="giaothongModel.XETAPLAI_GP" Role="XETAPLAI_GP" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1958,6 +2145,14 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="giaothongModelStoreContainer" CdmEntityContainer="giaothongEntities">
+          <EntitySetMapping Name="CaDays">
+            <EntityTypeMapping TypeName="giaothongModel.CaDay">
+              <MappingFragment StoreEntitySet="CaDay">
+                <ScalarProperty Name="CaDay1" ColumnName="CaDay" />
+                <ScalarProperty Name="MaCD" ColumnName="MaCD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DM_DonViGTVT">
             <EntityTypeMapping TypeName="giaothongModel.DM_DonViGTVT">
               <MappingFragment StoreEntitySet="DM_DonViGTVT">
@@ -2172,6 +2367,30 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="KhoaHoc_GiaoVien">
+            <EntityTypeMapping TypeName="giaothongModel.KhoaHoc_GiaoVien">
+              <MappingFragment StoreEntitySet="KhoaHoc_GiaoVien">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MaST" ColumnName="MaST" />
+                <ScalarProperty Name="MaCD" ColumnName="MaCD" />
+                <ScalarProperty Name="MaPD" ColumnName="MaPD" />
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
+                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NgayHetHL" ColumnName="NgayHetHL" />
+                <ScalarProperty Name="NgayHL" ColumnName="NgayHL" />
+                <ScalarProperty Name="SoHV" ColumnName="SoHV" />
+                <ScalarProperty Name="LoaiGV" ColumnName="LoaiGV" />
+                <ScalarProperty Name="BienSoXe" ColumnName="BienSoXe" />
+                <ScalarProperty Name="TenGV" ColumnName="TenGV" />
+                <ScalarProperty Name="MaGV" ColumnName="MaGV" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="KySHes">
             <EntityTypeMapping TypeName="giaothongModel.KySH">
               <MappingFragment StoreEntitySet="KySH">
@@ -2219,6 +2438,21 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
                 <ScalarProperty Name="NgaySH" ColumnName="NgaySH" />
                 <ScalarProperty Name="MaTTSH" ColumnName="MaTTSH" />
                 <ScalarProperty Name="MaKySH" ColumnName="MaKySH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LichHocs">
+            <EntityTypeMapping TypeName="giaothongModel.LichHoc">
+              <MappingFragment StoreEntitySet="LichHoc">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="KiemTra" ColumnName="KiemTra" />
+                <ScalarProperty Name="GiaiDoan" ColumnName="GiaiDoan" />
+                <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+                <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+                <ScalarProperty Name="Tuan" ColumnName="Tuan" />
+                <ScalarProperty Name="Thang" ColumnName="Thang" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaLichHoc" ColumnName="MaLichHoc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2422,6 +2656,14 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PhongDays">
+            <EntityTypeMapping TypeName="giaothongModel.PhongDay">
+              <MappingFragment StoreEntitySet="PhongDay">
+                <ScalarProperty Name="PhongDay1" ColumnName="PhongDay" />
+                <ScalarProperty Name="MaPD" ColumnName="MaPD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="province_city">
             <EntityTypeMapping TypeName="giaothongModel.province_city">
               <MappingFragment StoreEntitySet="province_city">
@@ -2429,6 +2671,14 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="matp" ColumnName="matp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SanTaps">
+            <EntityTypeMapping TypeName="giaothongModel.SanTap">
+              <MappingFragment StoreEntitySet="SanTap">
+                <ScalarProperty Name="SanTap1" ColumnName="SanTap" />
+                <ScalarProperty Name="MaST" ColumnName="MaST" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2503,26 +2753,6 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
                 <ScalarProperty Name="MaDonViCap" ColumnName="MaDonViCap" />
                 <ScalarProperty Name="SoDangKy" ColumnName="SoDangKy" />
                 <ScalarProperty Name="SoGPXTL" ColumnName="SoGPXTL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="KhoaHoc_GiaoVien">
-            <EntityTypeMapping TypeName="giaothongModel.KhoaHoc_GiaoVien">
-              <MappingFragment StoreEntitySet="KhoaHoc_GiaoVien">
-                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
-                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="NgayHetHL" ColumnName="NgayHetHL" />
-                <ScalarProperty Name="NgayHL" ColumnName="NgayHL" />
-                <ScalarProperty Name="SoHV" ColumnName="SoHV" />
-                <ScalarProperty Name="LoaiGV" ColumnName="LoaiGV" />
-                <ScalarProperty Name="BienSoXe" ColumnName="BienSoXe" />
-                <ScalarProperty Name="TenGV" ColumnName="TenGV" />
-                <ScalarProperty Name="MaGV" ColumnName="MaGV" />
-                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

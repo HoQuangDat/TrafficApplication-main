@@ -230,7 +230,6 @@ C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\giaothong.csproj.CopyComplete
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\giaothong.exe
 C:\Users\hoqua\OneDrive\Desktop\Code\Giaothong\TrafficApplication-main\giaothong\obj\Debug\giaothong.pdb
-F:\WPF\TrafficApplication-main\giaothong\obj\Debug\giaothong.csproj.AssemblyReference.cache
 F:\WPF\TrafficApplication-main\giaothong\obj\Debug\EditTeacherGCNWindow.g.cs
 F:\WPF\TrafficApplication-main\giaothong\obj\Debug\EditTeacherWindow.g.cs
 F:\WPF\TrafficApplication-main\giaothong\obj\Debug\EditVehicleGPWindow.g.cs
@@ -375,3 +374,4 @@ F:\WPF\TrafficApplication-main\giaothong\obj\Debug\InsertPracticeTeacherTraining
 F:\WPF\TrafficApplication-main\giaothong\obj\Debug\InsertPracticeTeacherTrainingWindow.baml
 F:\WPF\TrafficApplication-main\giaothong\obj\Debug\TrainingWindow.g.cs
 F:\WPF\TrafficApplication-main\giaothong\obj\Debug\TrainingWindow.baml
+F:\WPF\TrafficApplication-main\giaothong\obj\Debug\giaothong.csproj.AssemblyReference.cache

@@ -9,7 +9,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.FontWeight="Regular"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        DataContext="{StaticResource trainingcentervmD}"
+        DataContext="{StaticResource trainingcentervm}"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Name="TrainingCenterWD"
@@ -43,25 +43,19 @@
 
                     <WrapPanel Margin="10 0 0 0" VerticalAlignment="Center">
                         <ComboBox
-                        Width="110"
+                        Width="120"
                         materialDesign:HintAssist.Hint="Trạng thái cơ sở"
-                        SelectedIndex="{Binding SelectedIndex,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding selectionChanged}"></i:InvokeCommandAction>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <ComboBoxItem Content="Tất cả"></ComboBoxItem>
-                            <ComboBoxItem Content="Mở khóa"></ComboBoxItem>
-                            <ComboBoxItem Content="Tạm đóng"></ComboBoxItem>
-                            <ComboBoxItem Content="Chờ duyệt"></ComboBoxItem>
+                        SelectedIndex="{Binding SelectedStatusIndex,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+        
+                            <ComboBoxItem Content="Được phép mở"></ComboBoxItem>
+                            <ComboBoxItem Content="Không được phép"></ComboBoxItem>
                         </ComboBox>
 
                         <TextBox
                           Margin="10 0 0 0"
                           Width="200"
-                          Text="{Binding SearchVehicle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                           materialDesign:HintAssist.Hint="Tìm kiếm theo tên hoặc mã cơ sở..."
                           Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                             <i:Interaction.Triggers>
@@ -75,15 +69,15 @@
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="10 0 10 0">
-                    <ListView ItemsSource="{Binding ListVehicle}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListView ItemsSource="{Binding ListCenterTraining}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn  DisplayMemberBinding="{Binding MaKH}" Header="Mã"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding MaCSDT}" Header="Tên"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding MaCSDT}" Header="Địa điểm"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding MaSoGTVT}" Header="Đào tạo"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding TenKH}" Header="Được phép"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding HangGPLX}" Header="Trạng thái"/>
+                                <GridViewColumn  DisplayMemberBinding="{Binding MaDV}" Header="Mã"/>
+                                <GridViewColumn  DisplayMemberBinding="{Binding TenDV}" Header="Tên"/>
+                                <GridViewColumn  DisplayMemberBinding="{Binding DiaChi}" Header="Địa điểm"/>
+                                <GridViewColumn  DisplayMemberBinding="{Binding TongSoHV}" Header="Đang đào tạo"/>
+                                <GridViewColumn  DisplayMemberBinding="{Binding LuuLuongDT}" Header="Được phép"/>
+                                <GridViewColumn  DisplayMemberBinding="{Binding TrangThai}" Header="Trạng thái"/>
                             </GridView>
                         </ListView.View>
                         <i:Interaction.Triggers>
@@ -95,13 +89,13 @@
                 </Grid>
 
                 <Grid Grid.Row="4" Margin="10 0 10 0">
-                    <TextBlock HorizontalAlignment="Left" FontSize="16" Text="Trang 4/10" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" FontSize="16" Text="{Binding ShowPage}" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
 
                     <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
+                        <Button Command="{Binding previousPage}" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
                             <materialDesign:PackIcon HorizontalAlignment="Center" Width="30" Height="25"  Foreground="#08bf96" Kind="ChevronLeft" />
                         </Button>
-                        <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
+                        <Button Command="{Binding nextPage}" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
                             <materialDesign:PackIcon HorizontalAlignment="Center" Width="30" Height="25"   Foreground="#08bf96" Kind="ChevronRight" />
                         </Button>
                     </WrapPanel>

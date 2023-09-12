@@ -75,7 +75,7 @@ namespace giaothong.ViewModel
             OpenManagerTrainCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Hide();
-                TrainingWindow train = new TrainingWindow();
+                TrainingCenterWindow train = new TrainingCenterWindow();
                 train.ShowDialog();
                 p.ShowDialog();
             });
