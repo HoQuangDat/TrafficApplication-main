@@ -7,9 +7,9 @@
     <EntitySet Name="DM_HangGPLX" EntityType="giaothongModel.DM_HangGPLX" />
     <EntitySet Name="GIAOVIENs" EntityType="giaothongModel.GIAOVIEN" />
     <EntitySet Name="GIAOVIEN_GCN" EntityType="giaothongModel.GIAOVIEN_GCN" />
+    <EntitySet Name="HangXes" EntityType="giaothongModel.HangXe" />
     <EntitySet Name="InHangDoiGPLXes" EntityType="giaothongModel.InHangDoiGPLX" />
     <EntitySet Name="KhoaHocs" EntityType="giaothongModel.KhoaHoc" />
-    <EntitySet Name="KhoaHoc_GiaoVien" EntityType="giaothongModel.KhoaHoc_GiaoVien" />
     <EntitySet Name="KySHes" EntityType="giaothongModel.KySH" />
     <EntitySet Name="LichHocs" EntityType="giaothongModel.LichHoc" />
     <EntitySet Name="NguoiLX_GPLX" EntityType="giaothongModel.NguoiLX_GPLX" />
@@ -24,9 +24,10 @@
     <EntitySet Name="USERS_ROLE" EntityType="giaothongModel.USERS_ROLE" />
     <EntitySet Name="XETAPLAIs" EntityType="giaothongModel.XETAPLAI" />
     <EntitySet Name="XETAPLAI_GP" EntityType="giaothongModel.XETAPLAI_GP" />
-    <AssociationSet Name="FK_KH_GV_CD" Association="giaothongModel.FK_KH_GV_CD">
+    <EntitySet Name="KhoaHoc_GiaoVien" EntityType="giaothongModel.KhoaHoc_GiaoVien" />
+    <AssociationSet Name="FK__CaDay__MaKH__67DE6983" Association="giaothongModel.FK__CaDay__MaKH__67DE6983">
+      <End Role="KhoaHoc" EntitySet="KhoaHocs" />
       <End Role="CaDay" EntitySet="CaDays" />
-      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
     </AssociationSet>
     <AssociationSet Name="FK_KhoaHoc_DM_DonViGTVT" Association="giaothongModel.FK_KhoaHoc_DM_DonViGTVT">
       <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
@@ -92,25 +93,29 @@
       <End Role="GIAOVIEN" EntitySet="GIAOVIENs" />
       <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
     </AssociationSet>
+    <AssociationSet Name="FK_HangXeGIAOVIEN_GCN" Association="giaothongModel.FK_HangXeGIAOVIEN_GCN">
+      <End Role="HangXe" EntitySet="HangXes" />
+      <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HangXeXETAPLAI" Association="giaothongModel.FK_HangXeXETAPLAI">
+      <End Role="HangXe" EntitySet="HangXes" />
+      <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
+    </AssociationSet>
     <AssociationSet Name="FK__KhoaHoc_Gi__MaKH__76619304" Association="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304">
       <End Role="KhoaHoc" EntitySet="KhoaHocs" />
       <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
     </AssociationSet>
+    <AssociationSet Name="FK__PhongDay__MaKH__6ABAD62E" Association="giaothongModel.FK__PhongDay__MaKH__6ABAD62E">
+      <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+      <End Role="PhongDay" EntitySet="PhongDays" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SanTap__MaKH__6D9742D9" Association="giaothongModel.FK__SanTap__MaKH__6D9742D9">
+      <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+      <End Role="SanTap" EntitySet="SanTaps" />
+    </AssociationSet>
     <AssociationSet Name="FK_LichHoc_KhoaHoc" Association="giaothongModel.FK_LichHoc_KhoaHoc">
       <End Role="KhoaHoc" EntitySet="KhoaHocs" />
       <End Role="LichHoc" EntitySet="LichHocs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_KH_GV_PD" Association="giaothongModel.FK_KH_GV_PD">
-      <End Role="PhongDay" EntitySet="PhongDays" />
-      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
-    </AssociationSet>
-    <AssociationSet Name="FK_KH_GV_ST" Association="giaothongModel.FK_KH_GV_ST">
-      <End Role="SanTap" EntitySet="SanTaps" />
-      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
-    </AssociationSet>
-    <AssociationSet Name="FK_KhoaHoc_GiaoVien_XeTap" Association="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap">
-      <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
-      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
     </AssociationSet>
     <AssociationSet Name="FK_NguoiLX_HoSo_KySH" Association="giaothongModel.FK_NguoiLX_HoSo_KySH">
       <End Role="KySH" EntitySet="KySHes" />
@@ -124,6 +129,10 @@
       <End Role="USERS_ROLE" EntitySet="USERS_ROLE" />
       <End Role="USER" EntitySet="USERS" />
     </AssociationSet>
+    <AssociationSet Name="FK_KhoaHoc_GiaoVien_XeTap" Association="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap">
+      <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
+      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+    </AssociationSet>
     <AssociationSet Name="fk_xetl_gp" Association="giaothongModel.fk_xetl_gp">
       <End Role="XETAPLAI_GP" EntitySet="XETAPLAI_GP" />
       <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
@@ -134,8 +143,9 @@
       <PropertyRef Name="MaCD" />
     </Key>
     <Property Name="MaCD" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
-    <Property Name="CaDay1" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK_KH_GV_CD" FromRole="CaDay" ToRole="KhoaHoc_GiaoVien" />
+    <Property Name="MaKH" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+    <Property Name="Caday1" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KhoaHoc" Relationship="giaothongModel.FK__CaDay__MaKH__67DE6983" FromRole="CaDay" ToRole="KhoaHoc" />
   </EntityType>
   <EntityType Name="DM_DonViGTVT">
     <Key>
@@ -259,7 +269,7 @@
     <Property Name="QDCap" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
     <Property Name="DonViCap" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="NgayCap" Type="DateTime" Precision="0" />
-    <Property Name="HangXe" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="HangXe" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
     <Property Name="MaDonViTapHuan" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
     <Property Name="NgayKiemTra" Type="DateTime" Precision="0" />
     <Property Name="AnhGCN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -267,6 +277,15 @@
     <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
     <Property Name="MaDVKiemTra" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="GIAOVIENs" Relationship="giaothongModel.fk_giaovien_gcn" FromRole="GIAOVIEN_GCN" ToRole="GIAOVIEN" />
+    <NavigationProperty Name="HangXe1" Relationship="giaothongModel.FK_HangXeGIAOVIEN_GCN" FromRole="GIAOVIEN_GCN" ToRole="HangXe" />
+  </EntityType>
+  <EntityType Name="HangXe">
+    <Key>
+      <PropertyRef Name="HangXe1" />
+    </Key>
+    <Property Name="HangXe1" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="GIAOVIEN_GCN" Relationship="giaothongModel.FK_HangXeGIAOVIEN_GCN" FromRole="HangXe" ToRole="GIAOVIEN_GCN" />
+    <NavigationProperty Name="XETAPLAIs" Relationship="giaothongModel.FK_HangXeXETAPLAI" FromRole="HangXe" ToRole="XETAPLAI" />
   </EntityType>
   <EntityType Name="InHangDoiGPLX">
     <Key>
@@ -360,41 +379,15 @@
     <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="TT_Xuly" Type="Int32" />
+    <NavigationProperty Name="CaDays" Relationship="giaothongModel.FK__CaDay__MaKH__67DE6983" FromRole="KhoaHoc" ToRole="CaDay" />
     <NavigationProperty Name="DM_DonViGTVT" Relationship="giaothongModel.FK_KhoaHoc_DM_DonViGTVT" FromRole="KhoaHoc" ToRole="DM_DonViGTVT" />
     <NavigationProperty Name="DM_DonViGTVT1" Relationship="giaothongModel.FK_KhoaHoc_DM_DonViGTVT1" FromRole="KhoaHoc" ToRole="DM_DonViGTVT" />
     <NavigationProperty Name="DM_HangDT" Relationship="giaothongModel.FK_KhoaHoc_DM_HangDT" FromRole="KhoaHoc" ToRole="DM_HangDT" />
     <NavigationProperty Name="DM_HangGPLX" Relationship="giaothongModel.FK_KhoaHoc_DM_HangGPLX" FromRole="KhoaHoc" ToRole="DM_HangGPLX" />
     <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304" FromRole="KhoaHoc" ToRole="KhoaHoc_GiaoVien" />
+    <NavigationProperty Name="PhongDays" Relationship="giaothongModel.FK__PhongDay__MaKH__6ABAD62E" FromRole="KhoaHoc" ToRole="PhongDay" />
+    <NavigationProperty Name="SanTaps" Relationship="giaothongModel.FK__SanTap__MaKH__6D9742D9" FromRole="KhoaHoc" ToRole="SanTap" />
     <NavigationProperty Name="LichHocs" Relationship="giaothongModel.FK_LichHoc_KhoaHoc" FromRole="KhoaHoc" ToRole="LichHoc" />
-  </EntityType>
-  <EntityType Name="KhoaHoc_GiaoVien">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="MaKH" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
-    <Property Name="MaGV" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
-    <Property Name="TenGV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BienSoXe" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="LoaiGV" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
-    <Property Name="SoHV" Type="Int32" />
-    <Property Name="NgayHL" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="NgayHetHL" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="GhiChu" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="TrangThai" Type="Boolean" Nullable="false" />
-    <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="MaPD" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-    <Property Name="MaCD" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-    <Property Name="MaST" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="CaDay" Relationship="giaothongModel.FK_KH_GV_CD" FromRole="KhoaHoc_GiaoVien" ToRole="CaDay" />
-    <NavigationProperty Name="GIAOVIEN" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_GiaoVien" FromRole="KhoaHoc_GiaoVien" ToRole="GIAOVIEN" />
-    <NavigationProperty Name="KhoaHoc" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304" FromRole="KhoaHoc_GiaoVien" ToRole="KhoaHoc" />
-    <NavigationProperty Name="PhongDay" Relationship="giaothongModel.FK_KH_GV_PD" FromRole="KhoaHoc_GiaoVien" ToRole="PhongDay" />
-    <NavigationProperty Name="SanTap" Relationship="giaothongModel.FK_KH_GV_ST" FromRole="KhoaHoc_GiaoVien" ToRole="SanTap" />
-    <NavigationProperty Name="XETAPLAI" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap" FromRole="KhoaHoc_GiaoVien" ToRole="XETAPLAI" />
   </EntityType>
   <EntityType Name="KySH">
     <Key>
@@ -679,8 +672,9 @@
       <PropertyRef Name="MaPD" />
     </Key>
     <Property Name="MaPD" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Name="MaKH" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
     <Property Name="PhongDay1" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK_KH_GV_PD" FromRole="PhongDay" ToRole="KhoaHoc_GiaoVien" />
+    <NavigationProperty Name="KhoaHoc" Relationship="giaothongModel.FK__PhongDay__MaKH__6ABAD62E" FromRole="PhongDay" ToRole="KhoaHoc" />
   </EntityType>
   <EntityType Name="province_city">
     <Key>
@@ -696,8 +690,9 @@
       <PropertyRef Name="MaST" />
     </Key>
     <Property Name="MaST" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Name="MaKH" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
     <Property Name="SanTap1" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK_KH_GV_ST" FromRole="SanTap" ToRole="KhoaHoc_GiaoVien" />
+    <NavigationProperty Name="KhoaHoc" Relationship="giaothongModel.FK__SanTap__MaKH__6D9742D9" FromRole="SanTap" ToRole="KhoaHoc" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -741,7 +736,7 @@
     <Property Name="SoGPTL" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
     <Property Name="NhanHieu" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
     <Property Name="KieuLoai" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-    <Property Name="HangXe" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="HangXe" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
     <Property Name="MauXe" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="SoDongCo" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
     <Property Name="SoKhung" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
@@ -751,6 +746,7 @@
     <Property Name="TrangThaiHD" Type="Boolean" />
     <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
     <Property Name="NguoiCapNhat" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HangXe1" Relationship="giaothongModel.FK_HangXeXETAPLAI" FromRole="XETAPLAI" ToRole="HangXe" />
     <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap" FromRole="XETAPLAI" ToRole="KhoaHoc_GiaoVien" />
     <NavigationProperty Name="XETAPLAI_GP" Relationship="giaothongModel.fk_xetl_gp" FromRole="XETAPLAI" ToRole="XETAPLAI_GP" />
   </EntityType>
@@ -773,15 +769,46 @@
     <Property Name="DuongTapLai" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="XETAPLAIs" Relationship="giaothongModel.fk_xetl_gp" FromRole="XETAPLAI_GP" ToRole="XETAPLAI" />
   </EntityType>
-  <Association Name="FK_KH_GV_CD">
-    <End Type="giaothongModel.CaDay" Role="CaDay" Multiplicity="0..1" />
-    <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
+  <EntityType Name="KhoaHoc_GiaoVien">
+    <Key>
+      <PropertyRef Name="MaKH" />
+      <PropertyRef Name="MaGV" />
+      <PropertyRef Name="TenGV" />
+      <PropertyRef Name="LoaiGV" />
+      <PropertyRef Name="NgayHL" />
+      <PropertyRef Name="NgayHetHL" />
+      <PropertyRef Name="GhiChu" />
+      <PropertyRef Name="TrangThai" />
+      <PropertyRef Name="NgayTao" />
+      <PropertyRef Name="NgaySua" />
+    </Key>
+    <Property Name="MaKH" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+    <Property Name="MaGV" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="TenGV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BienSoXe" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="LoaiGV" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="SoHV" Type="Int32" />
+    <Property Name="NgayHL" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NgayHetHL" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="GhiChu" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+    <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="GIAOVIEN" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_GiaoVien" FromRole="KhoaHoc_GiaoVien" ToRole="GIAOVIEN" />
+    <NavigationProperty Name="KhoaHoc" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304" FromRole="KhoaHoc_GiaoVien" ToRole="KhoaHoc" />
+    <NavigationProperty Name="XETAPLAI" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap" FromRole="KhoaHoc_GiaoVien" ToRole="XETAPLAI" />
+  </EntityType>
+  <Association Name="FK__CaDay__MaKH__67DE6983">
+    <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="1" />
+    <End Type="giaothongModel.CaDay" Role="CaDay" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CaDay">
-        <PropertyRef Name="MaCD" />
+      <Principal Role="KhoaHoc">
+        <PropertyRef Name="MaKH" />
       </Principal>
-      <Dependent Role="KhoaHoc_GiaoVien">
-        <PropertyRef Name="MaCD" />
+      <Dependent Role="CaDay">
+        <PropertyRef Name="MaKH" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -979,6 +1006,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_HangXeGIAOVIEN_GCN">
+    <End Type="giaothongModel.HangXe" Role="HangXe" Multiplicity="1" />
+    <End Type="giaothongModel.GIAOVIEN_GCN" Role="GIAOVIEN_GCN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HangXe">
+        <PropertyRef Name="HangXe1" />
+      </Principal>
+      <Dependent Role="GIAOVIEN_GCN">
+        <PropertyRef Name="HangXe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HangXeXETAPLAI">
+    <End Type="giaothongModel.HangXe" Role="HangXe" Multiplicity="1" />
+    <End Type="giaothongModel.XETAPLAI" Role="XETAPLAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HangXe">
+        <PropertyRef Name="HangXe1" />
+      </Principal>
+      <Dependent Role="XETAPLAI">
+        <PropertyRef Name="HangXe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__KhoaHoc_Gi__MaKH__76619304">
     <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="1" />
     <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
@@ -987,6 +1038,30 @@
         <PropertyRef Name="MaKH" />
       </Principal>
       <Dependent Role="KhoaHoc_GiaoVien">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PhongDay__MaKH__6ABAD62E">
+    <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="1" />
+    <End Type="giaothongModel.PhongDay" Role="PhongDay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhoaHoc">
+        <PropertyRef Name="MaKH" />
+      </Principal>
+      <Dependent Role="PhongDay">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SanTap__MaKH__6D9742D9">
+    <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="1" />
+    <End Type="giaothongModel.SanTap" Role="SanTap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhoaHoc">
+        <PropertyRef Name="MaKH" />
+      </Principal>
+      <Dependent Role="SanTap">
         <PropertyRef Name="MaKH" />
       </Dependent>
     </ReferentialConstraint>
@@ -1000,42 +1075,6 @@
       </Principal>
       <Dependent Role="LichHoc">
         <PropertyRef Name="MaKH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_KH_GV_PD">
-    <End Type="giaothongModel.PhongDay" Role="PhongDay" Multiplicity="0..1" />
-    <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PhongDay">
-        <PropertyRef Name="MaPD" />
-      </Principal>
-      <Dependent Role="KhoaHoc_GiaoVien">
-        <PropertyRef Name="MaPD" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_KH_GV_ST">
-    <End Type="giaothongModel.SanTap" Role="SanTap" Multiplicity="0..1" />
-    <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SanTap">
-        <PropertyRef Name="MaST" />
-      </Principal>
-      <Dependent Role="KhoaHoc_GiaoVien">
-        <PropertyRef Name="MaST" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_KhoaHoc_GiaoVien_XeTap">
-    <End Type="giaothongModel.XETAPLAI" Role="XETAPLAI" Multiplicity="0..1" />
-    <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="XETAPLAI">
-        <PropertyRef Name="SoDangKy" />
-      </Principal>
-      <Dependent Role="KhoaHoc_GiaoVien">
-        <PropertyRef Name="BienSoXe" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1074,6 +1113,18 @@
       </Principal>
       <Dependent Role="USER">
         <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KhoaHoc_GiaoVien_XeTap">
+    <End Type="giaothongModel.XETAPLAI" Role="XETAPLAI" Multiplicity="0..1" />
+    <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="XETAPLAI">
+        <PropertyRef Name="SoDangKy" />
+      </Principal>
+      <Dependent Role="KhoaHoc_GiaoVien">
+        <PropertyRef Name="BienSoXe" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

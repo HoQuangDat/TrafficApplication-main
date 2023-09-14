@@ -265,7 +265,8 @@ namespace giaothong.ViewModel
         private GIAOVIEN _selectedItem;
         public GIAOVIEN SelectedItem
         {
-            get => _selectedItem; set
+            get => _selectedItem;
+            set
             {
                 _selectedItem = value;
                 OnPropertyChanged();

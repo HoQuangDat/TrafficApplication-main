@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace giaothong.ViewModel
@@ -57,10 +58,20 @@ namespace giaothong.ViewModel
             }
         }
 
+        private static TrainingDTO _selectedItem;
+        public static TrainingDTO SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+            }
+        }
+
         public ICommand nextPage { get; set; }
         public ICommand previousPage { get; set; }
         public ICommand textChanged { get; set; }
-
+        public ICommand previewMouseLeftButtonUp { get; set; }
         public TrainingCenterViewModel()
         {
             ListCenterTraining = new ObservableCollection<TrainingDTO>();
@@ -99,6 +110,15 @@ namespace giaothong.ViewModel
 
                 loadCenterTraining(StatusSelected, Keyword);
             });
+
+            previewMouseLeftButtonUp = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.Hide();
+                TrainingWindow train = new TrainingWindow();
+                train.ShowDialog();
+                p.ShowDialog();
+            });
+
         }
 
         private ObservableCollection<TrainingDTO> loadCenterTraining(bool selected, string keyword)

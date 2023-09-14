@@ -17,7 +17,7 @@
         WindowStyle="None" 
         AllowsTransparency="True" 
         Background="Transparent"
-        Title="Teacher Window" Height="650" Width="1400">
+        Title="Teacher Window" Height="650" Width="1280">
     <Grid>
         <Border CornerRadius="10" Background="#ffffff">
             <Grid>
@@ -69,7 +69,7 @@
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="10 0 10 0">
-                    <ListView ItemsSource="{Binding ListCenterTraining}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListView ItemsSource="{Binding ListCenterTraining}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-12,9,12,-9">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn  DisplayMemberBinding="{Binding MaDV}" Header="Mã"/>

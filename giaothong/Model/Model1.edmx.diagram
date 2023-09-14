@@ -4,31 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="da1067969f914074b9e88438c3605253" Name="Diagram1" ZoomLevel="61">
-        <EntityTypeShape EntityType="giaothongModel.CaDay" Width="1.5" PointX="6" PointY="40.125" />
-        <EntityTypeShape EntityType="giaothongModel.DM_DonViGTVT" Width="1.5" PointX="0.75" PointY="21.625" />
-        <EntityTypeShape EntityType="giaothongModel.DM_HangDT" Width="1.5" PointX="0.75" PointY="30.5" />
-        <EntityTypeShape EntityType="giaothongModel.DM_HangGPLX" Width="1.5" PointX="0.75" PointY="16.875" />
-        <EntityTypeShape EntityType="giaothongModel.GIAOVIEN" Width="1.5" PointX="6" PointY="2.5" />
-        <EntityTypeShape EntityType="giaothongModel.GIAOVIEN_GCN" Width="1.5" PointX="3.75" PointY="3.875" />
-        <EntityTypeShape EntityType="giaothongModel.InHangDoiGPLX" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="giaothongModel.KhoaHoc" Width="1.5" PointX="3" PointY="21.625" />
-        <EntityTypeShape EntityType="giaothongModel.KhoaHoc_GiaoVien" Width="1.5" PointX="8.25" PointY="21.625" />
-        <EntityTypeShape EntityType="giaothongModel.KySH" Width="1.5" PointX="3" PointY="44" />
-        <EntityTypeShape EntityType="giaothongModel.LichHoc" Width="1.5" PointX="5.25" PointY="34" />
-        <EntityTypeShape EntityType="giaothongModel.NguoiLX_GPLX" Width="1.5" PointX="6" PointY="18.25" />
-        <EntityTypeShape EntityType="giaothongModel.NguoiLX_HoSo" Width="1.5" PointX="8.25" PointY="28" />
-        <EntityTypeShape EntityType="giaothongModel.NguoiLXHS_GiayTo" Width="1.5" PointX="10.5" PointY="36.625" />
-        <EntityTypeShape EntityType="giaothongModel.NguoiLXHS_KQSH" Width="1.5" PointX="8.75" PointY="4.75" />
-        <EntityTypeShape EntityType="giaothongModel.PhongDay" Width="1.5" PointX="6" PointY="9.5" />
-        <EntityTypeShape EntityType="giaothongModel.province_city" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="giaothongModel.SanTap" Width="1.5" PointX="6" PointY="37.75" />
-        <EntityTypeShape EntityType="giaothongModel.sysdiagram" Width="1.5" PointX="2.75" PointY="8.75" />
-        <EntityTypeShape EntityType="giaothongModel.USER" Width="1.5" PointX="11" PointY="1" />
-        <EntityTypeShape EntityType="giaothongModel.USERS_ROLE" Width="1.5" PointX="8.75" PointY="1.625" />
-        <EntityTypeShape EntityType="giaothongModel.XETAPLAI" Width="1.5" PointX="6" PointY="12.375" />
-        <EntityTypeShape EntityType="giaothongModel.XETAPLAI_GP" Width="1.5" PointX="3.75" PointY="12.75" />
-        <AssociationConnector Association="giaothongModel.FK_KH_GV_CD" />
+      <Diagram DiagramId="da1067969f914074b9e88438c3605253" Name="Diagram1" ZoomLevel="52">
+        <EntityTypeShape EntityType="giaothongModel.CaDay" Width="1.5" PointX="10.25" PointY="37.375" />
+        <EntityTypeShape EntityType="giaothongModel.DM_DonViGTVT" Width="1.5" PointX="0.75" PointY="25" />
+        <EntityTypeShape EntityType="giaothongModel.DM_HangDT" Width="1.5" PointX="5.75" PointY="21.375" />
+        <EntityTypeShape EntityType="giaothongModel.DM_HangGPLX" Width="1.5" PointX="5.75" PointY="16.625" />
+        <EntityTypeShape EntityType="giaothongModel.GIAOVIEN" Width="1.5" PointX="11" PointY="9.25" />
+        <EntityTypeShape EntityType="giaothongModel.GIAOVIEN_GCN" Width="1.5" PointX="8.75" PointY="10.5" />
+        <EntityTypeShape EntityType="giaothongModel.HangXe" Width="1.5" PointX="6.5" PointY="11.5" />
+        <EntityTypeShape EntityType="giaothongModel.InHangDoiGPLX" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="giaothongModel.KhoaHoc" Width="1.5" PointX="8" PointY="24.875" />
+        <EntityTypeShape EntityType="giaothongModel.KySH" Width="1.5" PointX="3" PointY="39.25" />
+        <EntityTypeShape EntityType="giaothongModel.LichHoc" Width="1.5" PointX="10.25" PointY="33.75" />
+        <EntityTypeShape EntityType="giaothongModel.NguoiLX_GPLX" Width="1.5" PointX="3" PointY="21.625" />
+        <EntityTypeShape EntityType="giaothongModel.NguoiLX_HoSo" Width="1.5" PointX="5.25" PointY="27.25" />
+        <EntityTypeShape EntityType="giaothongModel.NguoiLXHS_GiayTo" Width="1.5" PointX="7.5" PointY="35.875" />
+        <EntityTypeShape EntityType="giaothongModel.NguoiLXHS_KQSH" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="giaothongModel.PhongDay" Width="1.5" PointX="10.25" PointY="31.25" />
+        <EntityTypeShape EntityType="giaothongModel.province_city" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="giaothongModel.SanTap" Width="1.5" PointX="10.25" PointY="23.625" />
+        <EntityTypeShape EntityType="giaothongModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="giaothongModel.USER" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="giaothongModel.USERS_ROLE" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="giaothongModel.XETAPLAI" Width="1.5" PointX="11" PointY="40" />
+        <EntityTypeShape EntityType="giaothongModel.XETAPLAI_GP" Width="1.5" PointX="8.75" PointY="40.375" />
+        <EntityTypeShape EntityType="giaothongModel.KhoaHoc_GiaoVien" Width="1.5" PointX="13.25" PointY="26.75" />
+        <AssociationConnector Association="giaothongModel.FK__CaDay__MaKH__67DE6983" />
         <AssociationConnector Association="giaothongModel.FK_KhoaHoc_DM_DonViGTVT" />
         <AssociationConnector Association="giaothongModel.FK_KhoaHoc_DM_DonViGTVT1" />
         <AssociationConnector Association="giaothongModel.FK_KySH_DM_DonViGTVT" />
@@ -45,14 +46,16 @@
         <AssociationConnector Association="giaothongModel.FK_NguoiLX_HoSo_DM_HangGPLX" />
         <AssociationConnector Association="giaothongModel.fk_giaovien_gcn" />
         <AssociationConnector Association="giaothongModel.FK_KhoaHoc_GiaoVien_GiaoVien" />
+        <AssociationConnector Association="giaothongModel.FK_HangXeGIAOVIEN_GCN" />
+        <AssociationConnector Association="giaothongModel.FK_HangXeXETAPLAI" />
         <AssociationConnector Association="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304" />
+        <AssociationConnector Association="giaothongModel.FK__PhongDay__MaKH__6ABAD62E" />
+        <AssociationConnector Association="giaothongModel.FK__SanTap__MaKH__6D9742D9" />
         <AssociationConnector Association="giaothongModel.FK_LichHoc_KhoaHoc" />
-        <AssociationConnector Association="giaothongModel.FK_KH_GV_PD" />
-        <AssociationConnector Association="giaothongModel.FK_KH_GV_ST" />
-        <AssociationConnector Association="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap" />
         <AssociationConnector Association="giaothongModel.FK_NguoiLX_HoSo_KySH" />
         <AssociationConnector Association="giaothongModel.FK_NguoiLXHS_GiayTo_NguoiLX_HoSo" />
         <AssociationConnector Association="giaothongModel.fk_user_role" />
+        <AssociationConnector Association="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap" />
         <AssociationConnector Association="giaothongModel.fk_xetl_gp" />
       </Diagram>
     </edmx:Diagrams>

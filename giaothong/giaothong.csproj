@@ -291,6 +291,9 @@
     <Compile Include="Model\DM_HangGPLX.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\HangXe.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\InHangDoiGPLX.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

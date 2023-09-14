@@ -17,7 +17,7 @@
         WindowStyle="None" 
         AllowsTransparency="True" 
         Background="Transparent"
-        Title="Teacher Window" Height="650" Width="1400">
+        Title="Teacher Window" Height="650" Width="1280">
     <Grid>
         <Border CornerRadius="10" Background="#ffffff">
             <Grid>
@@ -119,17 +119,13 @@
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="10 0 10 0">
-                    <ListView ItemsSource="{Binding ListVehicle}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListView ItemsSource="{Binding ListTrainingCourse}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn  DisplayMemberBinding="{Binding MaKH}" Header="MaKH"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding MaCSDT}" Header="MaCSDT"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding MaSoGTVT}" Header="MaSoGTVT"/>
                                 <GridViewColumn  DisplayMemberBinding="{Binding TenKH}" Header="TenKH"/>
                                 <GridViewColumn  DisplayMemberBinding="{Binding HangGPLX}" Header="HangGPLX"/>
                                 <GridViewColumn  DisplayMemberBinding="{Binding HangDT}" Header="HangDT"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding SoQD_KhaiGiang}" Header="SoQD_KhaiGiang"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding NgayQD_KhaiGiang}" Header="NgayQD_KhaiGiang"/>
                                 <GridViewColumn  DisplayMemberBinding="{Binding NgayKG}" Header="NgayKG"/>
                                 <GridViewColumn  DisplayMemberBinding="{Binding NgayBG}" Header="NgayBG"/>
                                 <GridViewColumn  DisplayMemberBinding="{Binding MucTieuDT}" Header="MucTieuDT"/>
@@ -146,9 +142,7 @@
                                 <GridViewColumn  DisplayMemberBinding="{Binding TrangThai}" Header="TrangThai"/>
                                 <GridViewColumn  DisplayMemberBinding="{Binding NguoiTao}" Header="NguoiTao"/>
                                 <GridViewColumn  DisplayMemberBinding="{Binding NguoiSua}" Header="NguoiSua"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding TrangThai}" Header="NgayTao"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding NguoiTao}" Header="NgaySua"/>
-                                <GridViewColumn  DisplayMemberBinding="{Binding NguoiSua}" Header="TT_Xuly"/>
+                                <GridViewColumn  DisplayMemberBinding="{Binding TrangThaiXL}" Header="TrangThaiXL"/>
                             </GridView>
                         </ListView.View>
                         <i:Interaction.Triggers>

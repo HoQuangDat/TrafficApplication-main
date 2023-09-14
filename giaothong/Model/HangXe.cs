@@ -12,28 +12,20 @@ namespace giaothong.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class GIAOVIEN_GCN
+    public partial class HangXe
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GIAOVIEN_GCN()
+        public HangXe()
         {
-            this.GIAOVIENs = new HashSet<GIAOVIEN>();
+            this.GIAOVIEN_GCN = new HashSet<GIAOVIEN_GCN>();
+            this.XETAPLAIs = new HashSet<XETAPLAI>();
         }
     
-        public string SoGCN { get; set; }
-        public string QDCap { get; set; }
-        public string DonViCap { get; set; }
-        public Nullable<System.DateTime> NgayCap { get; set; }
-        public string HangXe { get; set; }
-        public string MaDonViTapHuan { get; set; }
-        public Nullable<System.DateTime> NgayKiemTra { get; set; }
-        public string AnhGCN { get; set; }
-        public string NguoiCapNhat { get; set; }
-        public Nullable<System.DateTime> NgayCapNhat { get; set; }
-        public string MaDVKiemTra { get; set; }
+        public string HangXe1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GIAOVIEN> GIAOVIENs { get; set; }
-        public virtual HangXe HangXe1 { get; set; }
+        public virtual ICollection<GIAOVIEN_GCN> GIAOVIEN_GCN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<XETAPLAI> XETAPLAIs { get; set; }
     }
 }

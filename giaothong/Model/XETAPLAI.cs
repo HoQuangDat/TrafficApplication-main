@@ -36,6 +36,7 @@ namespace giaothong.Model
         public Nullable<System.DateTime> NgayCapNhat { get; set; }
         public string NguoiCapNhat { get; set; }
     
+        public virtual HangXe HangXe1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KhoaHoc_GiaoVien> KhoaHoc_GiaoVien { get; set; }
         public virtual XETAPLAI_GP XETAPLAI_GP { get; set; }
