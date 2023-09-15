@@ -27,7 +27,7 @@ namespace giaothong.ViewModel
                 p.Hide();
                 InsertTheoryTeacherTrainingWindow insertTheoryTeacher = new InsertTheoryTeacherTrainingWindow();
                 insertTheoryTeacher.ShowDialog();
-                p.ShowDialog();
+                p.Close();
             });
 
             openInsertPraticeTeacherWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -35,7 +35,7 @@ namespace giaothong.ViewModel
                 p.Hide();
                 InsertPracticeTeacherTrainingrWindow insertPractieTeacher = new InsertPracticeTeacherTrainingrWindow();
                 insertPractieTeacher.ShowDialog();
-                p.ShowDialog();
+                p.Close();
             });
         }
     }

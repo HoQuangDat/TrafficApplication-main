@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\WPF\TrafficApplication-main\giaothong\obj\Debug\
+F:\WPF\TrafficApplication-main\giaothong\obj\Debug\
 giaothong
 none
 false
 DEBUG;TRACE
-C:\WPF\TrafficApplication-main\giaothong\App.xaml
+F:\WPF\TrafficApplication-main\giaothong\App.xaml
 22-1524206413
 2-1556844510
 65-590499680
-167405496560
+1671824724049
 ArrangePracticeTeacherWindow.xaml;ArrangeTeacherWindow.xaml;ArrangeTheoryTeacherWindow.xaml;EditTeacherGCNWindow.xaml;EditTeacherWindow.xaml;EditVehicleGPWindow.xaml;EditVehicleWindow.xaml;HomeWindow.xaml;InsertTeacherGCNWindow.xaml;InsertPracticeTeacherTrainingWindow.xaml;InsertTheoryTeacherTrainingWindow.xaml;InsertTeacherWindow.xaml;InsertVehicleGPWindow.xaml;InsertVehicleWindow.xaml;MainWindow.xaml;TrainingCenterWindow.xaml;TrainingWindow.xaml;Resources\MainResource.xaml;TeacherGCNWindow.xaml;TeacherWindow.xaml;VehicleGPWindow.xaml;VehicleWindow.xaml;
 
 False

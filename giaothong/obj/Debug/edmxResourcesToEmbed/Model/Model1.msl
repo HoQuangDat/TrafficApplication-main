@@ -4,8 +4,7 @@
     <EntitySetMapping Name="CaDays">
       <EntityTypeMapping TypeName="giaothongModel.CaDay">
         <MappingFragment StoreEntitySet="CaDay">
-          <ScalarProperty Name="Caday1" ColumnName="Caday" />
-          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="CaDay1" ColumnName="CaDay" />
           <ScalarProperty Name="MaCD" ColumnName="MaCD" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -500,7 +499,6 @@
       <EntityTypeMapping TypeName="giaothongModel.PhongDay">
         <MappingFragment StoreEntitySet="PhongDay">
           <ScalarProperty Name="PhongDay1" ColumnName="PhongDay" />
-          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
           <ScalarProperty Name="MaPD" ColumnName="MaPD" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -519,7 +517,6 @@
       <EntityTypeMapping TypeName="giaothongModel.SanTap">
         <MappingFragment StoreEntitySet="SanTap">
           <ScalarProperty Name="SanTap1" ColumnName="SanTap" />
-          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
           <ScalarProperty Name="MaST" ColumnName="MaST" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -601,20 +598,19 @@
     <EntitySetMapping Name="KhoaHoc_GiaoVien">
       <EntityTypeMapping TypeName="giaothongModel.KhoaHoc_GiaoVien">
         <MappingFragment StoreEntitySet="KhoaHoc_GiaoVien">
+          <ScalarProperty Name="MaST" ColumnName="MaST" />
+          <ScalarProperty Name="MaCD" ColumnName="MaCD" />
+          <ScalarProperty Name="MaPD" ColumnName="MaPD" />
           <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
           <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
           <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
           <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-          <ScalarProperty Name="NgayHetHL" ColumnName="NgayHetHL" />
-          <ScalarProperty Name="NgayHL" ColumnName="NgayHL" />
           <ScalarProperty Name="SoHV" ColumnName="SoHV" />
-          <ScalarProperty Name="LoaiGV" ColumnName="LoaiGV" />
           <ScalarProperty Name="BienSoXe" ColumnName="BienSoXe" />
-          <ScalarProperty Name="TenGV" ColumnName="TenGV" />
           <ScalarProperty Name="MaGV" ColumnName="MaGV" />
           <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

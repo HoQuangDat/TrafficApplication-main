@@ -29,7 +29,7 @@
                     <RowDefinition Height="40"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="50" Command="{Binding closeVehicleWindow}"  CommandParameter="{Binding ElementName=vehicleWindow}">
+                <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="50" Command="{Binding closeTrainingCenterWindow}"  CommandParameter="{Binding ElementName=TrainingCenterWD}">
                     <materialDesign:PackIcon Width="20" Height="20" Foreground="#08bf96" Kind="Logout" />
                 </Button>
 

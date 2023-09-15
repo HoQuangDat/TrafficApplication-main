@@ -23,6 +23,7 @@ namespace giaothong.Model
         public string MaGV { get; set; }
         public string HoDem { get; set; }
         public string TenGV { get; set; }
+        public string FullName { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public string SoCCCD { get; set; }
         public string NoiCT { get; set; }
@@ -32,6 +33,7 @@ namespace giaothong.Model
         public string TrinhDo_VH { get; set; }
         public string Nganh_CM { get; set; }
         public string TrinhDo_SP { get; set; }
+        public string Training { get; set; }
         public Nullable<bool> GV_LT { get; set; }
         public Nullable<bool> GV_TH { get; set; }
         public string SoGCN { get; set; }

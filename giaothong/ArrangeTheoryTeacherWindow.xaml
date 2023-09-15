@@ -19,6 +19,13 @@
         Background="Transparent"
         Height="620" 
         Width="720">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding trainingTheoryWindowLoaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Border CornerRadius="10" Background="#ffffff">
         <Grid>
             <Grid.RowDefinitions>
@@ -46,7 +53,7 @@
                                 <TextBlock Text="khóa học" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <TextBox
-                                      Text="124"
+                                      Text="{Binding Course.MaKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                       IsEnabled="False"
                                       Height="30"
                                       FontSize="14"

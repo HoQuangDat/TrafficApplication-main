@@ -19,7 +19,7 @@ namespace giaothong.ViewModel
         private ObservableCollection<TrainingDTO> _listCenterTraining;
         public ObservableCollection<TrainingDTO> ListCenterTraining { get => _listCenterTraining; set => _listCenterTraining = value; }
 
-        public int pageSize = 2; // Số phần tử trên mỗi trang
+        public int pageSize = 13; // Số phần tử trên mỗi trang
 
         private int _currentPage; // Trang hiện tại
         public int CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged(); } }
@@ -48,12 +48,12 @@ namespace giaothong.ViewModel
                 if (SelectedStatusIndex == 0)
                 {
                     StatusSelected = true;
-                    loadCenterTraining(StatusSelected, Keyword);
+                    loadCenterTraining(StatusSelected);
                 }
                 else
                 {
                     StatusSelected = false;
-                    loadCenterTraining(StatusSelected, Keyword);
+                    loadCenterTraining(StatusSelected);
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace giaothong.ViewModel
             get => _selectedItem;
             set
             {
-                _selectedItem = value;
+                _selectedItem = value; 
             }
         }
 
@@ -72,13 +72,20 @@ namespace giaothong.ViewModel
         public ICommand previousPage { get; set; }
         public ICommand textChanged { get; set; }
         public ICommand previewMouseLeftButtonUp { get; set; }
+        public ICommand closeTrainingCenterWindow { get; set; }
+
         public TrainingCenterViewModel()
         {
             ListCenterTraining = new ObservableCollection<TrainingDTO>();
             StatusSelected = true;
             Keyword = null;
             CurrentPage = 1;
-            loadCenterTraining(StatusSelected, Keyword);
+            loadCenterTraining(StatusSelected);
+
+            closeTrainingCenterWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.Close();
+            });
 
             //next page
             nextPage = new RelayCommand<string>((p) => { return true; }, (p) =>
@@ -86,7 +93,7 @@ namespace giaothong.ViewModel
                 if (CurrentPage < TotalPages)
                 {
                     CurrentPage++;
-                    loadCenterTraining(StatusSelected, Keyword);
+                    loadCenterTraining(StatusSelected);
                 }
             });
 
@@ -96,32 +103,37 @@ namespace giaothong.ViewModel
                 if (CurrentPage > 1)
                 {
                     CurrentPage--;
-                    loadCenterTraining(StatusSelected, Keyword);
+                    loadCenterTraining(StatusSelected);
                 }
             });
 
             //search center training
             textChanged = new RelayCommand<string>((p) => { return true; }, (p) =>
             {
+            
                 if(Keyword.Length == 0)
                 {
                     Keyword = null;
                 }
 
-                loadCenterTraining(StatusSelected, Keyword);
+                loadCenterTraining(StatusSelected);
             });
 
             previewMouseLeftButtonUp = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                p.Hide();
-                TrainingWindow train = new TrainingWindow();
-                train.ShowDialog();
-                p.ShowDialog();
+                if(SelectedItem != null)
+                {
+                    p.Hide();
+
+                    TrainingWindow train = new TrainingWindow();
+                    train.ShowDialog();
+                    p.ShowDialog();
+                }    
             });
 
         }
 
-        private ObservableCollection<TrainingDTO> loadCenterTraining(bool selected, string keyword)
+        private ObservableCollection<TrainingDTO> loadCenterTraining(bool selected)
         {
             using (db = new giaothongEntities())
             {
@@ -129,9 +141,9 @@ namespace giaothong.ViewModel
 
                 var centers = (from dv in db.DM_DonViGTVT select dv).Where(i => i.TrangThai == selected).OrderBy(p => p.MaDV).ToList();
 
-                if (keyword != null)
+                if (Keyword != null)
                 {
-                    centers = (from dv in db.DM_DonViGTVT select dv).Where(i => i.MaDV == keyword || i.TenDV == keyword).OrderBy(p => p.MaDV).ToList();
+                    centers = (from dv in db.DM_DonViGTVT select dv).Where(i => i.MaDV == Keyword || i.TenDV == Keyword).OrderBy(p => p.MaDV).ToList();
                 }
 
                 var course = (from kh in db.KhoaHocs

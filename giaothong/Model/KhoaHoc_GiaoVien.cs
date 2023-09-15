@@ -14,23 +14,24 @@ namespace giaothong.Model
     
     public partial class KhoaHoc_GiaoVien
     {
+        public int ID { get; set; }
         public string MaKH { get; set; }
         public string MaGV { get; set; }
-        public string TenGV { get; set; }
         public string BienSoXe { get; set; }
-        public string LoaiGV { get; set; }
         public Nullable<int> SoHV { get; set; }
-        public System.DateTime NgayHL { get; set; }
-        public System.DateTime NgayHetHL { get; set; }
-        public string GhiChu { get; set; }
-        public bool TrangThai { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
         public string NguoiTao { get; set; }
         public string NguoiSua { get; set; }
-        public System.DateTime NgayTao { get; set; }
-        public System.DateTime NgaySua { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
+        public Nullable<System.DateTime> NgaySua { get; set; }
+        public string MaPD { get; set; }
+        public string MaCD { get; set; }
+        public string MaST { get; set; }
     
+        public virtual CaDay CaDay { get; set; }
         public virtual GIAOVIEN GIAOVIEN { get; set; }
         public virtual KhoaHoc KhoaHoc { get; set; }
-        public virtual XETAPLAI XETAPLAI { get; set; }
+        public virtual PhongDay PhongDay { get; set; }
+        public virtual SanTap SanTap { get; set; }
     }
 }

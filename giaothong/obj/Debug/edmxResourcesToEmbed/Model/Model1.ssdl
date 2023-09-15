@@ -5,8 +5,7 @@
       <PropertyRef Name="MaCD" />
     </Key>
     <Property Name="MaCD" Type="char" MaxLength="25" Nullable="false" />
-    <Property Name="MaKH" Type="char" MaxLength="13" Nullable="false" />
-    <Property Name="Caday" Type="nvarchar" MaxLength="70" />
+    <Property Name="CaDay" Type="nvarchar" MaxLength="80" />
   </EntityType>
   <EntityType Name="DM_DonViGTVT">
     <Key>
@@ -114,7 +113,7 @@
     <Property Name="QDCap" Type="char" MaxLength="15" />
     <Property Name="DonViCap" Type="char" MaxLength="5" />
     <Property Name="NgayCap" Type="date" />
-    <Property Name="HangXe" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="HangXe" Type="char" MaxLength="3" />
     <Property Name="MaDonViTapHuan" Type="char" MaxLength="5" />
     <Property Name="NgayKiemTra" Type="date" />
     <Property Name="AnhGCN" Type="text" />
@@ -221,35 +220,23 @@
     <Property Name="NgaySua" Type="datetime" Nullable="false" />
     <Property Name="TT_Xuly" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="KhoaHoc_GiaoVien">
     <Key>
-      <PropertyRef Name="MaKH" />
-      <PropertyRef Name="MaGV" />
-      <PropertyRef Name="TenGV" />
-      <PropertyRef Name="LoaiGV" />
-      <PropertyRef Name="NgayHL" />
-      <PropertyRef Name="NgayHetHL" />
-      <PropertyRef Name="GhiChu" />
-      <PropertyRef Name="TrangThai" />
-      <PropertyRef Name="NgayTao" />
-      <PropertyRef Name="NgaySua" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="MaKH" Type="char" MaxLength="13" Nullable="false" />
-    <Property Name="MaGV" Type="char" MaxLength="20" Nullable="false" />
-    <Property Name="TenGV" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaKH" Type="char" MaxLength="13" />
+    <Property Name="MaGV" Type="char" MaxLength="20" />
     <Property Name="BienSoXe" Type="char" MaxLength="10" />
-    <Property Name="LoaiGV" Type="char" MaxLength="2" Nullable="false" />
     <Property Name="SoHV" Type="int" />
-    <Property Name="NgayHL" Type="datetime" Nullable="false" />
-    <Property Name="NgayHetHL" Type="datetime" Nullable="false" />
-    <Property Name="GhiChu" Type="nvarchar" MaxLength="255" Nullable="false" />
-    <Property Name="TrangThai" Type="bit" Nullable="false" />
+    <Property Name="TrangThai" Type="bit" />
     <Property Name="NguoiTao" Type="nvarchar" MaxLength="30" />
     <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
-    <Property Name="NgayTao" Type="datetime" Nullable="false" />
-    <Property Name="NgaySua" Type="datetime" Nullable="false" />
+    <Property Name="NgayTao" Type="datetime" />
+    <Property Name="NgaySua" Type="datetime" />
+    <Property Name="MaPD" Type="char" MaxLength="25" />
+    <Property Name="MaCD" Type="char" MaxLength="25" />
+    <Property Name="MaST" Type="char" MaxLength="25" />
   </EntityType>
   <EntityType Name="KySH">
     <Key>
@@ -519,7 +506,6 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
       <PropertyRef Name="MaPD" />
     </Key>
     <Property Name="MaPD" Type="char" MaxLength="25" Nullable="false" />
-    <Property Name="MaKH" Type="char" MaxLength="13" Nullable="false" />
     <Property Name="PhongDay" Type="nvarchar" MaxLength="80" />
   </EntityType>
   <EntityType Name="province_city">
@@ -536,7 +522,6 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
       <PropertyRef Name="MaST" />
     </Key>
     <Property Name="MaST" Type="char" MaxLength="25" Nullable="false" />
-    <Property Name="MaKH" Type="char" MaxLength="13" Nullable="false" />
     <Property Name="SanTap" Type="nvarchar" MaxLength="80" />
   </EntityType>
   <EntityType Name="sysdiagrams">
@@ -579,7 +564,7 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
     <Property Name="SoGPTL" Type="char" MaxLength="15" />
     <Property Name="NhanHieu" Type="char" MaxLength="15" />
     <Property Name="KieuLoai" Type="char" MaxLength="15" />
-    <Property Name="HangXe" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="HangXe" Type="char" MaxLength="3" />
     <Property Name="MauXe" Type="nvarchar" MaxLength="20" />
     <Property Name="SoDongCo" Type="char" MaxLength="20" />
     <Property Name="SoKhung" Type="char" MaxLength="20" />
@@ -608,20 +593,44 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
     <Property Name="NguoiCapNhat" Type="nvarchar" MaxLength="15" />
     <Property Name="DuongTapLai" Type="char" MaxLength="200" />
   </EntityType>
-  <Association Name="FK__CaDay__MaKH__67DE6983">
-    <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
-    <End Role="CaDay" Type="Self.CaDay" Multiplicity="*" />
+  <Association Name="FK__KhoaHoc_Gi__MaCD__27C3E46E">
+    <End Role="CaDay" Type="Self.CaDay" Multiplicity="0..1" />
+    <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="KhoaHoc">
-        <PropertyRef Name="MaKH" />
+      <Principal Role="CaDay">
+        <PropertyRef Name="MaCD" />
       </Principal>
-      <Dependent Role="CaDay">
-        <PropertyRef Name="MaKH" />
+      <Dependent Role="KhoaHoc_GiaoVien">
+        <PropertyRef Name="MaCD" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__KhoaHoc_Gi__MaKH__76619304">
-    <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
+  <Association Name="FK__KhoaHoc_Gi__MaGV__25DB9BFC">
+    <End Role="GIAOVIEN" Type="Self.GIAOVIEN" Multiplicity="0..1" />
+    <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GIAOVIEN">
+        <PropertyRef Name="MaGV" />
+      </Principal>
+      <Dependent Role="KhoaHoc_GiaoVien">
+        <PropertyRef Name="MaGV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KhoaHoc_Gi__MaPD__26CFC035">
+    <End Role="PhongDay" Type="Self.PhongDay" Multiplicity="0..1" />
+    <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhongDay">
+        <PropertyRef Name="MaPD" />
+      </Principal>
+      <Dependent Role="KhoaHoc_GiaoVien">
+        <PropertyRef Name="MaPD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KhoaHoc_Gi__MaST__24E777C3">
+    <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="0..1" />
     <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="KhoaHoc">
@@ -632,27 +641,15 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PhongDay__MaKH__6ABAD62E">
-    <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
-    <End Role="PhongDay" Type="Self.PhongDay" Multiplicity="*" />
+  <Association Name="FK__KhoaHoc_Gi__MaST__28B808A7">
+    <End Role="SanTap" Type="Self.SanTap" Multiplicity="0..1" />
+    <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="KhoaHoc">
-        <PropertyRef Name="MaKH" />
+      <Principal Role="SanTap">
+        <PropertyRef Name="MaST" />
       </Principal>
-      <Dependent Role="PhongDay">
-        <PropertyRef Name="MaKH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__SanTap__MaKH__6D9742D9">
-    <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
-    <End Role="SanTap" Type="Self.SanTap" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KhoaHoc">
-        <PropertyRef Name="MaKH" />
-      </Principal>
-      <Dependent Role="SanTap">
-        <PropertyRef Name="MaKH" />
+      <Dependent Role="KhoaHoc_GiaoVien">
+        <PropertyRef Name="MaST" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -670,26 +667,14 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_HangXeGIAOVIEN_GCN">
-    <End Role="HangXe" Type="Self.HangXe" Multiplicity="1" />
+  <Association Name="FK_GVGCN_HX">
+    <End Role="HangXe" Type="Self.HangXe" Multiplicity="0..1" />
     <End Role="GIAOVIEN_GCN" Type="Self.GIAOVIEN_GCN" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="HangXe">
         <PropertyRef Name="HangXe" />
       </Principal>
       <Dependent Role="GIAOVIEN_GCN">
-        <PropertyRef Name="HangXe" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_HangXeXETAPLAI">
-    <End Role="HangXe" Type="Self.HangXe" Multiplicity="1" />
-    <End Role="XETAPLAI" Type="Self.XETAPLAI" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HangXe">
-        <PropertyRef Name="HangXe" />
-      </Principal>
-      <Dependent Role="XETAPLAI">
         <PropertyRef Name="HangXe" />
       </Dependent>
     </ReferentialConstraint>
@@ -739,30 +724,6 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
       </Principal>
       <Dependent Role="KhoaHoc">
         <PropertyRef Name="HangGPLX" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_KhoaHoc_GiaoVien_GiaoVien">
-    <End Role="GIAOVIEN" Type="Self.GIAOVIEN" Multiplicity="1" />
-    <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GIAOVIEN">
-        <PropertyRef Name="MaGV" />
-      </Principal>
-      <Dependent Role="KhoaHoc_GiaoVien">
-        <PropertyRef Name="MaGV" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_KhoaHoc_GiaoVien_XeTap">
-    <End Role="XETAPLAI" Type="Self.XETAPLAI" Multiplicity="0..1" />
-    <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="XETAPLAI">
-        <PropertyRef Name="SoDangKy" />
-      </Principal>
-      <Dependent Role="KhoaHoc_GiaoVien">
-        <PropertyRef Name="BienSoXe" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -950,6 +911,18 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_XETL_HX">
+    <End Role="HangXe" Type="Self.HangXe" Multiplicity="0..1" />
+    <End Role="XETAPLAI" Type="Self.XETAPLAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HangXe">
+        <PropertyRef Name="HangXe" />
+      </Principal>
+      <Dependent Role="XETAPLAI">
+        <PropertyRef Name="HangXe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="giaothongModelStoreContainer">
     <EntitySet Name="CaDay" EntityType="Self.CaDay" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_DonViGTVT" EntityType="Self.DM_DonViGTVT" Schema="dbo" store:Type="Tables" />
@@ -960,6 +933,7 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
     <EntitySet Name="HangXe" EntityType="Self.HangXe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InHangDoiGPLX" EntityType="Self.InHangDoiGPLX" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KhoaHoc" EntityType="Self.KhoaHoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KhoaHoc_GiaoVien" EntityType="Self.KhoaHoc_GiaoVien" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KySH" EntityType="Self.KySH" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LichHoc" EntityType="Self.LichHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NguoiLX_GPLX" EntityType="Self.NguoiLX_GPLX" Schema="dbo" store:Type="Tables" />
@@ -974,51 +948,33 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
     <EntitySet Name="USERS_ROLE" EntityType="Self.USERS_ROLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="XETAPLAI" EntityType="Self.XETAPLAI" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="XETAPLAI_GP" EntityType="Self.XETAPLAI_GP" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="KhoaHoc_GiaoVien" EntityType="Self.KhoaHoc_GiaoVien" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [KhoaHoc_GiaoVien].[MaKH] AS [MaKH], 
-    [KhoaHoc_GiaoVien].[MaGV] AS [MaGV], 
-    [KhoaHoc_GiaoVien].[TenGV] AS [TenGV], 
-    [KhoaHoc_GiaoVien].[BienSoXe] AS [BienSoXe], 
-    [KhoaHoc_GiaoVien].[LoaiGV] AS [LoaiGV], 
-    [KhoaHoc_GiaoVien].[SoHV] AS [SoHV], 
-    [KhoaHoc_GiaoVien].[NgayHL] AS [NgayHL], 
-    [KhoaHoc_GiaoVien].[NgayHetHL] AS [NgayHetHL], 
-    [KhoaHoc_GiaoVien].[GhiChu] AS [GhiChu], 
-    [KhoaHoc_GiaoVien].[TrangThai] AS [TrangThai], 
-    [KhoaHoc_GiaoVien].[NguoiTao] AS [NguoiTao], 
-    [KhoaHoc_GiaoVien].[NguoiSua] AS [NguoiSua], 
-    [KhoaHoc_GiaoVien].[NgayTao] AS [NgayTao], 
-    [KhoaHoc_GiaoVien].[NgaySua] AS [NgaySua]
-    FROM [dbo].[KhoaHoc_GiaoVien] AS [KhoaHoc_GiaoVien]</DefiningQuery>
-    </EntitySet>
-    <AssociationSet Name="FK__CaDay__MaKH__67DE6983" Association="Self.FK__CaDay__MaKH__67DE6983">
-      <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+    <AssociationSet Name="FK__KhoaHoc_Gi__MaCD__27C3E46E" Association="Self.FK__KhoaHoc_Gi__MaCD__27C3E46E">
       <End Role="CaDay" EntitySet="CaDay" />
+      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
     </AssociationSet>
-    <AssociationSet Name="FK__KhoaHoc_Gi__MaKH__76619304" Association="Self.FK__KhoaHoc_Gi__MaKH__76619304">
+    <AssociationSet Name="FK__KhoaHoc_Gi__MaGV__25DB9BFC" Association="Self.FK__KhoaHoc_Gi__MaGV__25DB9BFC">
+      <End Role="GIAOVIEN" EntitySet="GIAOVIEN" />
+      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KhoaHoc_Gi__MaPD__26CFC035" Association="Self.FK__KhoaHoc_Gi__MaPD__26CFC035">
+      <End Role="PhongDay" EntitySet="PhongDay" />
+      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KhoaHoc_Gi__MaST__24E777C3" Association="Self.FK__KhoaHoc_Gi__MaST__24E777C3">
       <End Role="KhoaHoc" EntitySet="KhoaHoc" />
       <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
     </AssociationSet>
-    <AssociationSet Name="FK__PhongDay__MaKH__6ABAD62E" Association="Self.FK__PhongDay__MaKH__6ABAD62E">
-      <End Role="KhoaHoc" EntitySet="KhoaHoc" />
-      <End Role="PhongDay" EntitySet="PhongDay" />
-    </AssociationSet>
-    <AssociationSet Name="FK__SanTap__MaKH__6D9742D9" Association="Self.FK__SanTap__MaKH__6D9742D9">
-      <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+    <AssociationSet Name="FK__KhoaHoc_Gi__MaST__28B808A7" Association="Self.FK__KhoaHoc_Gi__MaST__28B808A7">
       <End Role="SanTap" EntitySet="SanTap" />
+      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
     </AssociationSet>
     <AssociationSet Name="fk_giaovien_gcn" Association="Self.fk_giaovien_gcn">
       <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
       <End Role="GIAOVIEN" EntitySet="GIAOVIEN" />
     </AssociationSet>
-    <AssociationSet Name="FK_HangXeGIAOVIEN_GCN" Association="Self.FK_HangXeGIAOVIEN_GCN">
+    <AssociationSet Name="FK_GVGCN_HX" Association="Self.FK_GVGCN_HX">
       <End Role="HangXe" EntitySet="HangXe" />
       <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
-    </AssociationSet>
-    <AssociationSet Name="FK_HangXeXETAPLAI" Association="Self.FK_HangXeXETAPLAI">
-      <End Role="HangXe" EntitySet="HangXe" />
-      <End Role="XETAPLAI" EntitySet="XETAPLAI" />
     </AssociationSet>
     <AssociationSet Name="FK_KhoaHoc_DM_DonViGTVT" Association="Self.FK_KhoaHoc_DM_DonViGTVT">
       <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
@@ -1035,14 +991,6 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
     <AssociationSet Name="FK_KhoaHoc_DM_HangGPLX" Association="Self.FK_KhoaHoc_DM_HangGPLX">
       <End Role="DM_HangGPLX" EntitySet="DM_HangGPLX" />
       <End Role="KhoaHoc" EntitySet="KhoaHoc" />
-    </AssociationSet>
-    <AssociationSet Name="FK_KhoaHoc_GiaoVien_GiaoVien" Association="Self.FK_KhoaHoc_GiaoVien_GiaoVien">
-      <End Role="GIAOVIEN" EntitySet="GIAOVIEN" />
-      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
-    </AssociationSet>
-    <AssociationSet Name="FK_KhoaHoc_GiaoVien_XeTap" Association="Self.FK_KhoaHoc_GiaoVien_XeTap">
-      <End Role="XETAPLAI" EntitySet="XETAPLAI" />
-      <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
     </AssociationSet>
     <AssociationSet Name="FK_KySH_DM_DonViGTVT" Association="Self.FK_KySH_DM_DonViGTVT">
       <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
@@ -1102,6 +1050,10 @@ warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a pr
     </AssociationSet>
     <AssociationSet Name="fk_xetl_gp" Association="Self.fk_xetl_gp">
       <End Role="XETAPLAI_GP" EntitySet="XETAPLAI_GP" />
+      <End Role="XETAPLAI" EntitySet="XETAPLAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_XETL_HX" Association="Self.FK_XETL_HX">
+      <End Role="HangXe" EntitySet="HangXe" />
       <End Role="XETAPLAI" EntitySet="XETAPLAI" />
     </AssociationSet>
   </EntityContainer>

@@ -14,10 +14,16 @@ namespace giaothong.Model
     
     public partial class CaDay
     {
-        public string MaCD { get; set; }
-        public string MaKH { get; set; }
-        public string Caday1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CaDay()
+        {
+            this.KhoaHoc_GiaoVien = new HashSet<KhoaHoc_GiaoVien>();
+        }
     
-        public virtual KhoaHoc KhoaHoc { get; set; }
+        public string MaCD { get; set; }
+        public string CaDay1 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhoaHoc_GiaoVien> KhoaHoc_GiaoVien { get; set; }
     }
 }
