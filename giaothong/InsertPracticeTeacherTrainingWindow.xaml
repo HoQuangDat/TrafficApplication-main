@@ -12,12 +12,19 @@
         DataContext="{StaticResource trainingpracticevm}"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Name="TrainingCenterWD"
+        Name="TrainingPracticeTeacherWD"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" 
         AllowsTransparency="True" 
         Background="Transparent"
         Title="Teacher Training Practice Window" Height="650" Width="1400">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding trainingPracticeWindowLoaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid>
         <Border CornerRadius="10" Background="#ffffff">
             <Grid>
@@ -27,11 +34,11 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="50" Command="{Binding closeVehicleWindow}"  CommandParameter="{Binding ElementName=vehicleWindow}">
+                <Button  HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="50" Command="{Binding closeInsertPracticeTeacherWindow}"  CommandParameter="{Binding ElementName=TrainingPracticeTeacherWD}">
                     <materialDesign:PackIcon Width="20" Height="20" Foreground="#08bf96" Kind="Logout" />
                 </Button>
 
-                <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="THÊM GIÁO VIÊN DẠY KHÓA HỌC: 5823" FontWeight="SemiBold"></TextBlock>
+                <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold"></TextBlock>
 
                 <Grid Grid.Row="2" Margin="0 10 0 0">
                     <Grid.ColumnDefinitions>
@@ -47,8 +54,8 @@
                                 <TextBox
                                       Margin="10 5 0 5"
                                       Width="200"
-                                      Text="{Binding SearchVehicle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                      materialDesign:HintAssist.Hint="Tìm kiếm theo tên giáo viên..."
+                                      Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                      materialDesign:HintAssist.Hint="Tìm kiếm theo tên hoặc mã giáo viên..."
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="TextChanged">
@@ -58,18 +65,18 @@
                                 </TextBox>
                             </WrapPanel>
 
-                            <ListView SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                            <ListView ItemsSource="{Binding ListTeacher}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn  DisplayMemberBinding="{Binding MaGV}" Header="Mã"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding MaGV}" Header="Cơ sở"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding TenGV}" Header="Tên"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding MaCSDT}" Header="Loại dạy"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding FullName}" Header="Tên"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding TuyenDung}" Header="Tuyển dụng"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding Training}" Header="Đào tạo"/>
                                     </GridView>
                                 </ListView.View>
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                                        <i:InvokeCommandAction CommandParameter="{Binding ElementName=TrainingCenterWD}" Command="{Binding previewMouseLeftButtonUp}"></i:InvokeCommandAction>
+                                        <i:InvokeCommandAction CommandParameter="{Binding ElementName=TrainingPracticeTeacherWD }" Command="{Binding previewMouseLeftButtonUp}"></i:InvokeCommandAction>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ListView>
@@ -82,35 +89,35 @@
                             <RowDefinition Height="30"></RowDefinition>
                         </Grid.RowDefinitions>
                         <StackPanel>
-                            <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Thông Tin Giáo Viên Trong Khóa Học" FontWeight="SemiBold"></TextBlock>
+                            <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Thông Tin Giáo Viên Dạy Thực Hành Trong Khóa Học" FontWeight="SemiBold"></TextBlock>
 
-                            <ListView Margin="0 43 0 0" ItemsSource="{Binding ListVehicle}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                            <ListView Margin="0 43 0 0" ItemsSource="{Binding ListTeacherTraining}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding MaKH}" Header="STT"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding MaCSDT}" Header="Họ Tên"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding MaCSDT}" Header="Hạng"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding MaSoGTVT}" Header="Xe"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding TenKH}" Header="Sân Tập"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding HangGPLX}" Header="Số HV"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding ID}" Header="STT"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding GIAOVIEN.FullName}" Header="Họ Tên"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding KhoaHoc.HangDT}" Header="Hạng"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding BienSoXe}" Header="Xe"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding SanTap.MaST}" Header="Sân Tập"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding SoHV}" Header="Số HV"/>
                                     </GridView>
                                 </ListView.View>
-                                <i:Interaction.Triggers>
+                                <!--<i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                                        <i:InvokeCommandAction CommandParameter="{Binding ElementName=TrainingCenterWD}" Command="{Binding previewMouseLeftButtonUp}"></i:InvokeCommandAction>
+                                        <i:InvokeCommandAction CommandParameter="{Binding ElementName=TrainingPracticeTeacherWD}" Command="{Binding previewMouseLeftButtonUp}"></i:InvokeCommandAction>
                                     </i:EventTrigger>
-                                </i:Interaction.Triggers>
+                                </i:Interaction.Triggers>-->
                             </ListView>
                         </StackPanel>
 
                         <Grid Grid.Row="1">
-                            <TextBlock HorizontalAlignment="Left" FontSize="16" Text="Trang 4/10" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
+                            <TextBlock HorizontalAlignment="Left" FontSize="16" Text="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
 
                             <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
+                                <Button Command="{Binding previousPage}" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
                                     <materialDesign:PackIcon HorizontalAlignment="Center" Width="30" Height="25"  Foreground="#08bf96" Kind="ChevronLeft" />
                                 </Button>
-                                <Button HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
+                                <Button Command="{Binding nextPage}" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" Height="30" Width="40">
                                     <materialDesign:PackIcon HorizontalAlignment="Center" Width="30" Height="25"   Foreground="#08bf96" Kind="ChevronRight" />
                                 </Button>
                             </WrapPanel>

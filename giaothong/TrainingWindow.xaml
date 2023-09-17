@@ -73,7 +73,7 @@
                                       Height="33"
                                       FontSize="14"
                                       Padding="5 0"
-                                      SelectedDate="{Binding DateSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyy'}"
+                                      SelectedDate="{Binding DateSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"
                                       materialDesign:HintAssist.Hint="Ngày khai giảng">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectedDateChanged">

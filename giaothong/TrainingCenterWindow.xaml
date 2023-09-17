@@ -18,6 +18,13 @@
         AllowsTransparency="True" 
         Background="Transparent"
         Title="Teacher Window" Height="650" Width="1280">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding trainingWindowLoaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid>
         <Border CornerRadius="10" Background="#ffffff">
             <Grid>

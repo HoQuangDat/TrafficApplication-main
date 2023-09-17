@@ -18,12 +18,15 @@ namespace giaothong.ViewModel
         private ObservableCollection<GIAOVIEN> _listTeacher;
         public ObservableCollection<GIAOVIEN> ListTeacher { get => _listTeacher; set => _listTeacher = value; }
 
+        private ObservableCollection<CaDay> _listOfWorkTime;
+        public ObservableCollection<CaDay> ListOfWorkTime { get => _listOfWorkTime; set => _listOfWorkTime = value; }
 
-        private ObservableCollection<KhoaHoc_GiaoVien> _listgTeacherTrainin;
-        public ObservableCollection<KhoaHoc_GiaoVien> ListTeacherTraining { get => _listgTeacherTrainin; set => _listgTeacherTrainin = value; }
+        private ObservableCollection<PhongDay> _listRoomWorkTime;
+        public ObservableCollection<PhongDay> ListRoomWorkTime { get => _listRoomWorkTime; set => _listRoomWorkTime = value; }
 
-        private KhoaHoc _course;
-        public KhoaHoc Course { get => _course; set { _course = value; ; OnPropertyChanged(); } }
+        private ObservableCollection<KhoaHoc_GiaoVien> _listTeacherTrainin;
+        public ObservableCollection<KhoaHoc_GiaoVien> ListTeacherTraining { get => _listTeacherTrainin; set => _listTeacherTrainin = value; }
+
 
         private string _title;
         public string Title { get => _title; set { _title = value; ; OnPropertyChanged(); } }
@@ -43,14 +46,51 @@ namespace giaothong.ViewModel
         public string ShowPage { get => _showPage; set { _showPage = value; OnPropertyChanged(); } }
 
 
+        private KhoaHoc _course;
+        public KhoaHoc Course { get => _course; set { _course = value; ; OnPropertyChanged(); } }
+
         private GIAOVIEN _selectedItem;
         public GIAOVIEN SelectedItem { get => _selectedItem; set { _selectedItem = value; OnPropertyChanged(); } }
 
+        private KhoaHoc_GiaoVien _selectedArrangeTeacherItem;
+        public KhoaHoc_GiaoVien SelectedArrangeTeacherItem
+        {
+            get => _selectedArrangeTeacherItem; set
+            {
+                _selectedArrangeTeacherItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private CaDay _selectedWorkTimeItem;
+        public CaDay SelectedWorkTimeItem
+        {
+            get => _selectedWorkTimeItem;
+            set
+            {
+                _selectedWorkTimeItem = value;
+                OnPropertyChanged();
+
+            }
+        }
+
+        private PhongDay _selectedRoomWorkItem;
+        public PhongDay SelectedRoomWorkItem
+        {
+            get => _selectedRoomWorkItem;
+            set
+            {
+                _selectedRoomWorkItem = value;
+                OnPropertyChanged();
+
+            }
+        }
 
         public ICommand trainingTheoryWindowLoaded { get; set; }
         public ICommand closeInsertTheoryTeacherWindow { get; set; }
         public ICommand textChanged { get; set; }
         public ICommand previewMouseLeftButtonUp { get; set; }
+        public ICommand previewMouseArrange { get; set; }
         public ICommand nextPage { get; set; }
         public ICommand previousPage { get; set; }
 
@@ -60,6 +100,8 @@ namespace giaothong.ViewModel
             {
                 ListTeacher = new ObservableCollection<GIAOVIEN>();
                 ListTeacherTraining = new ObservableCollection<KhoaHoc_GiaoVien>();
+                ListOfWorkTime = new ObservableCollection<CaDay>();
+                ListRoomWorkTime = new ObservableCollection<PhongDay>();
 
                 Course = TrainingViewModel.SelectedItem;
                 CurrentPage = 1;
@@ -89,12 +131,30 @@ namespace giaothong.ViewModel
 
             previewMouseLeftButtonUp = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                MessageBoxResult messageBox = MessageBox.Show("Bạn có muốn thêm giáo viên: " + SelectedItem.FullName + " giảng dạy khóa học: " + Course.TenKH, "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
-
-                if (MessageBoxResult.OK == messageBox)
+                if (SelectedItem != null)
                 {
-                    insertTeacherCourse();
-                    listTeacherTraining();
+                    MessageBoxResult messageBox = MessageBox.Show("Bạn có muốn thêm giáo viên: " + SelectedItem.FullName + " giảng dạy khóa học: " + Course.TenKH, "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+
+                    if (MessageBoxResult.OK == messageBox)
+                    {
+                        insertTeacherCourse();
+                        listTeacherTraining();
+                    }
+                }
+            });
+
+            previewMouseArrange = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                if (SelectedArrangeTeacherItem != null)
+                {
+                    p.Hide();
+                    listOfWorkTime();
+                    listRoomWork();
+
+                    ArrangeTheoryTeacherWindow arrangeTheory = new ArrangeTheoryTeacherWindow();
+                    arrangeTheory.ShowDialog();
+
+                    p.ShowDialog();
                 }
             });
 
@@ -119,6 +179,42 @@ namespace giaothong.ViewModel
             });
         }
 
+        private ObservableCollection<PhongDay> listRoomWork()
+        {
+            using (db = new giaothongEntities())
+            {
+                ListRoomWorkTime.Clear();
+
+                var rooms = (from c in db.PhongDays where db.KhoaHoc_GiaoVien.Any(p => p.MaPD != c.MaPD && SelectedArrangeTeacherItem.MaGV != p.MaGV) select c).OrderBy(p => p.MaPD);
+
+                rooms.ToList().ForEach(p =>
+                {
+                    ListRoomWorkTime.Add(p);
+                });
+
+                return ListRoomWorkTime;
+            }
+        }
+
+        //load list work time
+        private ObservableCollection<CaDay> listOfWorkTime()
+        {
+            using (db = new giaothongEntities())
+            {
+                ListOfWorkTime.Clear();
+
+                var teachs = (from c in db.CaDays where db.KhoaHoc_GiaoVien.Any(p => p.MaCD != c.MaCD && SelectedArrangeTeacherItem.MaGV != p.MaGV) select c).OrderBy(p => p.MaCD);
+
+                teachs.ToList().ForEach(p =>
+                {
+                    ListOfWorkTime.Add(p);
+                });
+
+                return ListOfWorkTime;
+            }
+        }
+
+        //load all teachers in table
         private ObservableCollection<GIAOVIEN> listTeacher()
         {
             using (db = new giaothongEntities())

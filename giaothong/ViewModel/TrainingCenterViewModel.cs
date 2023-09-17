@@ -73,14 +73,20 @@ namespace giaothong.ViewModel
         public ICommand textChanged { get; set; }
         public ICommand previewMouseLeftButtonUp { get; set; }
         public ICommand closeTrainingCenterWindow { get; set; }
+        public ICommand trainingWindowLoaded { get; set; }
 
         public TrainingCenterViewModel()
         {
-            ListCenterTraining = new ObservableCollection<TrainingDTO>();
-            StatusSelected = true;
-            Keyword = null;
-            CurrentPage = 1;
-            loadCenterTraining(StatusSelected);
+            trainingWindowLoaded = new RelayCommand<string>((p) => { return true; }, (p) =>
+            {
+                ListCenterTraining = new ObservableCollection<TrainingDTO>();
+
+                StatusSelected = true;
+                Keyword = null;
+                CurrentPage = 1;
+
+                loadCenterTraining(StatusSelected);
+            });
 
             closeTrainingCenterWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
@@ -127,6 +133,7 @@ namespace giaothong.ViewModel
 
                     TrainingWindow train = new TrainingWindow();
                     train.ShowDialog();
+
                     p.ShowDialog();
                 }    
             });

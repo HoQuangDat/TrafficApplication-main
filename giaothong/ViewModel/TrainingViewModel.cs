@@ -161,10 +161,14 @@ namespace giaothong.ViewModel
 
             previewMouseLeftButtonUp = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                p.Hide();
-                ArrangeTeacherWindow arrangeTeacher = new ArrangeTeacherWindow();
-                arrangeTeacher.ShowDialog();
-                p.ShowDialog();
+                if(SelectedItem != null)
+                {
+                    p.Hide();
+                    ArrangeTeacherWindow arrangeTeacher = new ArrangeTeacherWindow();
+                    arrangeTeacher.ShowDialog();
+
+                    p.ShowDialog();
+                }    
             });
         }
 

@@ -55,7 +55,7 @@
                                       Margin="10 5 0 5"
                                       Width="200"
                                       Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                      materialDesign:HintAssist.Hint="Tìm kiếm theo tên giáo viên..."
+                                      materialDesign:HintAssist.Hint="Tìm kiếm theo tên hoặc mã giáo viên..."
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="TextChanged">
@@ -91,7 +91,7 @@
                         <StackPanel>
                             <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Thông Tin Giáo Viên Dạy Lý Thuyết Trong Khóa Học" FontWeight="SemiBold"></TextBlock>
 
-                            <ListView Margin="0 43 0 0" ItemsSource="{Binding ListTeacherTraining}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                            <ListView Margin="0 43 0 0" ItemsSource="{Binding ListTeacherTraining}" SelectedItem="{Binding SelectedArrangeTeacherItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn  DisplayMemberBinding="{Binding ID}" Header="STT"/>
@@ -104,11 +104,11 @@
                                         <GridViewColumn  DisplayMemberBinding="{Binding SoHV}" Header="Số HV"/>
                                     </GridView>
                                 </ListView.View>
-                                <!--<i:Interaction.Triggers>
+                                <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                                        <i:InvokeCommandAction CommandParameter="{Binding ElementName=TrainingCenterWD}" Command="{Binding previewMouseLeftButtonUp}"></i:InvokeCommandAction>
+                                        <i:InvokeCommandAction CommandParameter="{Binding ElementName=InsertTheoryTeacherWD}" Command="{Binding previewMouseArrange}"></i:InvokeCommandAction>
                                     </i:EventTrigger>
-                                </i:Interaction.Triggers>-->
+                                </i:Interaction.Triggers>
                             </ListView>
                         </StackPanel>
 
