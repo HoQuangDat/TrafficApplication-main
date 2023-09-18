@@ -14,6 +14,12 @@ namespace giaothong.Model
     
     public partial class GIAOVIEN
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GIAOVIEN()
+        {
+            this.KhoaHoc_GiaoVien = new HashSet<KhoaHoc_GiaoVien>();
+        }
+    
         public string MaGV { get; set; }
         public string HoDem { get; set; }
         public string TenGV { get; set; }
@@ -40,5 +46,7 @@ namespace giaothong.Model
         public string TrinhDo_CM { get; set; }
     
         public virtual GIAOVIEN_GCN GIAOVIEN_GCN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhoaHoc_GiaoVien> KhoaHoc_GiaoVien { get; set; }
     }
 }

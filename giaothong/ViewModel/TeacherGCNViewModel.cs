@@ -20,9 +20,6 @@ namespace giaothong.ViewModel
         private ObservableCollection<GIAOVIEN_GCN> _listGCN;
         public ObservableCollection<GIAOVIEN_GCN> ListGCN { get => _listGCN; set => _listGCN = value; }
 
-        private ObservableCollection<HangXe> _listHangXe;
-        public ObservableCollection<HangXe> ListHangXe { get => _listHangXe; set => _listHangXe = value; }
-
 
         private GIAOVIEN_GCN _giayCN;
         public GIAOVIEN_GCN GiayCN { get => _giayCN; set { _giayCN = value; OnPropertyChanged(); } }
@@ -41,22 +38,6 @@ namespace giaothong.ViewModel
         private string _selectedImage;
         public string SelectedImage { get => _selectedImage; set { _selectedImage = value; OnPropertyChanged(); } }
 
-        private HangXe _selectedIndexHangXe;
-        public HangXe SelectedIndexHangXe
-        {
-            get => _selectedIndexHangXe;
-            set
-            {
-                _selectedIndexHangXe = value;
-                OnPropertyChanged();
-
-                if (SelectedIndexHangXe != null)
-                {
-                    GiayCN.HangXe = SelectedIndexHangXe.ten;
-                }
-            }
-        }
-
 
         private GIAOVIEN_GCN _selectedItem;
         public GIAOVIEN_GCN SelectedItem
@@ -73,27 +54,7 @@ namespace giaothong.ViewModel
                     GiayCN.QDCap = SelectedItem.QDCap.Trim();
                     GiayCN.DonViCap = SelectedItem.DonViCap.Trim();
                     GiayCN.NgayCap = SelectedItem.NgayCap;
-
-                    int index = 0;
-
-                    foreach (var item in ListHangXe)
-                    {
-                        if (SelectedItem.HangXe != null)
-                        {
-                            if (item.ten.CompareTo(SelectedItem.HangXe.Trim()) == 0)
-                            {
-                                SelectedIndexHangXe = ListHangXe[index];
-                                break;
-                            }
-                            index++;
-
-                        }
-                    }
-                    if (SelectedItem.HangXe != null)
-                    {
-                        GiayCN.HangXe = SelectedItem.HangXe.Trim();
-                    }
-
+                    GiayCN.HangXe = SelectedItem.HangXe.Trim();
                     GiayCN.MaDonViTapHuan = SelectedItem.MaDonViTapHuan.Trim();
                     GiayCN.NgayKiemTra = SelectedItem.NgayKiemTra;
                     GiayCN.MaDVKiemTra = SelectedItem.MaDVKiemTra.Trim();
@@ -117,12 +78,11 @@ namespace giaothong.ViewModel
         public TeacherGCNViewModel()
         {
             ListGCN = new ObservableCollection<GIAOVIEN_GCN>();
-            ListHangXe = new ObservableCollection<HangXe>();
+
             GiayCN = new GIAOVIEN_GCN();
             GiayCN.NgayCap = DateTime.Now;
             GiayCN.NgayKiemTra = DateTime.Now;
             listGCN();
-            listHangXe();
 
             //close view teacher window
             closeTeacherWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -311,7 +271,7 @@ namespace giaothong.ViewModel
 
                     string currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
                     var index = currentDirectory.IndexOf("giaothong");
-                    var newCurrentUrl = currentDirectory.Substring(0, index) + @"giaothong\giaothong\images\teacher_gcn";
+                    var newCurrentUrl = currentDirectory.Substring(0, index) + @"giaothong\images\teacher_gcn";
 
                     string filePath = Path.Combine(newCurrentUrl, nameFile);
 
@@ -439,28 +399,6 @@ namespace giaothong.ViewModel
             return GiayCN;
         }
 
-        //get list hang xe
-        public ObservableCollection<HangXe> listHangXe()
-        {
-            using (db = new giaothongEntities())
-            {
-                ListHangXe.Clear();
-
-                try
-                {
-                    var hangxes = from c in db.HangXes select c;
-
-                    hangxes.ToList().ForEach(p =>
-                    {
-                        ListHangXe.Add(p);
-                    });
-                }
-                catch { }
-
-                return ListHangXe;
-            }
-        }
-
         //get list teacher GCN
         public ObservableCollection<GIAOVIEN_GCN> listGCN(string searchKey = null)
         {
@@ -494,7 +432,7 @@ namespace giaothong.ViewModel
             var list = gcn.Skip((CurrentPage - 1) * pageSize).Take(pageSize);
             string currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
             var index = currentDirectory.IndexOf("giaothong");
-            var newCurrentUrl = currentDirectory.Substring(0, index) + @"giaothong\giaothong";
+            var newCurrentUrl = currentDirectory.Substring(0, index) + @"giaothong";
 
             list.ToList().ForEach(p =>
             {

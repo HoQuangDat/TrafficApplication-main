@@ -36,38 +36,14 @@ namespace giaothong.ViewModel
         private List<province_city> _listCity;
         public List<province_city> ListCity { get => _listCity; set => _listCity = value; }
 
+        private GIAOVIEN _giaoVien;
+        public GIAOVIEN GiaoVien { get => _giaoVien; set { _giaoVien = value; OnPropertyChanged(); } }
+
         private USER _user;
         public USER User { get => _user; set { _user = value; OnPropertyChanged(); } }
 
         private static bool _isEnable;
         public static bool IsEnable { get => _isEnable; set { _isEnable = value; } }
-
-        private string _maGV;
-        public string MaGV { get => _maGV; set { _maGV = value; OnPropertyChanged(); } }
-
-        private string _hoDem;
-        public string HoDem { get => _hoDem; set { _hoDem = value; OnPropertyChanged(); } }
-
-        private string _tenGV;
-        public string TenGV { get => _tenGV; set { _tenGV = value; OnPropertyChanged(); } }
-
-        private DateTime _ngaySinh;
-        public DateTime NgaySinh { get => _ngaySinh; set { _ngaySinh = value; OnPropertyChanged(); } }
-
-        private string _soCCCD;
-        public string SoCCCD { get => _soCCCD; set { _soCCCD = value; OnPropertyChanged(); } }
-
-        private string _noiCT;
-        public string NoiCT { get => _noiCT; set { _noiCT = value; OnPropertyChanged(); } }
-
-        private int _gioiTinh;
-        public int GioiTinh { get => _gioiTinh; set { _gioiTinh = value; OnPropertyChanged(); } }
-
-        private string _phone;
-        public string Phone { get => _phone; set { _phone = value; OnPropertyChanged(); } }
-
-        private string _trinhDo_CM;
-        public string TrinhDo_CM { get => _trinhDo_CM; set => _trinhDo_CM = value; }
 
         public int pageSize = 10; // Số phần tử trên mỗi trang
         private int _currentPage; // Trang hiện tại
@@ -75,21 +51,6 @@ namespace giaothong.ViewModel
 
         private int _totalPages;
         public int TotalPages { get => _totalPages; set { _totalPages = value; OnPropertyChanged(); } }
-
-        private string _tuyenDung;
-        public string TuyenDung { get => _tuyenDung; set { _tuyenDung = value; OnPropertyChanged(); } }
-
-        private string _trinhDo_VH;
-        public string TrinhDo_VH { get => _trinhDo_VH; set { _trinhDo_VH = value; OnPropertyChanged(); } }
-
-        private string _nganh_CM;
-        public string Nganh_CM { get => _nganh_CM; set { _nganh_CM = value; OnPropertyChanged(); } }
-
-        private string _trinhDo_SP;
-        public string TrinhDo_SP { get => _trinhDo_SP; set { _trinhDo_SP = value; OnPropertyChanged(); } }
-
-        private bool _gV_LT;
-        public bool GV_LT { get => _gV_LT; set { _gV_LT = value; OnPropertyChanged(); } }
 
         private bool _isCheckedGV_LT;
         public bool IsCheckedGV_LT
@@ -100,14 +61,11 @@ namespace giaothong.ViewModel
                 _isCheckedGV_LT = value;
                 OnPropertyChanged();
                 if (IsCheckedGV_LT)
-                    GV_LT = true;
+                    GiaoVien.GV_LT = true;
                 else
-                    GV_LT = false;
+                    GiaoVien.GV_LT = false;
             }
         }
-
-        private bool _gV_TH;
-        public bool GV_TH { get => _gV_TH; set { _gV_TH = value; OnPropertyChanged(); } }
 
         private bool _isCheckedGV_TH;
         public bool IsCheckedGV_TH
@@ -117,23 +75,11 @@ namespace giaothong.ViewModel
                 _isCheckedGV_TH = value;
                 OnPropertyChanged();
                 if (IsCheckedGV_TH)
-                    GV_TH = true;
+                    GiaoVien.GV_TH = true;
                 else
-                    GV_TH = false;
+                    GiaoVien.GV_TH = false;
             }
         }
-
-        private string _soGCN;
-        public string SoGCN { get => _soGCN; set { _soGCN = value; OnPropertyChanged(); } }
-
-        private string _maSoGTVT;
-        public string MaSoGTVT { get => _maSoGTVT; set { _maSoGTVT = value; OnPropertyChanged(); } }
-
-        private string _maCSDT;
-        public string MaCSDT { get => _maCSDT; set { _maCSDT = value; OnPropertyChanged(); } }
-
-        private bool _trangThai;
-        public bool TrangThai { get => _trangThai; set { _trangThai = value; OnPropertyChanged(); } }
 
         private int _selectedIndex;
         public int SelectedIndex { get => _selectedIndex; set => _selectedIndex = value; }
@@ -144,8 +90,8 @@ namespace giaothong.ViewModel
         private string _selectedImage;
         public string SelectedImage { get => _selectedImage; set { _selectedImage = value; OnPropertyChanged(); } }
 
-        private string _anhCD;
-        public string AnhCD { get => _anhCD; set { _anhCD = value; OnPropertyChanged(); } }
+        private bool _currentWindow;
+        public bool CurrentWindow { get => _currentWindow; set { _currentWindow = value; OnPropertyChanged(); } }
 
 
         private int _selectedIndexStatus;
@@ -159,11 +105,11 @@ namespace giaothong.ViewModel
 
                 if (SelectedIndexStatus == 0)
                 {
-                    TrangThai = true;
+                    GiaoVien.TrangThai = true;
                 }
                 else
                 {
-                    TrangThai = false;
+                    GiaoVien.TrangThai = false;
                 };
             }
         }
@@ -180,11 +126,11 @@ namespace giaothong.ViewModel
 
                 if (IsCheckedGender)
                 {
-                    GioiTinh = 0;
+                    GiaoVien.GioiTinh = 0;
                 }
                 else
                 {
-                    GioiTinh = 1;
+                    GiaoVien.GioiTinh = 1;
                 }
             }
         }
@@ -205,7 +151,7 @@ namespace giaothong.ViewModel
                 {
                     if (index == SelectedIndexNoiCT)
                     {
-                        NoiCT = ListCity[index].name;
+                        GiaoVien.NoiCT = ListCity[index].name;
                         break;
                     }
                 }
@@ -228,7 +174,7 @@ namespace giaothong.ViewModel
                 {
                     if (index == SelectedIndexGCN)
                     {
-                        SoGCN = ListGCN[index].SoGCN.Trim();
+                        GiaoVien.SoGCN = ListGCN[index].SoGCN.Trim();
                         break;
                     }
                 }
@@ -248,15 +194,15 @@ namespace giaothong.ViewModel
 
                 if (SelectedIndexTD == 0)
                 {
-                    TuyenDung = "Hợp đồng";
+                    GiaoVien.TuyenDung = "Hợp đồng";
                 }
                 else if (SelectedIndexTD == 1)
                 {
-                    TuyenDung = "Biên chế";
+                    GiaoVien.TuyenDung = "Biên chế";
                 }
                 else if (SelectedIndexTD == 2)
                 {
-                    TuyenDung = "Thời vụ";
+                    GiaoVien.TuyenDung = "Thời vụ";
                 }
             }
         }
@@ -273,35 +219,35 @@ namespace giaothong.ViewModel
 
                 if (SelectedItem != null)
                 {
-                    MaGV = SelectedItem.MaGV;
-                    HoDem = SelectedItem.HoDem;
-                    TenGV = SelectedItem.TenGV;
-                    NgaySinh = SelectedItem.NgaySinh.Value;
-                    SoCCCD = SelectedItem.SoCCCD;
-                    NoiCT = SelectedItem.NoiCT;
-                    GioiTinh = SelectedItem.GioiTinh.Value;
-                    Phone = SelectedItem.Phone;
-                    TuyenDung = SelectedItem.TuyenDung;
+                    GiaoVien.MaGV = SelectedItem.MaGV;
+                    GiaoVien.HoDem = SelectedItem.HoDem;
+                    GiaoVien.TenGV = SelectedItem.TenGV;
+                    GiaoVien.NgaySinh = SelectedItem.NgaySinh.Value;
+                    GiaoVien.SoCCCD = SelectedItem.SoCCCD;
+                    GiaoVien.NoiCT = SelectedItem.NoiCT;
+                    GiaoVien.GioiTinh = SelectedItem.GioiTinh.Value;
+                    GiaoVien.Phone = SelectedItem.Phone;
+                    GiaoVien.TuyenDung = SelectedItem.TuyenDung;
 
                     int index = 0;
 
                     foreach (var item in ListCity)
                     {
-                        if (item.name.CompareTo(NoiCT) == 0)
+                        if (item.name.CompareTo(GiaoVien.NoiCT) == 0)
                         {
                             SelectedIndexNoiCT = index;
-                            NoiCT = item.name;
+                            GiaoVien.NoiCT = item.name;
                             break;
                         }
 
                         index++;
                     }
 
-                    if (TuyenDung.CompareTo("Hợp đồng") == 0)
+                    if (GiaoVien.TuyenDung.CompareTo("Hợp đồng") == 0)
                     {
                         SelectedIndexTD = 0;
                     }
-                    else if (TuyenDung.CompareTo("Biên chế") == 0)
+                    else if (GiaoVien.TuyenDung.CompareTo("Biên chế") == 0)
                     {
                         SelectedIndexTD = 1;
                     }
@@ -310,29 +256,29 @@ namespace giaothong.ViewModel
                         SelectedIndexTD = 2;
                     }
 
-                    TrinhDo_VH = SelectedItem.TrinhDo_VH;
-                    TrinhDo_SP = SelectedItem.TrinhDo_SP;
+                    GiaoVien.TrinhDo_VH = SelectedItem.TrinhDo_VH;
+                    GiaoVien.TrinhDo_SP = SelectedItem.TrinhDo_SP;
 
 
                     if (!string.IsNullOrEmpty(SelectedItem.GV_LT.ToString()))
                     {
-                        GV_LT = SelectedItem.GV_LT.Value;
-                        IsCheckedGV_LT = GV_LT;
+                        GiaoVien.GV_LT = SelectedItem.GV_LT.Value;
+                        IsCheckedGV_LT = (Boolean)GiaoVien.GV_LT;
                     }
 
                     if (!string.IsNullOrEmpty(SelectedItem.GV_TH.ToString()))
                     {
-                        GV_TH = SelectedItem.GV_TH.Value;
-                        IsCheckedGV_TH = GV_TH;
+                        GiaoVien.GV_TH = SelectedItem.GV_TH.Value;
+                        IsCheckedGV_TH = (Boolean)GiaoVien.GV_TH;
                     }
-                    TrinhDo_CM = SelectedItem.TrinhDo_CM;
-                    Nganh_CM = SelectedItem.Nganh_CM;
-                    SoGCN = SelectedItem.SoGCN;
-                    MaSoGTVT = SelectedItem.MaSoGTVT;
-                    MaCSDT = SelectedItem.MaCSDT;
-                    TrangThai = SelectedItem.TrangThai.Value;
+                    GiaoVien.TrinhDo_CM = SelectedItem.TrinhDo_CM;
+                    GiaoVien.Nganh_CM = SelectedItem.Nganh_CM;
+                    GiaoVien.SoGCN = SelectedItem.SoGCN.Trim();
+                    GiaoVien.MaSoGTVT = SelectedItem.MaSoGTVT;
+                    GiaoVien.MaCSDT = SelectedItem.MaCSDT;
+                    GiaoVien.TrangThai = SelectedItem.TrangThai.Value;
 
-                    if (TrangThai == true)
+                    if (GiaoVien.TrangThai == true)
                     {
                         SelectedIndexStatus = 0;
                     }
@@ -341,8 +287,10 @@ namespace giaothong.ViewModel
                         SelectedIndexStatus = 1;
                     }
 
-                    AnhCD = SelectedItem.AnhCD;
-                    SelectedImage = AnhCD;
+                    GiaoVien.AnhCD = SelectedItem.AnhCD;
+                    SelectedImage = SelectedItem.AnhCD;
+                    GiaoVien.NguoiCapNhat = User.Name;
+                    listGCN();
                 }
             }
         }
@@ -370,10 +318,12 @@ namespace giaothong.ViewModel
             ListAllGCN = new ObservableCollection<GIAOVIEN_GCN>();
             ListCity = new List<province_city>();
             User = MainViewModel.User;
+            GiaoVien = new GIAOVIEN();
 
-            NgaySinh = DateTime.Now;
-            GioiTinh = 1;
+            GiaoVien.NgaySinh = DateTime.Now;
+            GiaoVien.GioiTinh = 1;
             CurrentPage = 1;
+            CurrentWindow = true;
 
             teachers();
             cities();
@@ -724,13 +674,13 @@ namespace giaothong.ViewModel
 
                         if (MessageBoxResult.OK == message)
                         {
-                            var kh = db.GIAOVIENs.Find(MaGV.Trim());
+                            var kh = db.GIAOVIENs.Find(GiaoVien.MaGV.Trim());
                             if (kh != null)
                             {
                                 db.GIAOVIENs.Remove(kh);
                                 db.SaveChanges();
 
-                                var index = ListTeacher.ToList().FindIndex(t => t.MaGV == MaGV);
+                                var index = ListTeacher.ToList().FindIndex(t => t.MaGV == GiaoVien.MaGV);
                                 ListTeacher.RemoveAt(index);
                                 listGCN();
 
@@ -751,6 +701,8 @@ namespace giaothong.ViewModel
             {
                 if (SelectedItem != null)
                 {
+                    CurrentWindow = true;
+                    listGCN();
                     p.Hide();
                     EditTeacherWindow teacher = new EditTeacherWindow();
                     teacher.ShowDialog();
@@ -789,7 +741,7 @@ namespace giaothong.ViewModel
                 teachers(selectedValue);
             });
 
-            //find teacher by ID or CCCD
+            //find teacher by ID or CCCD or TenGV
             textChanged = new RelayCommand<string>((p) => { return true; }, (p) =>
             {
                 var selectedValue = changeSelectedStatus(SelectedIndex);
@@ -801,19 +753,21 @@ namespace giaothong.ViewModel
             {
                 getMaxMaGV();
                 reset();
+                
 
                 if (ListGCN.Count > 0)
                 {
-                    SoGCN = ListGCN[0].SoGCN.Trim();
+                    GiaoVien.SoGCN = ListGCN[0].SoGCN.Trim();
                 }
 
                 if (ListCity.Count > 0)
                 {
-                    NoiCT = ListCity[0].name.Trim();
+                    GiaoVien.NoiCT = ListCity[0].name.Trim();
                 }
 
+                CurrentWindow = false;
                 SelectedIndexStatus = 1;
-
+                listGCN();
                 p.Hide();
                 InsertTeacher inserTeacher = new InsertTeacher();
                 inserTeacher.ShowDialog();
@@ -847,7 +801,7 @@ namespace giaothong.ViewModel
 
                     SelectedImage = newCurrentUrl;
 
-                    AnhCD = "/Images/avatar/" + nameFile;
+                    GiaoVien.AnhCD = "/Images/avatar/" + nameFile;
                 }
                 catch { }
             });
@@ -855,70 +809,26 @@ namespace giaothong.ViewModel
             //insert teacher
             insertTeacher = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                try
+                GiaoVien.NgayCapNhat = DateTime.Now;
+
+                bool check = validation();
+
+                if (check)
                 {
-                    var check = validation();
-
-                    var checkCSDT = checkExists(MaCSDT);
-
-                    if (!checkCSDT)
+                    using (db = new giaothongEntities())
                     {
-                        check = false;
-                        MessageBox.Show("Giáo viên hiện tại đang dạy ở cơ sở khác!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
-                    var checkSoGCN = checkExistsSoGCN(SoGCN);
-
-                    if (!checkSoGCN)
-                    {
-                        check = false;
-                        MessageBox.Show("Số giấy chứng nhận không tồn tại hoặc đang thuộc sở hữu của giáo viên khác!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
-                    var checkCCCD = checkExists(SoCCCD);
-
-                    if (!checkCCCD)
-                    {
-                        check = false;
-                        MessageBox.Show("Số CCCD/CMND đã tồn tại!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
-                    if (check)
-                    {
-                        GIAOVIEN gv = new GIAOVIEN()
+                        try
                         {
-                            MaGV = MaGV.Trim(),
-                            HoDem = HoDem.Trim(),
-                            TenGV = TenGV.Trim(),
-                            NgaySinh = NgaySinh,
-                            SoCCCD = SoCCCD.Trim(),
-                            NoiCT = NoiCT.Trim(),
-                            GioiTinh = GioiTinh,
-                            Phone = Phone.Trim(),
-                            TuyenDung = TuyenDung.Trim(),
-                            TrinhDo_SP = TrinhDo_SP.Trim(),
-                            TrinhDo_CM = TrinhDo_CM.Trim(),
-                            TrinhDo_VH = TrinhDo_VH.Trim(),
-                            Nganh_CM = Nganh_CM.Trim(),
-                            GV_LT = GV_LT,
-                            GV_TH = GV_TH,
-                            SoGCN = SoGCN.Trim(),
-                            MaSoGTVT = MaSoGTVT.Trim(),
-                            MaCSDT = MaCSDT.Trim(),
-                            TrangThai = TrangThai,
-                            AnhCD = AnhCD,
-                            NgayCapNhat = DateTime.Now,
-                            NguoiCapNhat = User.Name
-                        };
-
-                        insert(gv);
-                        listGCN();
-                        p.Close();
+                            db.GIAOVIENs.Add(GiaoVien);
+                            db.SaveChanges();
+                            listGV();
+                            p.Close();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Thêm giáo viên thất bại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
-                }
-                catch
-                {
-                    MessageBox.Show("Thêm giáo viên thất bại", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
 
@@ -929,7 +839,7 @@ namespace giaothong.ViewModel
                     try
                     {
 
-                        var kh = db.GIAOVIENs.Find(MaGV.Trim());
+                        var kh = db.GIAOVIENs.Find(GiaoVien.MaGV.Trim());
 
                         if (kh != null)
                         {
@@ -953,6 +863,7 @@ namespace giaothong.ViewModel
             //edit teacher 
             editTeacher = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
+
                 using (db = new giaothongEntities())
                 {
                     try
@@ -962,41 +873,42 @@ namespace giaothong.ViewModel
                         if (check)
                         {
 
-                            var kh = db.GIAOVIENs.Find(MaGV.Trim());
+                            var kh = db.GIAOVIENs.Find(GiaoVien.MaGV.Trim());
 
                             if (kh != null)
                             {
-                                kh.HoDem = HoDem.Trim();
-                                kh.TenGV = TenGV.Trim();
-                                kh.NgaySinh = NgaySinh;
-                                kh.SoCCCD = SoCCCD.Trim();
-                                kh.NoiCT = NoiCT.Trim();
-                                kh.GioiTinh = GioiTinh;
-                                kh.Phone = Phone.Trim();
-                                kh.TuyenDung = TuyenDung.Trim();
-                                kh.TrinhDo_SP = TrinhDo_SP.Trim();
-                                kh.TrinhDo_CM = TrinhDo_CM.Trim();
-                                kh.TrinhDo_VH = TrinhDo_VH.Trim();
-                                kh.Nganh_CM = Nganh_CM.Trim();
-                                kh.GV_LT = GV_LT;
-                                kh.GV_TH = GV_TH;
-                                kh.SoGCN = SoGCN.Trim();
-                                kh.MaSoGTVT = MaSoGTVT.Trim();
-                                kh.MaCSDT = MaCSDT.Trim();
-                                kh.TrangThai = TrangThai;
+                                kh.HoDem = GiaoVien.HoDem.Trim();
+                                kh.TenGV = GiaoVien.TenGV.Trim();
+                                kh.NgaySinh = GiaoVien.NgaySinh;
+                                kh.SoCCCD = GiaoVien.SoCCCD.Trim();
+                                kh.NoiCT = GiaoVien.NoiCT.Trim();
+                                kh.GioiTinh = GiaoVien.GioiTinh;
+                                kh.Phone = GiaoVien.Phone.Trim();
+                                kh.TuyenDung = GiaoVien.TuyenDung.Trim();
+                                kh.TrinhDo_SP = GiaoVien.TrinhDo_SP.Trim();
+                                kh.TrinhDo_CM = GiaoVien.TrinhDo_CM.Trim();
+                                kh.TrinhDo_VH = GiaoVien.TrinhDo_VH.Trim();
+                                kh.Nganh_CM = GiaoVien.Nganh_CM.Trim();
+                                kh.GV_LT = GiaoVien.GV_LT;
+                                kh.GV_TH = GiaoVien.GV_TH;
+                                kh.SoGCN = GiaoVien.SoGCN.Trim();
+                                kh.MaSoGTVT = GiaoVien.MaSoGTVT.Trim();
+                                kh.MaCSDT = GiaoVien.MaCSDT.Trim();
+                                kh.TrangThai = GiaoVien.TrangThai;
 
-                                var checkFile = AnhCD.Contains("giaothong");
+                                var checkFile = GiaoVien.AnhCD.Contains("giaothong");
 
                                 if (checkFile)
                                 {
-                                    var index = AnhCD.IndexOf("Images");
-                                    AnhCD = AnhCD.Remove(0, index - 1);
+                                    var index = GiaoVien.AnhCD.IndexOf("Images");
+                                    GiaoVien.AnhCD = GiaoVien.AnhCD.Remove(0, index - 1);
                                 }
 
-                                kh.AnhCD = AnhCD;
+                                kh.AnhCD = GiaoVien.AnhCD;
                                 kh.NgayCapNhat = DateTime.Now;
                                 kh.NguoiCapNhat = User.Name;
 
+                                
                                 db.SaveChanges();
                                 teachers();
                                 listGCN();
@@ -1061,15 +973,13 @@ namespace giaothong.ViewModel
             using (db = new giaothongEntities())
             {
                 ListGCN.Clear();
-
-                var gcn = from c in db.GIAOVIEN_GCN
-                          where !db.GIAOVIENs.Any(v => v.SoGCN == c.SoGCN)
-                          select c;
-
-                gcn.ToList().ForEach(p =>
-                {
-                    ListGCN.Add(p);
-                });
+                        var gcn = from c in db.GIAOVIEN_GCN
+                                  where !db.GIAOVIENs.Any(v => v.SoGCN == c.SoGCN) || (GiaoVien.SoGCN == c.SoGCN && CurrentWindow == true)
+                                  select c;
+                        gcn.ToList().ForEach(p =>
+                        {
+                            ListGCN.Add(p);
+                        });
 
                 return ListGCN;
             }
@@ -1080,7 +990,7 @@ namespace giaothong.ViewModel
         {
             bool check = true;
 
-            var checkBirthDay = checkTypeDate(DateTime.Parse(NgaySinh.ToString()));
+            var checkBirthDay = checkTypeDate(DateTime.Parse(GiaoVien.NgaySinh.ToString()));
 
             if (!checkBirthDay)
             {
@@ -1088,85 +998,67 @@ namespace giaothong.ViewModel
                 MessageBox.Show("Giáo viên phải đủ từ 15 tuổi trở lên!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(HoDem, 25))
+            if (!checkLength(GiaoVien.HoDem, 25))
             {
                 check = false;
                 MessageBox.Show("Họ đệm không hợp lệ hoặc phải dưới 25 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(TenGV, 25))
+            if (!checkLength(GiaoVien.TenGV, 25))
             {
                 check = false;
                 MessageBox.Show("Tên đệm không hợp lệ hoặc phải dưới 15 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(Phone.Trim(), 14))
+            if (!checkLength(GiaoVien.Phone.Trim(), 14))
             {
                 check = false;
                 MessageBox.Show("Số điện thoại không hợp lệ!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(TrinhDo_VH, 10))
+            if (!checkLength(GiaoVien.TrinhDo_VH, 10))
             {
                 check = false;
                 MessageBox.Show("Trình độ văn hóa không hợp lệ hoặc phải dưới 10 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(TrinhDo_SP, 10))
+            if (!checkLength(GiaoVien.TrinhDo_SP, 10))
             {
                 check = false;
                 MessageBox.Show("Trình độ sư phạm không hợp lệ hoặc phải dưới 10 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(TrinhDo_CM, 10))
+            if (!checkLength(GiaoVien.TrinhDo_CM, 10))
             {
                 check = false;
                 MessageBox.Show("Trình độ chuyên môn không hợp lệ hoặc phải dưới 10 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(Nganh_CM, 20))
+            if (!checkLength(GiaoVien.Nganh_CM, 20))
             {
                 check = false;
                 MessageBox.Show("Ngành chuyên môn không hợp lệ hoặc phải dưới 20 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(MaSoGTVT, 5))
+            if (!checkLength(GiaoVien.MaSoGTVT, 5))
             {
                 check = false;
                 MessageBox.Show("Mã sở giao thông vận tải không hợp lệ hoặc phải dưới 5 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(MaCSDT, 5))
+            if (!checkLength(GiaoVien.MaCSDT, 5))
             {
                 check = false;
                 MessageBox.Show("Mã cơ sở đào tạo không hợp lệ hoặc phải dưới 5 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (GV_LT == false && GV_LT == false)
+            if (GiaoVien.GV_LT == false && GiaoVien.GV_LT == false)
             {
                 check = false;
                 MessageBox.Show("Vui lòng chọn loại giáo viên dạy!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return check;
-        }
-
-        //insert teacher
-        public void insert(GIAOVIEN giaovien)
-        {
-            using (db = new giaothongEntities())
-            {
-                db.GIAOVIENs.Add(giaovien);
-                db.SaveChanges();
-
-                string currentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-                var index = currentDirectory.IndexOf("giaothong");
-                var newCurrentUrl = currentDirectory.Substring(0, index) + @"giaothong";
-
-                giaovien.AnhCD = newCurrentUrl + giaovien.AnhCD;
-
-                ListTeacher.Add(giaovien);
-            }
         }
 
         //check length avaliable
@@ -1219,7 +1111,7 @@ namespace giaothong.ViewModel
         {
             using (db = new giaothongEntities())
             {
-                var query = (from gv in db.GIAOVIENs where gv.MaGV == MaGV && gv.MaCSDT == value || gv.SoCCCD == value select gv).Count();
+                var query = (from gv in db.GIAOVIENs where gv.MaGV == GiaoVien.MaGV && gv.MaCSDT == value || gv.SoCCCD == value select gv).Count();
 
                 if (query > 0)
                 {
@@ -1242,14 +1134,14 @@ namespace giaothong.ViewModel
 
                 if (arrMaGV.Length > 0)
                 {
-                    MaGV = arrMaGV[0] + "-" + dateNow + "-" + (Int32.Parse(arrMaGV[2]) + 1);
+                    GiaoVien.MaGV = arrMaGV[0] + "-" + dateNow + "-" + (Int32.Parse(arrMaGV[2]) + 1);
                 }
             }
             else
             {
-                MaGV = "52-" + dateNow + "-1";
+                GiaoVien.MaGV = "52-" + dateNow + "-1";
             }
-            return MaGV;
+            return GiaoVien.MaGV;
         }
 
         //selected image get url
@@ -1346,7 +1238,7 @@ namespace giaothong.ViewModel
 
                         if (!string.IsNullOrEmpty(searchKey))
                         {
-                            teachers = from gv in db.GIAOVIENs where gv.MaGV == searchKey || gv.SoCCCD == searchKey select gv;
+                            teachers = from gv in db.GIAOVIENs where gv.MaGV == searchKey || gv.SoCCCD == searchKey || gv.TenGV == searchKey select gv;
                         }
 
                         addValueToListTeacher(teachers.ToList());
@@ -1391,24 +1283,24 @@ namespace giaothong.ViewModel
 
         public void reset()
         {
-            TenGV = null;
-            HoDem = null;
-            SoCCCD = null;
-            NoiCT = null;
-            GioiTinh = 0;
-            Phone = null;
-            TuyenDung = null;
-            TrinhDo_VH = null;
-            TrinhDo_CM = null;
-            Nganh_CM = null;
-            TrinhDo_SP = null;
-            GV_LT = false;
-            GV_TH = false;
-            SoGCN = null;
-            MaSoGTVT = null;
-            MaCSDT = null;
-            TrangThai = false;
-            AnhCD = null;
+            GiaoVien.TenGV = null;
+            GiaoVien.HoDem = null;
+            GiaoVien.SoCCCD = null;
+            GiaoVien.NoiCT = null;
+            GiaoVien.GioiTinh = 0;
+            GiaoVien.Phone = null;
+            GiaoVien.TuyenDung = null;
+            GiaoVien.TrinhDo_VH = null;
+            GiaoVien.TrinhDo_CM = null;
+            GiaoVien.Nganh_CM = null;
+            GiaoVien.TrinhDo_SP = null;
+            GiaoVien.GV_LT = false;
+            GiaoVien.GV_TH = false;
+            GiaoVien.SoGCN = null;
+            GiaoVien.MaSoGTVT = null;
+            GiaoVien.MaCSDT = null;
+            GiaoVien.TrangThai = false;
+            GiaoVien.AnhCD = null;
             IsCheckedGV_LT = false;
             IsCheckedGV_TH = false;
             SelectedImage = null;
@@ -1435,6 +1327,31 @@ namespace giaothong.ViewModel
                     ListTeacher.Add(p);
                 }
             });
+        }
+
+
+        public ObservableCollection<GIAOVIEN> listGV(string searchKey = null)
+        {
+            using (db = new giaothongEntities())
+            {
+                ListTeacher.Clear();
+
+                try
+                {
+                    var gv = from c in db.GIAOVIENs select c;
+
+                    if (!string.IsNullOrEmpty(searchKey))
+                    {
+                        gv = from c in db.GIAOVIENs where c.MaGV.Equals(searchKey) select c;
+                    }
+
+                    addValueToListTeacher(gv.ToList());
+
+                }
+                catch { }
+
+                return ListTeacher;
+            }
         }
     }
 }

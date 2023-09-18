@@ -75,7 +75,7 @@
                                 <TextBlock Text="Mã giáo viên" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <TextBox
-                                      Text="{Binding maGV, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                      Text="{Binding GiaoVien.MaGV, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       IsEnabled="False"
                                       Height="30"
                                       FontSize="14"
@@ -90,7 +90,8 @@
                                     <TextBlock Text="Họ đệm" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                     <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                         <TextBox
-                                        Width="219"
+                                      Text="{Binding GiaoVien.HoDem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                      Width="219"
                                       Height="30"
                                       FontSize="14"
                                       Margin="2 0"
@@ -103,6 +104,7 @@
                                     <TextBlock Text="Tên" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                     <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                         <TextBox
+                                      Text="{Binding GiaoVien.TenGV, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       Width="219"
                                       Height="30"
                                       FontSize="14"
@@ -117,6 +119,7 @@
                                 <TextBlock Text="Ngày sinh" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <DatePicker
+                                        Text="{Binding GiaoVien.NgaySinh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       Height="30"
                                       FontSize="14"
                                       Margin="2 0"
@@ -129,6 +132,7 @@
                                 <TextBlock Text="Số CCCD/CMND" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <TextBox
+                                      Text="{Binding GiaoVien.SoCCCD, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       Height="30"
                                       FontSize="14"
                                       Margin="2 0"
@@ -141,15 +145,13 @@
                                 <TextBlock Text="Nơi CT" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <ComboBox
-                                    Height="30"
-                                    Padding="5 0"
-                                    materialDesign:HintAssist.Hint="Nơi CT"
-                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                                        <ComboBoxItem Content="Bình Định"></ComboBoxItem>
-                                        <ComboBoxItem Content="Hồ Chí Minh"></ComboBoxItem>
-                                        <ComboBoxItem Content="Hà Nội"></ComboBoxItem>
-                                        <ComboBoxItem Content="Lâm Đồng"></ComboBoxItem>
-                                        <ComboBoxItem Content="Đồng Nai"></ComboBoxItem>
+                                    ItemsSource="{Binding ListCity}"
+                                        DisplayMemberPath="name"
+                                        SelectedValuePath="name"
+                                        SelectedIndex="{Binding SelectedIndexNoiCT, UpdateSourceTrigger=PropertyChanged}"
+                                        Height="30"
+                                        Padding="5 6"
+                                        materialDesign:HintAssist.Hint="Nơi CT">
                                     </ComboBox>
                                 </Border>
                             </StackPanel>
@@ -159,10 +161,10 @@
                                 <TextBlock Text="Hình thức tuyển dụng" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <ComboBox
+                                    SelectedIndex="{Binding SelectedIndexTD, UpdateSourceTrigger=PropertyChanged}"
                                     Height="30"
-                                    Padding="5 0"
-                                    materialDesign:HintAssist.Hint="Nơi CT"
-                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                    Padding="5 6"
+                                    materialDesign:HintAssist.Hint="Hình thức tuyển dụng">
                                         <ComboBoxItem Content="Hợp đồng"></ComboBoxItem>
                                         <ComboBoxItem Content="Biên chế"></ComboBoxItem>
                                         <ComboBoxItem Content="Thời vụ"></ComboBoxItem>
@@ -174,6 +176,7 @@
                                 <TextBlock Text="Số điện thoại" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <TextBox
+                                        Text="{Binding GiaoVien.Phone, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       Height="30"
                                       FontSize="14"
                                       Margin="2 0"
@@ -189,6 +192,7 @@
                                     <TextBlock Text="Trình độ văn hóa" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                     <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                         <TextBox
+                                        Text="{Binding GiaoVien.TrinhDo_VH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                         Width="219"
                                       Height="30"
                                       FontSize="14"
@@ -202,6 +206,7 @@
                                     <TextBlock Text="Trình độ sư phạm" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                     <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                         <TextBox
+                                            Text="{Binding GiaoVien.TrinhDo_SP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       Width="219"
                                       Height="30"
                                       FontSize="14"
@@ -218,6 +223,7 @@
                                     <TextBlock Text="Trình độ chuyên môn" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                     <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                         <TextBox
+                                            Text="{Binding GiaoVien.TrinhDo_CM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       Width="219"
                                       Height="30"
                                       FontSize="14"
@@ -231,6 +237,7 @@
                                     <TextBlock Text="Ngành chuyên môn đào tạo" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                     <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                         <TextBox
+                                            Text="{Binding GiaoVien.Nganh_CM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       Width="219"
                                       Height="30"
                                       FontSize="14"
@@ -244,12 +251,18 @@
                             <StackPanel Margin="10 0">
                                 <TextBlock Text="Số giấy chứng nhận giáo viên" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
-                                    <TextBox
-                                      Height="30"
+                                    <ComboBox
+                                        ItemsSource="{Binding ListGCN}"
+                                        
+                                        SelectedIndex="{Binding SelectedIndexGCN, UpdateSourceTrigger=PropertyChanged}"
+                                        DisplayMemberPath="SoGCN"
+                                        SelectedValuePath="SoGCN"
+                                        Height="30"
                                       FontSize="14"
                                       Margin="2 0"
                                       Padding="5 0"
-                                      materialDesign:HintAssist.Hint="Số giấy chứng nhận giáo viên"/>
+                                      materialDesign:HintAssist.Hint="Số giấy chứng nhận giáo viên">
+                                    </ComboBox>
                                 </Border>
                             </StackPanel>
 
@@ -257,6 +270,7 @@
                                 <TextBlock Text="Mã sở giao thông vận tải" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <TextBox
+                                        Text="{Binding GiaoVien.MaSoGTVT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       Height="30"
                                       FontSize="14"
                                       Margin="2 0"
@@ -269,6 +283,7 @@
                                 <TextBlock Text="Mã cơ sở đào tạo" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <TextBox
+                                        Text="{Binding GiaoVien.MaCSDT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       Height="30"
                                       FontSize="14"
                                       Margin="2 0"
@@ -281,11 +296,11 @@
                                 <TextBlock Text="Trạng thái" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                 <Border CornerRadius="5" Margin="0 10" BorderThickness="1 1 1 1" BorderBrush="Gray">
                                     <ComboBox
+                                    SelectedIndex="{Binding SelectedIndexStatus, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                     Height="30"
-                                    Padding="5 0"
-                                    materialDesign:HintAssist.Hint="Trạng thái"
-                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                                        <ComboBoxItem Content="Họat động"></ComboBoxItem>
+                                    Padding="5 6"
+                                    materialDesign:HintAssist.Hint="Trạng thái">
+                                        <ComboBoxItem IsSelected="True" Content="Họat động"></ComboBoxItem>
                                         <ComboBoxItem Content="Không hoạt động"></ComboBoxItem>
                                     </ComboBox>
                                 </Border>
@@ -295,16 +310,16 @@
                                 <StackPanel Width="219">
                                     <TextBlock Text="Giáo viên dạy" Margin="0 0 0 15" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                     <WrapPanel Height="30">
-                                        <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Content="Lý thuyết" Margin="0 0 10 0"></CheckBox>
-                                        <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Content="Thực hành"></CheckBox>
+                                        <CheckBox IsChecked="{Binding IsCheckedGV_LT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignCheckBox}" Content="Lý thuyết" Margin="0 0 10 0"></CheckBox>
+                                        <CheckBox IsChecked="{Binding IsCheckedGV_TH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource MaterialDesignCheckBox}" Content="Thực hành"></CheckBox>
                                     </WrapPanel>
                                 </StackPanel>
 
                                 <StackPanel Width="219">
                                     <TextBlock Text="Giới tính" Margin="0 0 0 15" FontSize="16" FontWeight="SemiBold"></TextBlock>
                                     <WrapPanel>
-                                        <RadioButton Style="{StaticResource MaterialDesignRadioButton}" Content="Nam" Margin="0 0 10 0"></RadioButton>
-                                        <RadioButton Style="{StaticResource MaterialDesignRadioButton}" Content="Nữ"></RadioButton>
+                                        <RadioButton IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}" Content="Nam" Margin="0 0 10 0"></RadioButton>
+                                        <RadioButton IsChecked="{Binding IsCheckedGender, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Content="Nữ"></RadioButton>
                                     </WrapPanel>
                                 </StackPanel>
                             </WrapPanel>
@@ -317,7 +332,9 @@
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Width="100"
                                     ToolTip="Resource name: MaterialDesignRaisedButton"
-                                    Content="Thêm giáo viên"
+                                    Content="Hủy"
+                                    Command="{Binding closeInsertTeacherWindow}"
+                                    CommandParameter="{Binding ElementName=insertTeacherWindow}"
                                     BorderThickness="0"
                                     Background="Gray"
                                     Margin="0 0 10 0"
@@ -330,7 +347,9 @@
                                     Content="Thêm giáo viên"
                                     BorderThickness="0"
                                     Background="#08bf96"
-                                    Foreground="#ffffff">
+                                    Foreground="#ffffff"
+                                    CommandParameter="{Binding ElementName=insertTeacherWindow}"
+                                    Command="{Binding insertTeacher}">
                             </Button>
                         </StackPanel>
 

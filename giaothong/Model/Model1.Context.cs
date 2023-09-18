@@ -33,7 +33,16 @@ namespace giaothong.Model
         public virtual DbSet<USERS_ROLE> USERS_ROLE { get; set; }
         public virtual DbSet<XETAPLAI> XETAPLAIs { get; set; }
         public virtual DbSet<XETAPLAI_GP> XETAPLAI_GP { get; set; }
-        public virtual DbSet<HangXe> HangXes { get; set; }
-        public virtual DbSet<LoaiXe> LoaiXes { get; set; }
+        public virtual DbSet<DM_DonViGTVT> DM_DonViGTVT { get; set; }
+        public virtual DbSet<DM_HangDT> DM_HangDT { get; set; }
+        public virtual DbSet<DM_HangGPLX> DM_HangGPLX { get; set; }
+        public virtual DbSet<InHangDoiGPLX> InHangDoiGPLXes { get; set; }
+        public virtual DbSet<KhoaHoc> KhoaHocs { get; set; }
+        public virtual DbSet<KySH> KySHes { get; set; }
+        public virtual DbSet<NguoiLX_GPLX> NguoiLX_GPLX { get; set; }
+        public virtual DbSet<NguoiLX_HoSo> NguoiLX_HoSo { get; set; }
+        public virtual DbSet<NguoiLXHS_GiayTo> NguoiLXHS_GiayTo { get; set; }
+        public virtual DbSet<NguoiLXHS_KQSH> NguoiLXHS_KQSH { get; set; }
+        public virtual DbSet<KhoaHoc_GiaoVien> KhoaHoc_GiaoVien { get; set; }
     }
 }

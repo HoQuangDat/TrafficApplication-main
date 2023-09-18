@@ -27,9 +27,8 @@ namespace giaothong.ViewModel
     {
         private giaothongEntities db;
         private ObservableCollection<XETAPLAI> _listVehicle;
-        private ObservableCollection<HangXe> _listHangXe;
         private ObservableCollection<XETAPLAI_GP> _listGPTL;
-        private ObservableCollection<LoaiXe> _listLoaiXe;
+
         private USER _user;
         public USER User { get => _user; set { _user = value; OnPropertyChanged(); } }
         private static bool _isEnable;
@@ -38,61 +37,21 @@ namespace giaothong.ViewModel
         private ObservableCollection<XETAPLAI_GP> _listAllGPXTL;
         public ObservableCollection<XETAPLAI_GP> ListAllGPXTL { get => _listAllGPXTL; set => _listAllGPXTL = value; }
         public ObservableCollection<XETAPLAI> ListVehicle { get => _listVehicle; set => _listVehicle = value; }
-        public ObservableCollection<HangXe> ListHangXe { get => _listHangXe; set => _listHangXe = value; }
-
         public ObservableCollection<XETAPLAI_GP> ListGPTL { get => _listGPTL; set => _listGPTL = value; }
-        public ObservableCollection<LoaiXe> ListLoaiXe { get => _listLoaiXe; set => _listLoaiXe = value; }
 
-        private string _soDangKy;
-        public string SoDangKy { get => _soDangKy; set { _soDangKy = value; OnPropertyChanged(); } }
+        private XETAPLAI _xeTapLai;
+        public XETAPLAI XeTapLai { get => _xeTapLai; set { _xeTapLai = value; OnPropertyChanged(); } }
 
-        private string _tenChuSoHuu;
-        public string TenChuSoHuu { get => _tenChuSoHuu; set { _tenChuSoHuu = value; OnPropertyChanged(); } }
-
-        private string _soGPTL;
-        public string SoGPTL { get => _soGPTL; set { _soGPTL = value; OnPropertyChanged(); } }
-
-        private string _nhanHieu;
-        public string NhanHieu { get => _nhanHieu; set { _nhanHieu = value; OnPropertyChanged(); } }
-
-        private string _kieuLoai;
-        public string KieuLoai { get => _kieuLoai; set { _kieuLoai = value; OnPropertyChanged(); } }
-
-        private string _hangXe;
-        public string HangXe { get => _hangXe; set { _hangXe = value; OnPropertyChanged(); } }
-
-        private string _mauXe;
-        public string MauXe { get => _mauXe; set { _mauXe = value; OnPropertyChanged(); } }
-
-        private string _soDongCo;
-        public string SoDongCo { get => _soDongCo; set { _soDongCo = value; OnPropertyChanged(); } }
-
-        private string _soKhung;
-        public string SoKhung { get => _soKhung; set { _soKhung = value; OnPropertyChanged(); } }
-
-        private string _namSX;
-        public string NamSX { get => _namSX; set { _namSX = value; OnPropertyChanged(); } }
-
-        private string _loaiXe;
-        public string LoaiXe { get => _loaiXe; set { _loaiXe = value; OnPropertyChanged(); } }
-
-        private bool _xeSatHach;
-        public bool XeSatHach { get => _xeSatHach; set { _xeSatHach = value; OnPropertyChanged(); } }
-
-        private bool _trangThaiHD;
-        public bool TrangThaiHD { get => _trangThaiHD; set { _trangThaiHD = value; OnPropertyChanged(); } }
-
-        private DateTime _ngayCapNhat;
-        public DateTime NgayCapNhat { get => _ngayCapNhat; set { _ngayCapNhat = value; OnPropertyChanged(); } }
-
-        private string _nguoiCapNhat;
-        public string NguoiCapNhat { get => _nguoiCapNhat; set { _nguoiCapNhat = value; OnPropertyChanged(); } }
-
-        private int _selectedIndex;
-        public int SelectedIndex { get => _selectedIndex; set => _selectedIndex = value; }
+        public int pageSize = 10; // Số phần tử trên mỗi trang
+        private int _currentPage; // Trang hiện tại
+        public int CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged(); } }
+        private int _totalPages;
+        public int TotalPages { get => _totalPages; set { _totalPages = value; OnPropertyChanged(); } }
 
         private string _searchVehicle;
         public string SearchVehicle { get => _searchVehicle; set => _searchVehicle = value; }
+        private bool _currentWindow;
+        public bool CurrentWindow { get => _currentWindow; set { _currentWindow = value; OnPropertyChanged(); } }
 
         private bool _isCheckedXeSatHach;
         public bool IsCheckedXeSatHach
@@ -105,11 +64,11 @@ namespace giaothong.ViewModel
 
                 if (IsCheckedXeSatHach)
                 {
-                    XeSatHach = true;
+                    XeTapLai.XeSatHach = true;
                 }
                 else
                 {
-                    XeSatHach = false;
+                    XeTapLai.XeSatHach = false;
                 }
             }
         }
@@ -125,11 +84,11 @@ namespace giaothong.ViewModel
 
                 if (IsCheckedTrangThaiHD)
                 {
-                    TrangThaiHD = true;
+                    XeTapLai.TrangThaiHD = true;
                 }
                 else
                 {
-                    TrangThaiHD = false;
+                    XeTapLai.TrangThaiHD = false;
                 }
             }
         }
@@ -150,53 +109,7 @@ namespace giaothong.ViewModel
                 {
                     if (index == SelectedIndexGPLX)
                     {
-                        SoGPTL = ListGPTL[index].SoGPXTL.Trim();
-                        break;
-                    }
-                }
-            }
-        }
-
-        // Select hang xe
-        private int _selectedIndexHX;
-        public int SelectedIndexHX
-        {
-            get => _selectedIndexHX;
-            set
-            {
-                _selectedIndexHX = value;
-                OnPropertyChanged();
-
-                int index = 0;
-
-                for (index = 0; index < ListHangXe.Count(); index++)
-                {
-                    if (index == SelectedIndexHX)
-                    {
-                        HangXe = ListHangXe[index].ten.Trim();
-                        break;
-                    }
-                }
-            }
-        }
-
-        // Select loai xe
-        private int _selectedIndexLX;
-        public int SelectedIndexLX
-        {
-            get => _selectedIndexLX;
-            set
-            {
-                _selectedIndexLX = value;
-                OnPropertyChanged();
-
-                int index = 0;
-
-                for (index = 0; index < ListLoaiXe.Count(); index++)
-                {
-                    if (index == SelectedIndexLX)
-                    {
-                        LoaiXe = ListLoaiXe[index].Ten.Trim();
+                        XeTapLai.SoGPTL = ListGPTL[index].SoGPXTL.Trim();
                         break;
                     }
                 }
@@ -210,27 +123,30 @@ namespace giaothong.ViewModel
             {
                 _selectedItem = value;
                 OnPropertyChanged();
-                reset();
+                
 
                 if (SelectedItem != null)
                 {
-                    SoDangKy = SelectedItem.SoDangKy.Trim();
-                    TenChuSoHuu = SelectedItem.TenChuSoHuu.Trim();
-                    SoGPTL = SelectedItem.SoGPTL.Trim();
-                    NhanHieu = SelectedItem.NhanHieu.Trim();
-                    KieuLoai = SelectedItem.KieuLoai.Trim();
-                    HangXe = SelectedItem.HangXe.Trim();
-                    MauXe = SelectedItem.MauXe.Trim();
-                    SoDongCo = SelectedItem.SoDongCo.Trim();
-                    SoKhung = SelectedItem.SoKhung.Trim();
-                    NamSX = SelectedItem.NamSX.Trim();
-                    LoaiXe = SelectedItem.LoaiXe.Trim();
-                    XeSatHach = SelectedItem.XeSatHach.Value;
-                    TrangThaiHD = SelectedItem.TrangThaiHD.Value;
-                    NgayCapNhat = SelectedItem.NgayCapNhat.Value;
+                    XeTapLai.SoDangKy = SelectedItem.SoDangKy.Trim();
+                    XeTapLai.TenChuSoHuu = SelectedItem.TenChuSoHuu.Trim();
+                    XeTapLai.SoGPTL = SelectedItem.SoGPTL.Trim();
+                    XeTapLai.NhanHieu = SelectedItem.NhanHieu.Trim();
+                    XeTapLai.KieuLoai = SelectedItem.KieuLoai.Trim();
+                    XeTapLai.HangXe = SelectedItem.HangXe.Trim();
+                    XeTapLai.MauXe = SelectedItem.MauXe.Trim();
+                    XeTapLai.SoDongCo = SelectedItem.SoDongCo.Trim();
+                    XeTapLai.SoKhung = SelectedItem.SoKhung.Trim();
+                    XeTapLai.NamSX = SelectedItem.NamSX.Trim();
+                    XeTapLai.LoaiXe = SelectedItem.LoaiXe.Trim();
+                    XeTapLai.XeSatHach = SelectedItem.XeSatHach.Value;
+                    XeTapLai.TrangThaiHD = SelectedItem.TrangThaiHD.Value;
+                    XeTapLai.NgayCapNhat = SelectedItem.NgayCapNhat;
+                    listGPTL();
                 }
             }
         }
+        private int _selectedIndex;
+        public int SelectedIndex { get => _selectedIndex; set => _selectedIndex = value; }
 
         public ICommand viewInsertVehicle{ get; set; }
         public ICommand textChanged { get; set; }
@@ -244,21 +160,23 @@ namespace giaothong.ViewModel
         public ICommand AgreeVehicleWindow { get; set; }
         public ICommand viewGPXTL { get; set; }
         public ICommand ExportExcel { get; set; }
+        public ICommand nextPage { get; set; }
+        public ICommand previousPage { get; set; }
 
 
         public VehicleViewModel()
         {
             ListVehicle = new ObservableCollection<XETAPLAI>();
-            ListHangXe = new ObservableCollection<HangXe>();
             ListGPTL = new ObservableCollection<XETAPLAI_GP>();
-            ListLoaiXe = new ObservableCollection<LoaiXe>();
             ListAllGPXTL = new ObservableCollection<XETAPLAI_GP>();
+            XeTapLai = new XETAPLAI();
+            CurrentWindow = true;
 
             vehicles();
             listGPTL();
-            listHangXe();
-            listLoaiXe();
             listAllGPXTL();
+
+            XeTapLai.NgayCapNhat = DateTime.Now;
             //export file excel
             ExportExcel = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -589,6 +507,26 @@ namespace giaothong.ViewModel
 
             });
 
+            //next page
+            nextPage = new RelayCommand<string>((p) => { return true; }, (p) =>
+            {
+                if (CurrentPage < TotalPages)
+                {
+                    CurrentPage++;
+                    listVehicle(SearchVehicle);
+                }
+            });
+
+            //previous page
+            previousPage = new RelayCommand<string>((p) => { return true; }, (p) =>
+            {
+                if (CurrentPage > 1)
+                {
+                    CurrentPage--;
+                    listVehicle(SearchVehicle);
+                }
+            });
+
             // Đóng cửa sổ danh sách xe tập lái
             closeVehicleWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
@@ -606,20 +544,10 @@ namespace giaothong.ViewModel
             // Load view insert vehicle
             viewInsertVehicle = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-
+                reset();
                 if (ListGPTL.Count > 0)
                 {
-                    SoGPTL = ListGPTL[0].SoGPXTL.Trim();
-                }
-
-                if (ListHangXe.Count > 0)
-                {
-                    HangXe = ListHangXe[0].ten.Trim();
-                }
-
-                if (ListLoaiXe.Count > 0)
-                {
-                    LoaiXe = ListLoaiXe[0].Ten.Trim();
+                    XeTapLai.SoGPTL = ListGPTL[0].SoGPXTL.Trim();
                 }
 
                 p.Hide();
@@ -631,6 +559,8 @@ namespace giaothong.ViewModel
             //view gpxtl
             viewGPXTL = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
+                CurrentWindow = false;
+                listGPTL();
                 p.Hide();
                 VehicleGPWindow vehicleGP = new VehicleGPWindow();
                 vehicleGP.ShowDialog();
@@ -641,10 +571,10 @@ namespace giaothong.ViewModel
 
             //selectected change filter status vehicles
             selectionChanged = new RelayCommand<string>((p) => { return true; }, (p) =>
-             {
-                 var selectedValue = changeSelectedStatus(SelectedIndex);
+            {
+                var selectedValue = changeSelectedStatus(SelectedIndex);
                  vehicles(selectedValue);
-             });
+            });
 
             //find vehicle by SoDangKy or HangXe
             textChanged = new RelayCommand<string>((p) => { return true; }, (p) =>
@@ -659,6 +589,8 @@ namespace giaothong.ViewModel
                 //MessageBox.Show("Da vao su kien");
                 if (SelectedItem != null)
                 {
+                    CurrentWindow = true;
+                    listGPTL();
                     p.Hide();
                     EditVehicleWindow editvehicle = new EditVehicleWindow();
                     editvehicle.ShowDialog();
@@ -677,13 +609,13 @@ namespace giaothong.ViewModel
 
                         if (MessageBoxResult.OK == message)
                         {
-                            var xe = db.XETAPLAIs.Find(SoDangKy.Trim());
+                            var xe = db.XETAPLAIs.Find(XeTapLai.SoDangKy.Trim());
                             if (xe != null)
                             {
                                 db.XETAPLAIs.Remove(xe);
                                 db.SaveChanges();
 
-                                var index = ListVehicle.ToList().FindIndex(x => x.SoDangKy == SoDangKy);
+                                var index = ListVehicle.ToList().FindIndex(x => x.SoDangKy == XeTapLai.SoDangKy);
                                 ListVehicle.RemoveAt(index);
 
                                 MessageBox.Show("Xe đã được xóa khỏi danh sách", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -701,54 +633,22 @@ namespace giaothong.ViewModel
             //insert vehicle
             insertVehicle = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
+
                 try
                 {
                     var check = validation();
 
-                    var checkGPTL = checkExistsGPTL(SoGPTL);
-
-                    /*if (!checkGPTL)
+                    var checkGPTL = checkExistsGPTL(XeTapLai.SoGPTL);
+                    using (db = new giaothongEntities())
                     {
-                        check = false;
-                        MessageBox.Show("Giấy phép tập lái không tồn tại !!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
-                    if (SoGPTL != null)
-                    {
-                        check = false;
-                        MessageBox.Show("Vui lòng chọn giấy phép lái xe phù hợp!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
-                    if (LoaiXe != null)
-                    {
-                        check = false;
-                        MessageBox.Show("Chọn loại xe không được để trống", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }*/
-
-                    if (check)
-                    {
-                        XETAPLAI xe = new XETAPLAI()
+                        if (check)
                         {
-                            SoDangKy = SoDangKy.Trim(),
-                            TenChuSoHuu = TenChuSoHuu.Trim(),
-                            SoGPTL = SoGPTL.Trim(),
-                            NhanHieu = NhanHieu.Trim(),
-                            KieuLoai = KieuLoai.Trim(),
-                            HangXe = HangXe.Trim(),
-                            MauXe = MauXe.Trim(),
-                            SoDongCo = SoDongCo.Trim(),
-                            SoKhung = SoKhung.Trim(),
-                            NamSX = NamSX.Trim(),
-                            LoaiXe = LoaiXe.Trim(),
-                            XeSatHach = XeSatHach,
-                            TrangThaiHD = TrangThaiHD,
-                            NgayCapNhat = DateTime.Now,
-                            NguoiCapNhat = "Quang Dat",
-                        };
-
-                        insert(xe);
-
-                        p.Close();
+                            
+                            db.XETAPLAIs.Add(XeTapLai);
+                            ListVehicle.Add(XeTapLai);
+                            db.SaveChanges();
+                            p.Close();
+                        }
                     }
                 }
                 catch
@@ -768,27 +668,28 @@ namespace giaothong.ViewModel
                         {
                         using (db = new giaothongEntities())
                         {
-                            var xe = db.XETAPLAIs.Find(SoDangKy.Trim());
+                            var xe = db.XETAPLAIs.Find(XeTapLai.SoDangKy.Trim());
+                            var user = (from c in db.USERS select c).FirstOrDefault();
 
                             if (xe != null)
                             {
-                                xe.TenChuSoHuu = TenChuSoHuu.Trim();
-                                xe.SoGPTL = SoGPTL.Trim();
-                                xe.NhanHieu = NhanHieu.Trim();
-                                xe.KieuLoai = KieuLoai.Trim();
-                                xe.HangXe = HangXe.Trim();
-                                xe.MauXe = MauXe.Trim();
-                                xe.SoDongCo = SoDongCo.Trim();
-                                xe.SoKhung = SoKhung.Trim();
-                                xe.NamSX = NamSX.Trim();
-                                xe.LoaiXe = LoaiXe.Trim();
-                                xe.XeSatHach = XeSatHach;
-                                xe.TrangThaiHD = TrangThaiHD;
+                                xe.TenChuSoHuu = XeTapLai.TenChuSoHuu.Trim();
+                                xe.SoGPTL = XeTapLai.SoGPTL.Trim();
+                                xe.NhanHieu = XeTapLai.NhanHieu.Trim();
+                                xe.KieuLoai = XeTapLai.KieuLoai.Trim();
+                                xe.HangXe = XeTapLai.HangXe.Trim();
+                                xe.MauXe = XeTapLai.MauXe.Trim();
+                                xe.SoDongCo = XeTapLai.SoDongCo.Trim();
+                                xe.SoKhung = XeTapLai.SoKhung.Trim();
+                                xe.NamSX = XeTapLai.NamSX.Trim();
+                                xe.LoaiXe = XeTapLai.LoaiXe.Trim();
+                                xe.XeSatHach = XeTapLai.XeSatHach;
+                                xe.TrangThaiHD = XeTapLai.TrangThaiHD;
                                 xe.NgayCapNhat = DateTime.Now;
-
+                                xe.NguoiCapNhat = user.Name;
                                 db.SaveChanges();
                                 vehicles();
-
+                                CurrentWindow = true;
                                 p.Close();
                                 }
                             }
@@ -806,8 +707,8 @@ namespace giaothong.ViewModel
                 {
                     try
                     {
-
-                        var xe = db.XETAPLAIs.Find(SoDangKy.Trim());
+                        var message = MessageBox.Show("Bạn có thật sự muốn xóa XE này khỏi danh sách ?", "Thông Báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                        var xe = db.XETAPLAIs.Find(XeTapLai.SoDangKy.Trim());
 
                         if (xe != null)
                         {
@@ -834,40 +735,40 @@ namespace giaothong.ViewModel
         {
             bool check = true;
 
-            var checkSoDK = checkExists(SoDangKy);
+            var checkSoDK = checkExists(XeTapLai.SoDangKy);
 
 
-            if (!checkSoDK && !checkLength(SoDangKy, 10))
+            if (!checkSoDK && !checkLength(XeTapLai.SoDangKy, 10))
             {
                 check = false;
                 MessageBox.Show("Số đăng ký không hợp lệ hoặc phải dưới 10 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(TenChuSoHuu, 30))
+            if (!checkLength(XeTapLai.TenChuSoHuu, 30))
             {
                 check = false;
                 MessageBox.Show("Tên chủ sở hữu không hợp lệ hoặc phải dưới 30 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(NhanHieu, 15))
+            if (!checkLength(XeTapLai.NhanHieu, 15))
             {
                 check = false;
                 MessageBox.Show("Nhãn hiệu không hợp lệ hoặc phải dưới 15 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(SoDongCo, 20))
+            if (!checkLength(XeTapLai.SoDongCo, 20))
             {
                 check = false;
                 MessageBox.Show("Số động cơ không hợp lệ hoặc phải dưới 20 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(SoKhung, 20))
+            if (!checkLength(XeTapLai.SoKhung, 20))
             {
                 check = false;
                 MessageBox.Show("Số khung không hợp lệ hoặc phải dưới 20 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (!checkLength(NamSX, 5))
+            if (!checkLength(XeTapLai.NamSX, 5))
             {
                 check = false;
                 MessageBox.Show("Năm sản xuất không hợp lệ hoặc phải dưới 5 ký tự!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -875,6 +776,7 @@ namespace giaothong.ViewModel
 
             return check;
         }
+
 
         //check number Giay phep tap lai xe exists
         public bool checkExistsGPTL(string soGiayPhep)
@@ -955,7 +857,7 @@ namespace giaothong.ViewModel
                     value = "A2";
                     break;
                 case 3:
-                    value = "B";
+                    value = "B1";
                     break;
                 case 4:
                     value = "C";
@@ -994,17 +896,19 @@ namespace giaothong.ViewModel
 
                         addValueToListVehicle(vehicles.ToList());
                     }
-                    else
+                    else if (keyword.ToLower() == "A1")
                     {
-                        var vehicles = from xe in db.XETAPLAIs where xe.HangXe == keyword select xe;
+                        var vehicles = from xe in db.XETAPLAIs where xe.HangXe == "A1" select xe;
 
                         if (!string.IsNullOrEmpty(searchKey))
                         {
-                            vehicles = from xe in db.XETAPLAIs where xe.HangXe == keyword && xe.TenChuSoHuu == searchKey || xe.HangXe == keyword && xe.NhanHieu == searchKey || xe.HangXe == keyword && xe.SoDangKy == searchKey select xe;
+                            vehicles = from xe in db.XETAPLAIs where xe.SoDangKy == keyword || xe.TenChuSoHuu == keyword select xe;
                         }
 
                         addValueToListVehicle(vehicles.ToList());
                     }
+                    
+
                 }
                 catch { };
             }
@@ -1013,46 +917,60 @@ namespace giaothong.ViewModel
         //add value to list vehicles
         public void addValueToListVehicle(List<XETAPLAI> vehicles)
         {
-            vehicles.ToList().ForEach(p =>
+            TotalPages = (int)Math.Ceiling((double)vehicles.Count / pageSize);
+            var list = vehicles.Skip((CurrentPage - 1) * pageSize).Take(pageSize);
+            list.ToList().ForEach(p =>
             {
                 if (p != null)
                 {
                     ListVehicle.Add(p);
                 }
             });
-
-        }
-
-        //Them xe tap lai
-        public void insert(XETAPLAI vehicles)
-        {
-            using (db = new giaothongEntities())
-            {
-                db.XETAPLAIs.Add(vehicles);
-                db.SaveChanges();
-
-                ListVehicle.Add(vehicles);
-            }
         }
 
         // Reset form
         public void reset()
         {
-            SoDangKy = null;
-            TenChuSoHuu = null;
-            SoGPTL = null;
-            NhanHieu = null;
-            KieuLoai = null;
-            HangXe = null;
-            MauXe = null;
-            SoDongCo = null;
-            SoKhung = null;
-            NamSX = null;
-            LoaiXe = null;
-            XeSatHach = false;
-            TrangThaiHD = false;
-            NgayCapNhat = DateTime.MinValue;
-            NguoiCapNhat = null;
+            XeTapLai.SoDangKy = null;
+            XeTapLai.TenChuSoHuu = null;
+            XeTapLai.SoGPTL = null;
+            XeTapLai.NhanHieu = null;
+            XeTapLai.KieuLoai = null;
+            XeTapLai.HangXe = null;
+            XeTapLai.MauXe = null;
+            XeTapLai.SoDongCo = null;
+            XeTapLai.SoKhung = null;
+            XeTapLai.NamSX = null;
+            XeTapLai.LoaiXe = null;
+            XeTapLai.XeSatHach = false;
+            XeTapLai.TrangThaiHD = false;
+            XeTapLai.NgayCapNhat = DateTime.MinValue;
+            XeTapLai.NguoiCapNhat = null;
+        }
+
+        //get list vehicle GPXTL
+        public ObservableCollection<XETAPLAI> listVehicle(string searchKey = null)
+        {
+            using (db = new giaothongEntities())
+            {
+                ListVehicle.Clear();
+
+                try
+                {
+                    var xe = from x in db.XETAPLAIs select x;
+
+                    if (!string.IsNullOrEmpty(searchKey))
+                    {
+                        xe = from x in db.XETAPLAIs where x.SoDangKy.Equals(searchKey) select x;
+                    }
+
+                    addValueToListVehicle(xe.ToList());
+
+                }
+                catch { }
+
+                return ListVehicle;
+            }
         }
 
         //get list giay phep tap lai
@@ -1064,7 +982,7 @@ namespace giaothong.ViewModel
                 try
                 {
                     var gptl = from gp in db.XETAPLAI_GP
-                               where !db.XETAPLAIs.Any(xe => xe.SoGPTL == gp.SoGPXTL)
+                               where !db.XETAPLAIs.Any(xe => xe.SoGPTL == gp.SoGPXTL) || (XeTapLai.SoGPTL == gp.SoGPXTL && CurrentWindow == true)
                                select gp;
 
                     gptl.ToList().ForEach(p =>
@@ -1079,28 +997,6 @@ namespace giaothong.ViewModel
                 
 
                 return ListGPTL;
-            }
-        }
-
-        //get list hang xe
-        public ObservableCollection<HangXe> listHangXe()
-        {
-            using (db = new giaothongEntities())
-            {
-                ListHangXe.Clear();
-
-                try
-                {
-                    var hangxes = from c in db.HangXes select c;
-
-                    hangxes.ToList().ForEach(p =>
-                    {
-                        ListHangXe.Add(p);
-                    });
-                }
-                catch { }
-
-                return ListHangXe;
             }
         }
 
@@ -1122,29 +1018,5 @@ namespace giaothong.ViewModel
                 return ListAllGPXTL;
             }
         }
-
-        //get list LoaiXe
-        public ObservableCollection<LoaiXe> listLoaiXe()
-        {
-            using (db = new giaothongEntities())
-            {
-                ListLoaiXe.Clear();
-
-                try
-                {
-                    var loaixe = from lx in db.LoaiXes select lx;
-
-                    loaixe.ToList().ForEach(p =>
-                    {
-                        ListLoaiXe.Add(p);
-                    });
-                }
-                catch { }
-
-                return ListLoaiXe;
-            }
-        }
-
-
     }
 }

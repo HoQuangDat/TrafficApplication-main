@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="da1067969f914074b9e88438c3605253" Name="Diagram1">
+      <Diagram DiagramId="da1067969f914074b9e88438c3605253" Name="Diagram1" ZoomLevel="77">
         <EntityTypeShape EntityType="giaothongModel.GIAOVIEN" Width="1.5" PointX="8" PointY="5.125" />
         <EntityTypeShape EntityType="giaothongModel.GIAOVIEN_GCN" Width="1.5" PointX="5.75" PointY="6.375" />
         <EntityTypeShape EntityType="giaothongModel.province_city" Width="1.5" PointX="0.75" PointY="6.75" />
@@ -13,11 +13,39 @@
         <EntityTypeShape EntityType="giaothongModel.USERS_ROLE" Width="1.5" PointX="5.75" PointY="1.625" />
         <EntityTypeShape EntityType="giaothongModel.XETAPLAI" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="giaothongModel.XETAPLAI_GP" Width="1.5" PointX="0.75" PointY="1.25" />
-        <EntityTypeShape EntityType="giaothongModel.HangXe" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="giaothongModel.LoaiXe" Width="1.5" PointX="2.75" PointY="9.75" />
         <AssociationConnector Association="giaothongModel.fk_giaovien_gcn" />
         <AssociationConnector Association="giaothongModel.fk_user_role" />
         <AssociationConnector Association="giaothongModel.fk_xetl_gp" />
+        <EntityTypeShape EntityType="giaothongModel.DM_DonViGTVT" Width="1.5" PointX="10.375" PointY="20.5" />
+        <EntityTypeShape EntityType="giaothongModel.DM_HangDT" Width="1.5" PointX="15.375" PointY="12.5" />
+        <EntityTypeShape EntityType="giaothongModel.DM_HangGPLX" Width="1.5" PointX="15.375" PointY="17.75" />
+        <EntityTypeShape EntityType="giaothongModel.InHangDoiGPLX" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="giaothongModel.KhoaHoc" Width="1.5" PointX="17.625" PointY="20.75" />
+        <EntityTypeShape EntityType="giaothongModel.KySH" Width="1.5" PointX="12.625" PointY="34.625" />
+        <EntityTypeShape EntityType="giaothongModel.NguoiLX_GPLX" Width="1.5" PointX="12.625" PointY="17.125" />
+        <EntityTypeShape EntityType="giaothongModel.NguoiLX_HoSo" Width="1.5" PointX="14.875" PointY="22.75" />
+        <EntityTypeShape EntityType="giaothongModel.NguoiLXHS_GiayTo" Width="1.5" PointX="17.125" PointY="31.375" />
+        <EntityTypeShape EntityType="giaothongModel.NguoiLXHS_KQSH" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="giaothongModel.KhoaHoc_GiaoVien" Width="1.5" PointX="19.875" PointY="12.375" />
+        <AssociationConnector Association="giaothongModel.FK_KhoaHoc_DM_DonViGTVT" />
+        <AssociationConnector Association="giaothongModel.FK_KhoaHoc_DM_DonViGTVT1" />
+        <AssociationConnector Association="giaothongModel.FK_KySH_DM_DonViGTVT" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT1" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT2" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT1" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT2" />
+        <AssociationConnector Association="giaothongModel.FK_KhoaHoc_DM_HangDT" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLX_HoSo_DM_HangDT" />
+        <AssociationConnector Association="giaothongModel.FK_KhoaHoc_DM_HangGPLX" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLX_GPLX_DM_HangGPLX" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLX_HoSo_DM_HangGPLX" />
+        <AssociationConnector Association="giaothongModel.FK_KhoaHoc_GiaoVien_GiaoVien" />
+        <AssociationConnector Association="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLX_HoSo_KySH" />
+        <AssociationConnector Association="giaothongModel.FK_NguoiLXHS_GiayTo_NguoiLX_HoSo" />
+        <AssociationConnector Association="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

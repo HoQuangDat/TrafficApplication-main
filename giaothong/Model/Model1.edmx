@@ -5,6 +5,75 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="giaothongModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DM_DonViGTVT">
+          <Key>
+            <PropertyRef Name="MaDV" />
+          </Key>
+          <Property Name="MaDV" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="MaDVQL" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="LoaiDV" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="TenDV" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CoQuanQL" Type="nvarchar" MaxLength="100" />
+          <Property Name="LoaiTTSH" Type="int" />
+          <Property Name="CacHangGPLX" Type="varchar" MaxLength="50" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="20" />
+          <Property Name="Fax" Type="varchar" MaxLength="20" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
+          <Property Name="LuuLuongDT" Type="int" />
+          <Property Name="SoGP" Type="nvarchar" MaxLength="20" />
+          <Property Name="NgayGP" Type="datetime" />
+          <Property Name="LanhDao" Type="nvarchar" MaxLength="50" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="255" />
+          <Property Name="TrangThai" Type="bit" Nullable="false" />
+          <Property Name="NguoiTao" Type="nvarchar" MaxLength="30" />
+          <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
+          <Property Name="NgaySua" Type="datetime" Nullable="false" />
+          <Property Name="Website" Type="varchar" MaxLength="100" />
+          <Property Name="DienTichSanTap" Type="int" />
+          <Property Name="NgayHHGP" Type="datetime" />
+          <Property Name="DiaDiemDaoTao" Type="nvarchar" MaxLength="300" />
+          <Property Name="MaDvOld" Type="varchar" MaxLength="6" />
+          <Property Name="ROW_VERSION" Type="binary" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="DM_HangDT">
+          <Key>
+            <PropertyRef Name="MaHangDT" />
+          </Key>
+          <Property Name="MaHangDT" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TenHangDT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HangGPLX" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="SoVBPL" Type="nvarchar" MaxLength="30" />
+          <Property Name="TuoiHV" Type="int" />
+          <Property Name="ThamNien" Type="int" />
+          <Property Name="KmLXAT" Type="int" />
+          <Property Name="DKSH" Type="nvarchar" MaxLength="255" />
+          <Property Name="MucTieuDT" Type="nvarchar" MaxLength="500" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="255" />
+          <Property Name="TrangThai" Type="bit" Nullable="false" />
+          <Property Name="NguoiTao" Type="nvarchar" MaxLength="30" />
+          <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
+          <Property Name="NgaySua" Type="datetime" Nullable="false" />
+          <Property Name="ThoiGianDaoTao" Type="int" />
+        </EntityType>
+        <EntityType Name="DM_HangGPLX">
+          <Key>
+            <PropertyRef Name="MaHang" />
+          </Key>
+          <Property Name="MaHang" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="TenHang" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HanSuDung" Type="int" Nullable="false" />
+          <Property Name="MoTaVN" Type="nvarchar" MaxLength="500" />
+          <Property Name="MoTaEN" Type="nvarchar" MaxLength="500" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="255" />
+          <Property Name="TrangThai" Type="bit" Nullable="false" />
+          <Property Name="NguoiTao" Type="nvarchar" MaxLength="30" />
+          <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
+          <Property Name="NgaySua" Type="datetime" Nullable="false" />
+          <Property Name="HangDuocLai" Type="nvarchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="GIAOVIEN">
           <Key>
             <PropertyRef Name="MaGV" />
@@ -50,23 +119,376 @@
           <Property Name="NgayCapNhat" Type="date" />
           <Property Name="MaDVKiemTra" Type="nvarchar" MaxLength="5" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'giaothong.dbo.HangXe' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="HangXe">
+        <EntityType Name="InHangDoiGPLX">
           <Key>
-            <PropertyRef Name="mahx" />
+            <PropertyRef Name="MaDK" />
           </Key>
-          <Property Name="mahx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ten" Type="varchar" MaxLength="5" />
+          <Property Name="MaDK" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="SoHoSo" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="SoGPLX" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SoSeri" Type="varchar" MaxLength="20" />
+          <Property Name="HangGPLX" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AnhChanDung" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="HoVaTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgaySinh" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="QuocTich" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NoiCuTru1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NoiCuTru2" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TinhTP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NgayKy" Type="datetime" />
+          <Property Name="NguoiKy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NguoiKy_ChuVu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AnhChuKy" Type="nvarchar" MaxLength="255" />
+          <Property Name="AnhConDau" Type="nvarchar" MaxLength="255" />
+          <Property Name="NgayHH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NgayTT" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MoTaVN" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="MoTaEN" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="MaIn" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Verify" Type="varchar(max)" />
+          <Property Name="VerifyKey" Type="varchar(max)" />
+          <Property Name="TrangThaiIn" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="NgayIn" Type="datetime" />
+          <Property Name="NguoiIn" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaHTCap" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="MaDV" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="MaLo" Type="varchar" MaxLength="50" />
+          <Property Name="MaNguoiKy" Type="varchar" MaxLength="10" />
+          <Property Name="NgayTT_A1" Type="datetime" />
+          <Property Name="NgayTT_A2" Type="datetime" />
+          <Property Name="NgayTT_A3" Type="datetime" />
+          <Property Name="NgayTT_A4" Type="datetime" />
+          <Property Name="NgayTT_B1" Type="datetime" />
+          <Property Name="NgayTT_B2" Type="datetime" />
+          <Property Name="NgayTT_C" Type="datetime" />
+          <Property Name="NgayTT_D" Type="datetime" />
+          <Property Name="NgayTT_E" Type="datetime" />
+          <Property Name="NgayTT_F" Type="datetime" />
+          <Property Name="NgayTT_FB2" Type="datetime" />
+          <Property Name="NgayTT_FC" Type="datetime" />
+          <Property Name="NgayTT_FD" Type="datetime" />
+          <Property Name="NgayTT_FE" Type="datetime" />
+          <Property Name="TrangThaiDongBo" Type="int" />
+          <Property Name="NgayBanGiao" Type="datetime" />
+          <Property Name="NguoiBanGiao" Type="nvarchar" MaxLength="50" />
+          <Property Name="NguoiNhan" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayTT_B11" Type="datetime" />
+          <Property Name="NgayTT_B12" Type="datetime" />
+          <Property Name="NgayTT_B13" Type="datetime" />
+          <Property Name="NgayTT_B14" Type="datetime" />
+          <Property Name="NgayTT_B15" Type="datetime" />
+          <Property Name="NgayTT_A11" Type="datetime" />
+        </EntityType>
+        <EntityType Name="KhoaHoc">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="MaCSDT" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="MaSoGTVT" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="TenKH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HangGPLX" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="HangDT" Type="varchar" MaxLength="20" />
+          <Property Name="SoQD_KhaiGiang" Type="nvarchar" MaxLength="20" />
+          <Property Name="NgayQD_KhaiGiang" Type="datetime" />
+          <Property Name="NgayKG" Type="datetime" />
+          <Property Name="NgayBG" Type="datetime" />
+          <Property Name="MucTieuDT" Type="nvarchar" MaxLength="1000" />
+          <Property Name="NgayThi" Type="datetime" />
+          <Property Name="NgaySH" Type="datetime" />
+          <Property Name="TongSoHV" Type="int" />
+          <Property Name="SoHVTotNghiep" Type="int" />
+          <Property Name="SoHVDuocCapGPLX" Type="int" />
+          <Property Name="ThoiGianDT" Type="int" />
+          <Property Name="SoNgayOnKT" Type="int" />
+          <Property Name="SoNgayThucHoc" Type="int" />
+          <Property Name="SoNgayNghiLe" Type="int" />
+          <Property Name="TongSoNgay" Type="int" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="255" />
+          <Property Name="TrangThai" Type="bit" Nullable="false" />
+          <Property Name="NguoiTao" Type="nvarchar" MaxLength="30" />
+          <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
+          <Property Name="NgaySua" Type="datetime" Nullable="false" />
+          <Property Name="TT_Xuly" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="LoaiXe">
+warning 6002: The table/view 'giaothong.dbo.KhoaHoc_GiaoVien' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="KhoaHoc_GiaoVien">
           <Key>
-            <PropertyRef Name="MaLX" />
+            <PropertyRef Name="MaKH" />
+            <PropertyRef Name="MaGV" />
+            <PropertyRef Name="TenGV" />
+            <PropertyRef Name="LoaiGV" />
+            <PropertyRef Name="NgayHL" />
+            <PropertyRef Name="NgayHetHL" />
+            <PropertyRef Name="GhiChu" />
+            <PropertyRef Name="TrangThai" />
+            <PropertyRef Name="NgayTao" />
+            <PropertyRef Name="NgaySua" />
           </Key>
-          <Property Name="MaLX" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Ten" Type="varchar" MaxLength="20" />
+          <Property Name="MaKH" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="MaGV" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="TenGV" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BienSoXe" Type="char" MaxLength="10" />
+          <Property Name="LoaiGV" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="SoHV" Type="int" />
+          <Property Name="NgayHL" Type="datetime" Nullable="false" />
+          <Property Name="NgayHetHL" Type="datetime" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="TrangThai" Type="bit" Nullable="false" />
+          <Property Name="NguoiTao" Type="nvarchar" MaxLength="30" />
+          <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
+          <Property Name="NgaySua" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KySH">
+          <Key>
+            <PropertyRef Name="MaKySH" />
+          </Key>
+          <Property Name="MaKySH" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="MaTTSH" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="NgaySH" Type="datetime" Nullable="false" />
+          <Property Name="GioSH" Type="int" />
+          <Property Name="SoQD" Type="nvarchar" MaxLength="20" />
+          <Property Name="NgayQD" Type="datetime" />
+          <Property Name="NguoiQD" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChuTich_HDSH" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoChuTich_HDSH" Type="nvarchar" MaxLength="50" />
+          <Property Name="UV_GD_TTSH" Type="nvarchar" MaxLength="50" />
+          <Property Name="UV_ToTruong" Type="nvarchar" MaxLength="50" />
+          <Property Name="UV_ThuKy" Type="nvarchar" MaxLength="50" />
+          <Property Name="TongSoDK" Type="int" />
+          <Property Name="SoDuSH" Type="int" />
+          <Property Name="SoDat" Type="int" />
+          <Property Name="SoKhongDat" Type="int" />
+          <Property Name="SoVang" Type="int" />
+          <Property Name="SoVangThiHinh" Type="int" />
+          <Property Name="SoVangThiDuong" Type="int" />
+          <Property Name="SoDuSHLanDau" Type="int" />
+          <Property Name="SoDatSHLanDau" Type="int" />
+          <Property Name="TyLeDat" Type="int" />
+          <Property Name="SoViPham" Type="nvarchar" MaxLength="100" />
+          <Property Name="SHHaiLan" Type="int" />
+          <Property Name="NX_ThucHien_QuyChe" Type="nvarchar" MaxLength="50" />
+          <Property Name="NX_TrinhDo_CBSH" Type="nvarchar" MaxLength="50" />
+          <Property Name="NX_CoSo_VCKT" Type="nvarchar" MaxLength="50" />
+          <Property Name="NX_DamBao_AnToan" Type="nvarchar" MaxLength="50" />
+          <Property Name="NX_VanDe_Khac" Type="nvarchar" MaxLength="50" />
+          <Property Name="NhanXet" Type="nvarchar" MaxLength="100" />
+          <Property Name="LePhi_LyThuyet" Type="int" />
+          <Property Name="LePhi_ThiHinh" Type="int" />
+          <Property Name="LePhi_ThiDuong" Type="int" />
+          <Property Name="LePhi_CapGPLX" Type="int" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="255" />
+          <Property Name="TrangThai" Type="int" />
+          <Property Name="NguoiTao" Type="nvarchar" MaxLength="30" />
+          <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
+          <Property Name="NgaySua" Type="datetime" Nullable="false" />
+          <Property Name="SoQDTT" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayQDTT" Type="datetime" />
+          <Property Name="TenKySH" Type="nvarchar" MaxLength="50" />
+          <Property Name="TT_Xuly" Type="int" />
+        </EntityType>
+        <EntityType Name="NguoiLX_GPLX">
+          <Key>
+            <PropertyRef Name="MaDK" />
+          </Key>
+          <Property Name="MaDK" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="SoGPLX" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="HangGPLX" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="SoHoSo" Type="varchar" MaxLength="18" />
+          <Property Name="SoGPLXCu" Type="varchar" MaxLength="100" />
+          <Property Name="NoiCapGPLX" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="NgayCapGPLX" Type="datetime" Nullable="false" />
+          <Property Name="CoQuanQLGPLX" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="NgayHHGPLX" Type="datetime" />
+          <Property Name="NgayTTGPLX" Type="datetime" Nullable="false" />
+          <Property Name="MoTaVN" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="MoTaEN" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="NguoiKy" Type="nvarchar" MaxLength="255" />
+          <Property Name="MaHTCap" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="NoiHocGPLX" Type="varchar" MaxLength="6" />
+          <Property Name="NamHocGPLX" Type="int" />
+          <Property Name="DuongDanAnh" Type="nvarchar" MaxLength="255" />
+          <Property Name="HoTenDem" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenNLX" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="HoVaTen" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="NgaySinh" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="MaQuocTich" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="NoiCT" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoiCT_MaDVHC" Type="varchar" MaxLength="5" />
+          <Property Name="NoiCT_MaDVQL" Type="varchar" MaxLength="5" />
+          <Property Name="SoCMT" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SoSeri" Type="varchar" MaxLength="20" />
+          <Property Name="NoiIn" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayIn" Type="datetime" />
+          <Property Name="NgayTra" Type="datetime" />
+          <Property Name="NguoiTra" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoiTra" Type="nvarchar" MaxLength="50" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="255" />
+          <Property Name="NguoiTao" Type="nvarchar" MaxLength="30" />
+          <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
+          <Property Name="NgaySua" Type="datetime" Nullable="false" />
+          <Property Name="TrangThai" Type="bit" />
+          <Property Name="GioiTinh" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="NgayTT_A1" Type="datetime" />
+          <Property Name="NgayTT_A2" Type="datetime" />
+          <Property Name="NgayTT_A3" Type="datetime" />
+          <Property Name="NgayTT_A4" Type="datetime" />
+          <Property Name="NgayTT_B1" Type="datetime" />
+          <Property Name="NgayTT_B2" Type="datetime" />
+          <Property Name="NgayTT_C" Type="datetime" />
+          <Property Name="NgayTT_D" Type="datetime" />
+          <Property Name="NgayTT_E" Type="datetime" />
+          <Property Name="NgayTT_F" Type="datetime" />
+          <Property Name="NgayTT_FB2" Type="datetime" />
+          <Property Name="NgayTT_FC" Type="datetime" />
+          <Property Name="NgayTT_FD" Type="datetime" />
+          <Property Name="NgayTT_FE" Type="datetime" />
+          <Property Name="HoVaTenIn" Type="nvarchar" MaxLength="25" />
+          <Property Name="HangGplxIn" Type="varchar" MaxLength="150" />
+          <Property Name="NgayTTIn" Type="varchar" MaxLength="150" />
+          <Property Name="MaLo" Type="varchar" MaxLength="50" />
+          <Property Name="NgayTT_B11" Type="datetime" />
+          <Property Name="Hanoi" Type="nvarchar" MaxLength="150" />
+          <Property Name="HanoiViettat" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayTT_A11" Type="datetime" />
+          <Property Name="NgayTT_A12" Type="datetime" />
+          <Property Name="NgayTT_B12" Type="datetime" />
+          <Property Name="NgayTT_B13" Type="datetime" />
+          <Property Name="NgayTT_B14" Type="datetime" />
+          <Property Name="NgayTT_B15" Type="datetime" />
+        </EntityType>
+        <EntityType Name="NguoiLX_HoSo">
+          <Key>
+            <PropertyRef Name="MaDK" />
+          </Key>
+          <Property Name="MaDK" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="SoHoSo" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="MaCSDT" Type="varchar" MaxLength="6" />
+          <Property Name="MaSoGTVT" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="MaDVNhanHSo" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="NgayNhanHSo" Type="datetime" Nullable="false" />
+          <Property Name="NguoiNhanHSo" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayHenTra" Type="datetime" />
+          <Property Name="MaLoaiHs" Type="int" Nullable="false" />
+          <Property Name="TT_XuLy" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="DuongDanAnh" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ChatLuongAnh" Type="int" />
+          <Property Name="NgayThuNhanAnh" Type="datetime" />
+          <Property Name="NguoiThuNhanAnh" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoGPLXDaCo" Type="varchar" MaxLength="100" />
+          <Property Name="HangGPLXDaCo" Type="varchar" MaxLength="100" />
+          <Property Name="DonViCapGPLXDaCo" Type="varchar" MaxLength="100" />
+          <Property Name="NoiCapGPLXDaCo" Type="nvarchar" MaxLength="500" />
+          <Property Name="NgayCapGPLXDaCo" Type="varchar" MaxLength="100" />
+          <Property Name="NgayHHGPLXDaCo" Type="varchar" MaxLength="100" />
+          <Property Name="NgayTTGPLXDaCo" Type="varchar" MaxLength="100" />
+          <Property Name="DonViHocLX" Type="varchar" MaxLength="6" />
+          <Property Name="NamHocLX" Type="int" />
+          <Property Name="HangGPLX" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="SoNamLX" Type="int" />
+          <Property Name="SoKmLXAnToan" Type="int" />
+          <Property Name="GiayCNSK" Type="bit" />
+          <Property Name="LyDoCapDoi" Type="nvarchar" MaxLength="50" />
+          <Property Name="MucDichCapDoi" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoiDungSH" Type="int" />
+          <Property Name="MaKhoaHoc" Type="varchar" MaxLength="13" />
+          <Property Name="HangDaoTao" Type="varchar" MaxLength="20" />
+          <Property Name="SoGiayCNTN" Type="nvarchar" MaxLength="20" />
+          <Property Name="SoCCN" Type="nvarchar" MaxLength="20" />
+          <Property Name="MaBC1" Type="varchar" MaxLength="18" />
+          <Property Name="BC1_TuoiTS" Type="bit" />
+          <Property Name="BC1_ThamNien" Type="bit" />
+          <Property Name="MaBC2" Type="varchar" MaxLength="13" />
+          <Property Name="KetQuaBC2" Type="bit" />
+          <Property Name="MaLyDoTCBC2" Type="int" />
+          <Property Name="MaKySH" Type="varchar" MaxLength="12" />
+          <Property Name="SoBD" Type="varchar" MaxLength="3" />
+          <Property Name="LanSH" Type="int" />
+          <Property Name="SoQDSH" Type="nvarchar" MaxLength="20" />
+          <Property Name="NgayQDSH" Type="datetime" />
+          <Property Name="KetQua_LyThuyet" Type="int" />
+          <Property Name="NhanXet_LyThuyet" Type="nvarchar" MaxLength="50" />
+          <Property Name="KetQua_Hinh" Type="int" />
+          <Property Name="NhanXet_Hinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="KetQua_Duong" Type="int" />
+          <Property Name="NhanXet_Duong" Type="nvarchar" MaxLength="50" />
+          <Property Name="KetQuaSH" Type="varchar" MaxLength="2" />
+          <Property Name="SoQDTT" Type="nvarchar" MaxLength="20" />
+          <Property Name="NgayQDTT" Type="datetime" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="255" />
+          <Property Name="NguoiTao" Type="nvarchar" MaxLength="30" />
+          <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
+          <Property Name="NgaySua" Type="datetime" Nullable="false" />
+          <Property Name="SoGPLXTmp" Type="varchar" MaxLength="20" />
+          <Property Name="NgayKTBC1" Type="datetime" />
+          <Property Name="NguoiKTBC1" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayKTBC2" Type="datetime" />
+          <Property Name="NguoiKTBC2" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaIn" Type="nvarchar" MaxLength="255" />
+          <Property Name="KetQuaDoiSanhTW" Type="bit" />
+          <Property Name="GhiChuKQDSTW" Type="nvarchar" MaxLength="500" />
+          <Property Name="ChuKy" Type="nvarchar" MaxLength="255" />
+          <Property Name="TrangThai" Type="bit" />
+          <Property Name="MaHTCap" Type="varchar" MaxLength="5" />
+          <Property Name="NguoiKy" Type="nvarchar" MaxLength="50" />
+          <Property Name="VerifyData" Type="varchar(max)" />
+          <Property Name="VerifyKey" Type="varchar(max)" />
+          <Property Name="IDs" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TT_XuLy_Old" Type="varchar" MaxLength="2" />
+          <Property Name="KQ_BC1" Type="bit" />
+          <Property Name="KQ_BC1_GhiChu" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaLo" Type="varchar" MaxLength="50" />
+          <Property Name="NgayTT" Type="datetime" />
+          <Property Name="NamcapLandau" Type="varchar" MaxLength="4" />
+          <Property Name="MaTrichNgang" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayHHGplxNN" Type="datetime" />
+          <Property Name="SOSERI_GPLX_DACO" Type="varchar" MaxLength="100" />
+          <Property Name="IN_GPLX" Type="int" />
+          <Property Name="MADK2" Type="varchar" MaxLength="25" />
+          <Property Name="DiaChiTrenGPLX" Type="nvarchar" MaxLength="100" />
+          <Property Name="DiaChiTrenGPLX_ChiTiet" Type="nvarchar" MaxLength="100" />
+          <Property Name="anhcd" Type="nvarchar" MaxLength="200" />
+          <Property Name="ROW_VERSION" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NguoiLXHS_GiayTo">
+          <Key>
+            <PropertyRef Name="MaGT" />
+            <PropertyRef Name="MaDK" />
+          </Key>
+          <Property Name="MaGT" Type="int" Nullable="false" />
+          <Property Name="MaDK" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="SoHoSo" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="TenGT" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="TrangThai" Type="bit" />
+          <Property Name="MADK2" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="NguoiLXHS_KQSH">
+          <Key>
+            <PropertyRef Name="MaKySH" />
+            <PropertyRef Name="SoBaoDanh" />
+            <PropertyRef Name="LoaiSH" />
+          </Key>
+          <Property Name="MaKySH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SoBaoDanh" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="LoaiSH" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="NgaySH" Type="datetime" Nullable="false" />
+          <Property Name="DiemSH" Type="int" Nullable="false" />
+          <Property Name="DiemToiDa" Type="int" Nullable="false" />
+          <Property Name="SatHachVien" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NhanXetSHV" Type="nvarchar" MaxLength="255" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="255" />
+          <Property Name="NguoiTao" Type="nvarchar" MaxLength="30" />
+          <Property Name="NguoiSua" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
+          <Property Name="NgaySua" Type="datetime" Nullable="false" />
+          <Property Name="VangSH" Type="bit" Nullable="false" />
+          <Property Name="DiemToiThieu" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="province_city">
           <Key>
@@ -116,13 +538,13 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
           <Property Name="TenChuSoHuu" Type="char" MaxLength="30" />
           <Property Name="SoGPTL" Type="char" MaxLength="15" />
           <Property Name="NhanHieu" Type="char" MaxLength="15" />
-          <Property Name="KieuLoai" Type="char" MaxLength="20" />
-          <Property Name="HangXe" Type="char" MaxLength="5" />
+          <Property Name="KieuLoai" Type="char" MaxLength="15" />
+          <Property Name="HangXe" Type="char" MaxLength="3" />
           <Property Name="MauXe" Type="nvarchar" MaxLength="20" />
           <Property Name="SoDongCo" Type="char" MaxLength="20" />
           <Property Name="SoKhung" Type="char" MaxLength="20" />
           <Property Name="NamSX" Type="char" MaxLength="10" />
-          <Property Name="LoaiXe" Type="nvarchar" MaxLength="15" />
+          <Property Name="LoaiXe" Type="char" MaxLength="15" />
           <Property Name="XeSatHach" Type="bit" />
           <Property Name="TrangThaiHD" Type="bit" />
           <Property Name="NgayCapNhat" Type="date" />
@@ -146,6 +568,18 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
           <Property Name="NguoiCapNhat" Type="nvarchar" MaxLength="15" />
           <Property Name="DuongTapLai" Type="char" MaxLength="200" />
         </EntityType>
+        <Association Name="FK__KhoaHoc_Gi__MaKH__76619304">
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
+          <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaHoc">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_giaovien_gcn">
           <End Role="GIAOVIEN_GCN" Type="Self.GIAOVIEN_GCN" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -157,6 +591,224 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
             </Principal>
             <Dependent Role="GIAOVIEN">
               <PropertyRef Name="SoGCN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_DM_DonViGTVT">
+          <End Role="DM_DonViGTVT" Type="Self.DM_DonViGTVT" Multiplicity="1" />
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="MaSoGTVT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_DM_DonViGTVT1">
+          <End Role="DM_DonViGTVT" Type="Self.DM_DonViGTVT" Multiplicity="1" />
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="MaCSDT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_DM_HangDT">
+          <End Role="DM_HangDT" Type="Self.DM_HangDT" Multiplicity="0..1" />
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HangDT">
+              <PropertyRef Name="MaHangDT" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="HangDT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_DM_HangGPLX">
+          <End Role="DM_HangGPLX" Type="Self.DM_HangGPLX" Multiplicity="1" />
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HangGPLX">
+              <PropertyRef Name="MaHang" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="HangGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_GiaoVien_GiaoVien">
+          <End Role="GIAOVIEN" Type="Self.GIAOVIEN" Multiplicity="1" />
+          <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAOVIEN">
+              <PropertyRef Name="MaGV" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="MaGV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_GiaoVien_XeTap">
+          <End Role="XETAPLAI" Type="Self.XETAPLAI" Multiplicity="0..1" />
+          <End Role="KhoaHoc_GiaoVien" Type="Self.KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XETAPLAI">
+              <PropertyRef Name="SoDangKy" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="BienSoXe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KySH_DM_DonViGTVT">
+          <End Role="DM_DonViGTVT" Type="Self.DM_DonViGTVT" Multiplicity="1" />
+          <End Role="KySH" Type="Self.KySH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="KySH">
+              <PropertyRef Name="MaTTSH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_GPLX_DM_DonViGTVT">
+          <End Role="DM_DonViGTVT" Type="Self.DM_DonViGTVT" Multiplicity="1" />
+          <End Role="NguoiLX_GPLX" Type="Self.NguoiLX_GPLX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_GPLX">
+              <PropertyRef Name="NoiCapGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_GPLX_DM_DonViGTVT1">
+          <End Role="DM_DonViGTVT" Type="Self.DM_DonViGTVT" Multiplicity="1" />
+          <End Role="NguoiLX_GPLX" Type="Self.NguoiLX_GPLX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_GPLX">
+              <PropertyRef Name="CoQuanQLGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_GPLX_DM_DonViGTVT2">
+          <End Role="DM_DonViGTVT" Type="Self.DM_DonViGTVT" Multiplicity="0..1" />
+          <End Role="NguoiLX_GPLX" Type="Self.NguoiLX_GPLX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_GPLX">
+              <PropertyRef Name="NoiHocGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_GPLX_DM_HangGPLX">
+          <End Role="DM_HangGPLX" Type="Self.DM_HangGPLX" Multiplicity="1" />
+          <End Role="NguoiLX_GPLX" Type="Self.NguoiLX_GPLX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HangGPLX">
+              <PropertyRef Name="MaHang" />
+            </Principal>
+            <Dependent Role="NguoiLX_GPLX">
+              <PropertyRef Name="HangGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_DM_DonViGTVT">
+          <End Role="DM_DonViGTVT" Type="Self.DM_DonViGTVT" Multiplicity="0..1" />
+          <End Role="NguoiLX_HoSo" Type="Self.NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="MaCSDT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_DM_DonViGTVT1">
+          <End Role="DM_DonViGTVT" Type="Self.DM_DonViGTVT" Multiplicity="1" />
+          <End Role="NguoiLX_HoSo" Type="Self.NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="MaSoGTVT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_DM_DonViGTVT2">
+          <End Role="DM_DonViGTVT" Type="Self.DM_DonViGTVT" Multiplicity="1" />
+          <End Role="NguoiLX_HoSo" Type="Self.NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="MaDVNhanHSo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_DM_HangDT">
+          <End Role="DM_HangDT" Type="Self.DM_HangDT" Multiplicity="0..1" />
+          <End Role="NguoiLX_HoSo" Type="Self.NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HangDT">
+              <PropertyRef Name="MaHangDT" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="HangDaoTao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_DM_HangGPLX">
+          <End Role="DM_HangGPLX" Type="Self.DM_HangGPLX" Multiplicity="1" />
+          <End Role="NguoiLX_HoSo" Type="Self.NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HangGPLX">
+              <PropertyRef Name="MaHang" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="HangGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_KySH">
+          <End Role="KySH" Type="Self.KySH" Multiplicity="0..1" />
+          <End Role="NguoiLX_HoSo" Type="Self.NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KySH">
+              <PropertyRef Name="MaKySH" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="MaKySH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLXHS_GiayTo_NguoiLX_HoSo">
+          <End Role="NguoiLX_HoSo" Type="Self.NguoiLX_HoSo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NguoiLXHS_GiayTo" Type="Self.NguoiLXHS_GiayTo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiLX_HoSo">
+              <PropertyRef Name="MaDK" />
+            </Principal>
+            <Dependent Role="NguoiLXHS_GiayTo">
+              <PropertyRef Name="MaDK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -187,29 +839,121 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="giaothongModelStoreContainer">
+          <EntitySet Name="DM_DonViGTVT" EntityType="Self.DM_DonViGTVT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_HangDT" EntityType="Self.DM_HangDT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_HangGPLX" EntityType="Self.DM_HangGPLX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GIAOVIEN" EntityType="Self.GIAOVIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GIAOVIEN_GCN" EntityType="Self.GIAOVIEN_GCN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InHangDoiGPLX" EntityType="Self.InHangDoiGPLX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhoaHoc" EntityType="Self.KhoaHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KySH" EntityType="Self.KySH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NguoiLX_GPLX" EntityType="Self.NguoiLX_GPLX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NguoiLX_HoSo" EntityType="Self.NguoiLX_HoSo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NguoiLXHS_GiayTo" EntityType="Self.NguoiLXHS_GiayTo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NguoiLXHS_KQSH" EntityType="Self.NguoiLXHS_KQSH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="province_city" EntityType="Self.province_city" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS_ROLE" EntityType="Self.USERS_ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="XETAPLAI" EntityType="Self.XETAPLAI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="XETAPLAI_GP" EntityType="Self.XETAPLAI_GP" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HangXe" EntityType="Self.HangXe" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="KhoaHoc_GiaoVien" EntityType="Self.KhoaHoc_GiaoVien" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [HangXe].[mahx] AS [mahx], 
-    [HangXe].[ten] AS [ten]
-    FROM [dbo].[HangXe] AS [HangXe]</DefiningQuery>
+    [KhoaHoc_GiaoVien].[MaKH] AS [MaKH], 
+    [KhoaHoc_GiaoVien].[MaGV] AS [MaGV], 
+    [KhoaHoc_GiaoVien].[TenGV] AS [TenGV], 
+    [KhoaHoc_GiaoVien].[BienSoXe] AS [BienSoXe], 
+    [KhoaHoc_GiaoVien].[LoaiGV] AS [LoaiGV], 
+    [KhoaHoc_GiaoVien].[SoHV] AS [SoHV], 
+    [KhoaHoc_GiaoVien].[NgayHL] AS [NgayHL], 
+    [KhoaHoc_GiaoVien].[NgayHetHL] AS [NgayHetHL], 
+    [KhoaHoc_GiaoVien].[GhiChu] AS [GhiChu], 
+    [KhoaHoc_GiaoVien].[TrangThai] AS [TrangThai], 
+    [KhoaHoc_GiaoVien].[NguoiTao] AS [NguoiTao], 
+    [KhoaHoc_GiaoVien].[NguoiSua] AS [NguoiSua], 
+    [KhoaHoc_GiaoVien].[NgayTao] AS [NgayTao], 
+    [KhoaHoc_GiaoVien].[NgaySua] AS [NgaySua]
+    FROM [dbo].[KhoaHoc_GiaoVien] AS [KhoaHoc_GiaoVien]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="LoaiXe" EntityType="Self.LoaiXe" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [LoaiXe].[MaLX] AS [MaLX], 
-    [LoaiXe].[Ten] AS [Ten]
-    FROM [dbo].[LoaiXe] AS [LoaiXe]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK__KhoaHoc_Gi__MaKH__76619304" Association="Self.FK__KhoaHoc_Gi__MaKH__76619304">
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
           <AssociationSet Name="fk_giaovien_gcn" Association="Self.fk_giaovien_gcn">
             <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
             <End Role="GIAOVIEN" EntitySet="GIAOVIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_DM_DonViGTVT" Association="Self.FK_KhoaHoc_DM_DonViGTVT">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_DM_DonViGTVT1" Association="Self.FK_KhoaHoc_DM_DonViGTVT1">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_DM_HangDT" Association="Self.FK_KhoaHoc_DM_HangDT">
+            <End Role="DM_HangDT" EntitySet="DM_HangDT" />
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_DM_HangGPLX" Association="Self.FK_KhoaHoc_DM_HangGPLX">
+            <End Role="DM_HangGPLX" EntitySet="DM_HangGPLX" />
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_GiaoVien_GiaoVien" Association="Self.FK_KhoaHoc_GiaoVien_GiaoVien">
+            <End Role="GIAOVIEN" EntitySet="GIAOVIEN" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_GiaoVien_XeTap" Association="Self.FK_KhoaHoc_GiaoVien_XeTap">
+            <End Role="XETAPLAI" EntitySet="XETAPLAI" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KySH_DM_DonViGTVT" Association="Self.FK_KySH_DM_DonViGTVT">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="KySH" EntitySet="KySH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_GPLX_DM_DonViGTVT" Association="Self.FK_NguoiLX_GPLX_DM_DonViGTVT">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_GPLX" EntitySet="NguoiLX_GPLX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_GPLX_DM_DonViGTVT1" Association="Self.FK_NguoiLX_GPLX_DM_DonViGTVT1">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_GPLX" EntitySet="NguoiLX_GPLX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_GPLX_DM_DonViGTVT2" Association="Self.FK_NguoiLX_GPLX_DM_DonViGTVT2">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_GPLX" EntitySet="NguoiLX_GPLX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_GPLX_DM_HangGPLX" Association="Self.FK_NguoiLX_GPLX_DM_HangGPLX">
+            <End Role="DM_HangGPLX" EntitySet="DM_HangGPLX" />
+            <End Role="NguoiLX_GPLX" EntitySet="NguoiLX_GPLX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_DM_DonViGTVT" Association="Self.FK_NguoiLX_HoSo_DM_DonViGTVT">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_DM_DonViGTVT1" Association="Self.FK_NguoiLX_HoSo_DM_DonViGTVT1">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_DM_DonViGTVT2" Association="Self.FK_NguoiLX_HoSo_DM_DonViGTVT2">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_DM_HangDT" Association="Self.FK_NguoiLX_HoSo_DM_HangDT">
+            <End Role="DM_HangDT" EntitySet="DM_HangDT" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_DM_HangGPLX" Association="Self.FK_NguoiLX_HoSo_DM_HangGPLX">
+            <End Role="DM_HangGPLX" EntitySet="DM_HangGPLX" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_KySH" Association="Self.FK_NguoiLX_HoSo_KySH">
+            <End Role="KySH" EntitySet="KySH" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLXHS_GiayTo_NguoiLX_HoSo" Association="Self.FK_NguoiLXHS_GiayTo_NguoiLX_HoSo">
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+            <End Role="NguoiLXHS_GiayTo" EntitySet="NguoiLXHS_GiayTo" />
           </AssociationSet>
           <AssociationSet Name="fk_user_role" Association="Self.fk_user_role">
             <End Role="USERS_ROLE" EntitySet="USERS_ROLE" />
@@ -233,8 +977,6 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
           <EntitySet Name="USERS_ROLE" EntityType="giaothongModel.USERS_ROLE" />
           <EntitySet Name="XETAPLAIs" EntityType="giaothongModel.XETAPLAI" />
           <EntitySet Name="XETAPLAI_GP" EntityType="giaothongModel.XETAPLAI_GP" />
-          <EntitySet Name="HangXes" EntityType="giaothongModel.HangXe" />
-          <EntitySet Name="LoaiXes" EntityType="giaothongModel.LoaiXe" />
           <AssociationSet Name="fk_giaovien_gcn" Association="giaothongModel.fk_giaovien_gcn">
             <End Role="GIAOVIEN_GCN" EntitySet="GIAOVIEN_GCN" />
             <End Role="GIAOVIEN" EntitySet="GIAOVIENs" />
@@ -246,6 +988,93 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
           <AssociationSet Name="fk_xetl_gp" Association="giaothongModel.fk_xetl_gp">
             <End Role="XETAPLAI_GP" EntitySet="XETAPLAI_GP" />
             <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
+          </AssociationSet>
+          <EntitySet Name="DM_DonViGTVT" EntityType="giaothongModel.DM_DonViGTVT" />
+          <EntitySet Name="DM_HangDT" EntityType="giaothongModel.DM_HangDT" />
+          <EntitySet Name="DM_HangGPLX" EntityType="giaothongModel.DM_HangGPLX" />
+          <EntitySet Name="InHangDoiGPLXes" EntityType="giaothongModel.InHangDoiGPLX" />
+          <EntitySet Name="KhoaHocs" EntityType="giaothongModel.KhoaHoc" />
+          <EntitySet Name="KySHes" EntityType="giaothongModel.KySH" />
+          <EntitySet Name="NguoiLX_GPLX" EntityType="giaothongModel.NguoiLX_GPLX" />
+          <EntitySet Name="NguoiLX_HoSo" EntityType="giaothongModel.NguoiLX_HoSo" />
+          <EntitySet Name="NguoiLXHS_GiayTo" EntityType="giaothongModel.NguoiLXHS_GiayTo" />
+          <EntitySet Name="NguoiLXHS_KQSH" EntityType="giaothongModel.NguoiLXHS_KQSH" />
+          <EntitySet Name="KhoaHoc_GiaoVien" EntityType="giaothongModel.KhoaHoc_GiaoVien" />
+          <AssociationSet Name="FK_KhoaHoc_DM_DonViGTVT" Association="giaothongModel.FK_KhoaHoc_DM_DonViGTVT">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_DM_DonViGTVT1" Association="giaothongModel.FK_KhoaHoc_DM_DonViGTVT1">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KySH_DM_DonViGTVT" Association="giaothongModel.FK_KySH_DM_DonViGTVT">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="KySH" EntitySet="KySHes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_GPLX_DM_DonViGTVT" Association="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_GPLX" EntitySet="NguoiLX_GPLX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_GPLX_DM_DonViGTVT1" Association="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT1">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_GPLX" EntitySet="NguoiLX_GPLX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_GPLX_DM_DonViGTVT2" Association="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT2">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_GPLX" EntitySet="NguoiLX_GPLX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_DM_DonViGTVT" Association="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_DM_DonViGTVT1" Association="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT1">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_DM_DonViGTVT2" Association="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT2">
+            <End Role="DM_DonViGTVT" EntitySet="DM_DonViGTVT" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_DM_HangDT" Association="giaothongModel.FK_KhoaHoc_DM_HangDT">
+            <End Role="DM_HangDT" EntitySet="DM_HangDT" />
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_DM_HangDT" Association="giaothongModel.FK_NguoiLX_HoSo_DM_HangDT">
+            <End Role="DM_HangDT" EntitySet="DM_HangDT" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_DM_HangGPLX" Association="giaothongModel.FK_KhoaHoc_DM_HangGPLX">
+            <End Role="DM_HangGPLX" EntitySet="DM_HangGPLX" />
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_GPLX_DM_HangGPLX" Association="giaothongModel.FK_NguoiLX_GPLX_DM_HangGPLX">
+            <End Role="DM_HangGPLX" EntitySet="DM_HangGPLX" />
+            <End Role="NguoiLX_GPLX" EntitySet="NguoiLX_GPLX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_DM_HangGPLX" Association="giaothongModel.FK_NguoiLX_HoSo_DM_HangGPLX">
+            <End Role="DM_HangGPLX" EntitySet="DM_HangGPLX" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_GiaoVien_GiaoVien" Association="giaothongModel.FK_KhoaHoc_GiaoVien_GiaoVien">
+            <End Role="GIAOVIEN" EntitySet="GIAOVIENs" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KhoaHoc_Gi__MaKH__76619304" Association="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304">
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLX_HoSo_KySH" Association="giaothongModel.FK_NguoiLX_HoSo_KySH">
+            <End Role="KySH" EntitySet="KySHes" />
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLXHS_GiayTo_NguoiLX_HoSo" Association="giaothongModel.FK_NguoiLXHS_GiayTo_NguoiLX_HoSo">
+            <End Role="NguoiLX_HoSo" EntitySet="NguoiLX_HoSo" />
+            <End Role="NguoiLXHS_GiayTo" EntitySet="NguoiLXHS_GiayTo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_GiaoVien_XeTap" Association="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap">
+            <End Role="XETAPLAI" EntitySet="XETAPLAIs" />
+            <End Role="KhoaHoc_GiaoVien" EntitySet="KhoaHoc_GiaoVien" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="GIAOVIEN">
@@ -277,6 +1106,7 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
           <Property Name="NgayDuyet" Type="DateTime" Precision="0" />
           <Property Name="TrinhDo_CM" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="GIAOVIEN_GCN" Relationship="giaothongModel.fk_giaovien_gcn" FromRole="GIAOVIEN" ToRole="GIAOVIEN_GCN" />
+          <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_GiaoVien" FromRole="GIAOVIEN" ToRole="KhoaHoc_GiaoVien" />
         </EntityType>
         <EntityType Name="GIAOVIEN_GCN">
           <Key>
@@ -345,18 +1175,19 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
           <Property Name="TenChuSoHuu" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
           <Property Name="SoGPTL" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="NhanHieu" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="KieuLoai" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="HangXe" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="KieuLoai" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="HangXe" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="MauXe" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="SoDongCo" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
           <Property Name="SoKhung" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
           <Property Name="NamSX" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="LoaiXe" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="LoaiXe" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="XeSatHach" Type="Boolean" />
           <Property Name="TrangThaiHD" Type="Boolean" />
           <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
           <Property Name="NguoiCapNhat" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="XETAPLAI_GP" Relationship="giaothongModel.fk_xetl_gp" FromRole="XETAPLAI" ToRole="XETAPLAI_GP" />
+          <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap" FromRole="XETAPLAI" ToRole="KhoaHoc_GiaoVien" />
         </EntityType>
         <EntityType Name="XETAPLAI_GP">
           <Key>
@@ -376,20 +1207,6 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
           <Property Name="NguoiCapNhat" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="DuongTapLai" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="XETAPLAIs" Relationship="giaothongModel.fk_xetl_gp" FromRole="XETAPLAI_GP" ToRole="XETAPLAI" />
-        </EntityType>
-        <EntityType Name="HangXe">
-          <Key>
-            <PropertyRef Name="mahx" />
-          </Key>
-          <Property Name="mahx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ten" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="LoaiXe">
-          <Key>
-            <PropertyRef Name="MaLX" />
-          </Key>
-          <Property Name="MaLX" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ten" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_giaovien_gcn">
           <End Type="giaothongModel.GIAOVIEN_GCN" Role="GIAOVIEN_GCN" Multiplicity="0..1">
@@ -428,6 +1245,710 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
             </Principal>
             <Dependent Role="XETAPLAI">
               <PropertyRef Name="SoGPTL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DM_DonViGTVT">
+          <Key>
+            <PropertyRef Name="MaDV" />
+          </Key>
+          <Property Name="MaDV" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MaDVQL" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="LoaiDV" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="TenDV" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CoQuanQL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LoaiTTSH" Type="Int32" />
+          <Property Name="CacHangGPLX" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LuuLuongDT" Type="Int32" />
+          <Property Name="SoGP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NgayGP" Type="DateTime" Precision="3" />
+          <Property Name="LanhDao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DienTichSanTap" Type="Int32" />
+          <Property Name="NgayHHGP" Type="DateTime" Precision="3" />
+          <Property Name="DiaDiemDaoTao" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="MaDvOld" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="ROW_VERSION" Type="Binary" MaxLength="8" FixedLength="true" />
+          <NavigationProperty Name="KhoaHocs" Relationship="giaothongModel.FK_KhoaHoc_DM_DonViGTVT" FromRole="DM_DonViGTVT" ToRole="KhoaHoc" />
+          <NavigationProperty Name="KhoaHocs1" Relationship="giaothongModel.FK_KhoaHoc_DM_DonViGTVT1" FromRole="DM_DonViGTVT" ToRole="KhoaHoc" />
+          <NavigationProperty Name="KySHes" Relationship="giaothongModel.FK_KySH_DM_DonViGTVT" FromRole="DM_DonViGTVT" ToRole="KySH" />
+          <NavigationProperty Name="NguoiLX_GPLX" Relationship="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT" FromRole="DM_DonViGTVT" ToRole="NguoiLX_GPLX" />
+          <NavigationProperty Name="NguoiLX_GPLX1" Relationship="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT1" FromRole="DM_DonViGTVT" ToRole="NguoiLX_GPLX" />
+          <NavigationProperty Name="NguoiLX_GPLX2" Relationship="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT2" FromRole="DM_DonViGTVT" ToRole="NguoiLX_GPLX" />
+          <NavigationProperty Name="NguoiLX_HoSo" Relationship="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT" FromRole="DM_DonViGTVT" ToRole="NguoiLX_HoSo" />
+          <NavigationProperty Name="NguoiLX_HoSo1" Relationship="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT1" FromRole="DM_DonViGTVT" ToRole="NguoiLX_HoSo" />
+          <NavigationProperty Name="NguoiLX_HoSo2" Relationship="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT2" FromRole="DM_DonViGTVT" ToRole="NguoiLX_HoSo" />
+        </EntityType>
+        <EntityType Name="DM_HangDT">
+          <Key>
+            <PropertyRef Name="MaHangDT" />
+          </Key>
+          <Property Name="MaHangDT" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TenHangDT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HangGPLX" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="SoVBPL" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TuoiHV" Type="Int32" />
+          <Property Name="ThamNien" Type="Int32" />
+          <Property Name="KmLXAT" Type="Int32" />
+          <Property Name="DKSH" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MucTieuDT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ThoiGianDaoTao" Type="Int32" />
+          <NavigationProperty Name="KhoaHocs" Relationship="giaothongModel.FK_KhoaHoc_DM_HangDT" FromRole="DM_HangDT" ToRole="KhoaHoc" />
+          <NavigationProperty Name="NguoiLX_HoSo" Relationship="giaothongModel.FK_NguoiLX_HoSo_DM_HangDT" FromRole="DM_HangDT" ToRole="NguoiLX_HoSo" />
+        </EntityType>
+        <EntityType Name="DM_HangGPLX">
+          <Key>
+            <PropertyRef Name="MaHang" />
+          </Key>
+          <Property Name="MaHang" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="TenHang" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HanSuDung" Type="Int32" Nullable="false" />
+          <Property Name="MoTaVN" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MoTaEN" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HangDuocLai" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KhoaHocs" Relationship="giaothongModel.FK_KhoaHoc_DM_HangGPLX" FromRole="DM_HangGPLX" ToRole="KhoaHoc" />
+          <NavigationProperty Name="NguoiLX_GPLX" Relationship="giaothongModel.FK_NguoiLX_GPLX_DM_HangGPLX" FromRole="DM_HangGPLX" ToRole="NguoiLX_GPLX" />
+          <NavigationProperty Name="NguoiLX_HoSo" Relationship="giaothongModel.FK_NguoiLX_HoSo_DM_HangGPLX" FromRole="DM_HangGPLX" ToRole="NguoiLX_HoSo" />
+        </EntityType>
+        <EntityType Name="InHangDoiGPLX">
+          <Key>
+            <PropertyRef Name="MaDK" />
+          </Key>
+          <Property Name="MaDK" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="SoHoSo" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="SoGPLX" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SoSeri" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HangGPLX" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AnhChanDung" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="HoVaTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="QuocTich" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiCuTru1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiCuTru2" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayKy" Type="DateTime" Precision="3" />
+          <Property Name="NguoiKy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiKy_ChuVu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AnhChuKy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AnhConDau" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NgayHH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTT" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MoTaVN" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MoTaEN" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MaIn" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Verify" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VerifyKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TrangThaiIn" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="NgayIn" Type="DateTime" Precision="3" />
+          <Property Name="NguoiIn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaHTCap" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="MaDV" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MaLo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MaNguoiKy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NgayTT_A1" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_A2" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_A3" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_A4" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B1" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B2" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_C" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_D" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_E" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_F" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_FB2" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_FC" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_FD" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_FE" Type="DateTime" Precision="3" />
+          <Property Name="TrangThaiDongBo" Type="Int32" />
+          <Property Name="NgayBanGiao" Type="DateTime" Precision="3" />
+          <Property Name="NguoiBanGiao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTT_B11" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B12" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B13" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B14" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B15" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_A11" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="KhoaHoc">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="MaCSDT" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MaSoGTVT" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="TenKH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HangGPLX" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="HangDT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SoQD_KhaiGiang" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NgayQD_KhaiGiang" Type="DateTime" Precision="3" />
+          <Property Name="NgayKG" Type="DateTime" Precision="3" />
+          <Property Name="NgayBG" Type="DateTime" Precision="3" />
+          <Property Name="MucTieuDT" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="NgayThi" Type="DateTime" Precision="3" />
+          <Property Name="NgaySH" Type="DateTime" Precision="3" />
+          <Property Name="TongSoHV" Type="Int32" />
+          <Property Name="SoHVTotNghiep" Type="Int32" />
+          <Property Name="SoHVDuocCapGPLX" Type="Int32" />
+          <Property Name="ThoiGianDT" Type="Int32" />
+          <Property Name="SoNgayOnKT" Type="Int32" />
+          <Property Name="SoNgayThucHoc" Type="Int32" />
+          <Property Name="SoNgayNghiLe" Type="Int32" />
+          <Property Name="TongSoNgay" Type="Int32" />
+          <Property Name="GhiChu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TT_Xuly" Type="Int32" />
+          <NavigationProperty Name="DM_DonViGTVT" Relationship="giaothongModel.FK_KhoaHoc_DM_DonViGTVT" FromRole="KhoaHoc" ToRole="DM_DonViGTVT" />
+          <NavigationProperty Name="DM_DonViGTVT1" Relationship="giaothongModel.FK_KhoaHoc_DM_DonViGTVT1" FromRole="KhoaHoc" ToRole="DM_DonViGTVT" />
+          <NavigationProperty Name="DM_HangDT" Relationship="giaothongModel.FK_KhoaHoc_DM_HangDT" FromRole="KhoaHoc" ToRole="DM_HangDT" />
+          <NavigationProperty Name="DM_HangGPLX" Relationship="giaothongModel.FK_KhoaHoc_DM_HangGPLX" FromRole="KhoaHoc" ToRole="DM_HangGPLX" />
+          <NavigationProperty Name="KhoaHoc_GiaoVien" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304" FromRole="KhoaHoc" ToRole="KhoaHoc_GiaoVien" />
+        </EntityType>
+        <EntityType Name="KySH">
+          <Key>
+            <PropertyRef Name="MaKySH" />
+          </Key>
+          <Property Name="MaKySH" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="MaTTSH" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NgaySH" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GioSH" Type="Int32" />
+          <Property Name="SoQD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NgayQD" Type="DateTime" Precision="3" />
+          <Property Name="NguoiQD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChuTich_HDSH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoChuTich_HDSH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UV_GD_TTSH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UV_ToTruong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UV_ThuKy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TongSoDK" Type="Int32" />
+          <Property Name="SoDuSH" Type="Int32" />
+          <Property Name="SoDat" Type="Int32" />
+          <Property Name="SoKhongDat" Type="Int32" />
+          <Property Name="SoVang" Type="Int32" />
+          <Property Name="SoVangThiHinh" Type="Int32" />
+          <Property Name="SoVangThiDuong" Type="Int32" />
+          <Property Name="SoDuSHLanDau" Type="Int32" />
+          <Property Name="SoDatSHLanDau" Type="Int32" />
+          <Property Name="TyLeDat" Type="Int32" />
+          <Property Name="SoViPham" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SHHaiLan" Type="Int32" />
+          <Property Name="NX_ThucHien_QuyChe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NX_TrinhDo_CBSH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NX_CoSo_VCKT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NX_DamBao_AnToan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NX_VanDe_Khac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NhanXet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LePhi_LyThuyet" Type="Int32" />
+          <Property Name="LePhi_ThiHinh" Type="Int32" />
+          <Property Name="LePhi_ThiDuong" Type="Int32" />
+          <Property Name="LePhi_CapGPLX" Type="Int32" />
+          <Property Name="GhiChu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SoQDTT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayQDTT" Type="DateTime" Precision="3" />
+          <Property Name="TenKySH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TT_Xuly" Type="Int32" />
+          <NavigationProperty Name="DM_DonViGTVT" Relationship="giaothongModel.FK_KySH_DM_DonViGTVT" FromRole="KySH" ToRole="DM_DonViGTVT" />
+          <NavigationProperty Name="NguoiLX_HoSo" Relationship="giaothongModel.FK_NguoiLX_HoSo_KySH" FromRole="KySH" ToRole="NguoiLX_HoSo" />
+        </EntityType>
+        <EntityType Name="NguoiLX_GPLX">
+          <Key>
+            <PropertyRef Name="MaDK" />
+          </Key>
+          <Property Name="MaDK" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="SoGPLX" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HangGPLX" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="SoHoSo" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="SoGPLXCu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NoiCapGPLX" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NgayCapGPLX" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CoQuanQLGPLX" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NgayHHGPLX" Type="DateTime" Precision="3" />
+          <Property Name="NgayTTGPLX" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MoTaVN" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MoTaEN" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiKy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MaHTCap" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="NoiHocGPLX" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NamHocGPLX" Type="Int32" />
+          <Property Name="DuongDanAnh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="HoTenDem" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenNLX" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoVaTen" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="MaQuocTich" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NoiCT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiCT_MaDVHC" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="NoiCT_MaDVQL" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="SoCMT" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SoSeri" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NoiIn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayIn" Type="DateTime" Precision="3" />
+          <Property Name="NgayTra" Type="DateTime" Precision="3" />
+          <Property Name="NguoiTra" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiTra" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <Property Name="GioiTinh" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="NgayTT_A1" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_A2" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_A3" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_A4" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B1" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B2" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_C" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_D" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_E" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_F" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_FB2" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_FC" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_FD" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_FE" Type="DateTime" Precision="3" />
+          <Property Name="HoVaTenIn" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="HangGplxIn" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NgayTTIn" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="MaLo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NgayTT_B11" Type="DateTime" Precision="3" />
+          <Property Name="Hanoi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="HanoiViettat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTT_A11" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_A12" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B12" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B13" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B14" Type="DateTime" Precision="3" />
+          <Property Name="NgayTT_B15" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DM_DonViGTVT" Relationship="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT" FromRole="NguoiLX_GPLX" ToRole="DM_DonViGTVT" />
+          <NavigationProperty Name="DM_DonViGTVT1" Relationship="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT1" FromRole="NguoiLX_GPLX" ToRole="DM_DonViGTVT" />
+          <NavigationProperty Name="DM_DonViGTVT2" Relationship="giaothongModel.FK_NguoiLX_GPLX_DM_DonViGTVT2" FromRole="NguoiLX_GPLX" ToRole="DM_DonViGTVT" />
+          <NavigationProperty Name="DM_HangGPLX" Relationship="giaothongModel.FK_NguoiLX_GPLX_DM_HangGPLX" FromRole="NguoiLX_GPLX" ToRole="DM_HangGPLX" />
+        </EntityType>
+        <EntityType Name="NguoiLX_HoSo">
+          <Key>
+            <PropertyRef Name="MaDK" />
+          </Key>
+          <Property Name="MaDK" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="SoHoSo" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="MaCSDT" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MaSoGTVT" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MaDVNhanHSo" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NgayNhanHSo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NguoiNhanHSo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayHenTra" Type="DateTime" Precision="3" />
+          <Property Name="MaLoaiHs" Type="Int32" Nullable="false" />
+          <Property Name="TT_XuLy" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DuongDanAnh" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ChatLuongAnh" Type="Int32" />
+          <Property Name="NgayThuNhanAnh" Type="DateTime" Precision="3" />
+          <Property Name="NguoiThuNhanAnh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoGPLXDaCo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HangGPLXDaCo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DonViCapGPLXDaCo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NoiCapGPLXDaCo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NgayCapGPLXDaCo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NgayHHGPLXDaCo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NgayTTGPLXDaCo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DonViHocLX" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NamHocLX" Type="Int32" />
+          <Property Name="HangGPLX" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="SoNamLX" Type="Int32" />
+          <Property Name="SoKmLXAnToan" Type="Int32" />
+          <Property Name="GiayCNSK" Type="Boolean" />
+          <Property Name="LyDoCapDoi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MucDichCapDoi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDungSH" Type="Int32" />
+          <Property Name="MaKhoaHoc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="HangDaoTao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SoGiayCNTN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SoCCN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MaBC1" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="BC1_TuoiTS" Type="Boolean" />
+          <Property Name="BC1_ThamNien" Type="Boolean" />
+          <Property Name="MaBC2" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="KetQuaBC2" Type="Boolean" />
+          <Property Name="MaLyDoTCBC2" Type="Int32" />
+          <Property Name="MaKySH" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="SoBD" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="LanSH" Type="Int32" />
+          <Property Name="SoQDSH" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NgayQDSH" Type="DateTime" Precision="3" />
+          <Property Name="KetQua_LyThuyet" Type="Int32" />
+          <Property Name="NhanXet_LyThuyet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KetQua_Hinh" Type="Int32" />
+          <Property Name="NhanXet_Hinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KetQua_Duong" Type="Int32" />
+          <Property Name="NhanXet_Duong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KetQuaSH" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SoQDTT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NgayQDTT" Type="DateTime" Precision="3" />
+          <Property Name="GhiChu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SoGPLXTmp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NgayKTBC1" Type="DateTime" Precision="3" />
+          <Property Name="NguoiKTBC1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayKTBC2" Type="DateTime" Precision="3" />
+          <Property Name="NguoiKTBC2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaIn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="KetQuaDoiSanhTW" Type="Boolean" />
+          <Property Name="GhiChuKQDSTW" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ChuKy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <Property Name="MaHTCap" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="NguoiKy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VerifyData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VerifyKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IDs" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TT_XuLy_Old" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="KQ_BC1" Type="Boolean" />
+          <Property Name="KQ_BC1_GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaLo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NgayTT" Type="DateTime" Precision="3" />
+          <Property Name="NamcapLandau" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="MaTrichNgang" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayHHGplxNN" Type="DateTime" Precision="3" />
+          <Property Name="SOSERI_GPLX_DACO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IN_GPLX" Type="Int32" />
+          <Property Name="MADK2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="DiaChiTrenGPLX" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChiTrenGPLX_ChiTiet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="anhcd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ROW_VERSION" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="DM_DonViGTVT" Relationship="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT" FromRole="NguoiLX_HoSo" ToRole="DM_DonViGTVT" />
+          <NavigationProperty Name="DM_DonViGTVT1" Relationship="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT1" FromRole="NguoiLX_HoSo" ToRole="DM_DonViGTVT" />
+          <NavigationProperty Name="DM_DonViGTVT2" Relationship="giaothongModel.FK_NguoiLX_HoSo_DM_DonViGTVT2" FromRole="NguoiLX_HoSo" ToRole="DM_DonViGTVT" />
+          <NavigationProperty Name="DM_HangDT" Relationship="giaothongModel.FK_NguoiLX_HoSo_DM_HangDT" FromRole="NguoiLX_HoSo" ToRole="DM_HangDT" />
+          <NavigationProperty Name="DM_HangGPLX" Relationship="giaothongModel.FK_NguoiLX_HoSo_DM_HangGPLX" FromRole="NguoiLX_HoSo" ToRole="DM_HangGPLX" />
+          <NavigationProperty Name="KySH" Relationship="giaothongModel.FK_NguoiLX_HoSo_KySH" FromRole="NguoiLX_HoSo" ToRole="KySH" />
+          <NavigationProperty Name="NguoiLXHS_GiayTo" Relationship="giaothongModel.FK_NguoiLXHS_GiayTo_NguoiLX_HoSo" FromRole="NguoiLX_HoSo" ToRole="NguoiLXHS_GiayTo" />
+        </EntityType>
+        <EntityType Name="NguoiLXHS_GiayTo">
+          <Key>
+            <PropertyRef Name="MaGT" />
+            <PropertyRef Name="MaDK" />
+          </Key>
+          <Property Name="MaGT" Type="Int32" Nullable="false" />
+          <Property Name="MaDK" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="SoHoSo" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="TenGT" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <Property Name="MADK2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NguoiLX_HoSo" Relationship="giaothongModel.FK_NguoiLXHS_GiayTo_NguoiLX_HoSo" FromRole="NguoiLXHS_GiayTo" ToRole="NguoiLX_HoSo" />
+        </EntityType>
+        <EntityType Name="NguoiLXHS_KQSH">
+          <Key>
+            <PropertyRef Name="MaKySH" />
+            <PropertyRef Name="SoBaoDanh" />
+            <PropertyRef Name="LoaiSH" />
+          </Key>
+          <Property Name="MaKySH" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SoBaoDanh" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="LoaiSH" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="NgaySH" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DiemSH" Type="Int32" Nullable="false" />
+          <Property Name="DiemToiDa" Type="Int32" Nullable="false" />
+          <Property Name="SatHachVien" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NhanXetSHV" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VangSH" Type="Boolean" Nullable="false" />
+          <Property Name="DiemToiThieu" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KhoaHoc_GiaoVien">
+          <Key>
+            <PropertyRef Name="MaKH" />
+            <PropertyRef Name="MaGV" />
+            <PropertyRef Name="TenGV" />
+            <PropertyRef Name="LoaiGV" />
+            <PropertyRef Name="NgayHL" />
+            <PropertyRef Name="NgayHetHL" />
+            <PropertyRef Name="GhiChu" />
+            <PropertyRef Name="TrangThai" />
+            <PropertyRef Name="NgayTao" />
+            <PropertyRef Name="NgaySua" />
+          </Key>
+          <Property Name="MaKH" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="MaGV" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="TenGV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BienSoXe" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="LoaiGV" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="SoHV" Type="Int32" />
+          <Property Name="NgayHL" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgayHetHL" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GhiChu" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+          <Property Name="NguoiTao" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiSua" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="GIAOVIEN" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_GiaoVien" FromRole="KhoaHoc_GiaoVien" ToRole="GIAOVIEN" />
+          <NavigationProperty Name="KhoaHoc" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaKH__76619304" FromRole="KhoaHoc_GiaoVien" ToRole="KhoaHoc" />
+          <NavigationProperty Name="XETAPLAI" Relationship="giaothongModel.FK_KhoaHoc_GiaoVien_XeTap" FromRole="KhoaHoc_GiaoVien" ToRole="XETAPLAI" />
+        </EntityType>
+        <Association Name="FK_KhoaHoc_DM_DonViGTVT">
+          <End Type="giaothongModel.DM_DonViGTVT" Role="DM_DonViGTVT" Multiplicity="1" />
+          <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="MaSoGTVT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_DM_DonViGTVT1">
+          <End Type="giaothongModel.DM_DonViGTVT" Role="DM_DonViGTVT" Multiplicity="1" />
+          <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="MaCSDT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KySH_DM_DonViGTVT">
+          <End Type="giaothongModel.DM_DonViGTVT" Role="DM_DonViGTVT" Multiplicity="1" />
+          <End Type="giaothongModel.KySH" Role="KySH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="KySH">
+              <PropertyRef Name="MaTTSH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_GPLX_DM_DonViGTVT">
+          <End Type="giaothongModel.DM_DonViGTVT" Role="DM_DonViGTVT" Multiplicity="1" />
+          <End Type="giaothongModel.NguoiLX_GPLX" Role="NguoiLX_GPLX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_GPLX">
+              <PropertyRef Name="NoiCapGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_GPLX_DM_DonViGTVT1">
+          <End Type="giaothongModel.DM_DonViGTVT" Role="DM_DonViGTVT" Multiplicity="1" />
+          <End Type="giaothongModel.NguoiLX_GPLX" Role="NguoiLX_GPLX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_GPLX">
+              <PropertyRef Name="CoQuanQLGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_GPLX_DM_DonViGTVT2">
+          <End Type="giaothongModel.DM_DonViGTVT" Role="DM_DonViGTVT" Multiplicity="0..1" />
+          <End Type="giaothongModel.NguoiLX_GPLX" Role="NguoiLX_GPLX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_GPLX">
+              <PropertyRef Name="NoiHocGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_DM_DonViGTVT">
+          <End Type="giaothongModel.DM_DonViGTVT" Role="DM_DonViGTVT" Multiplicity="0..1" />
+          <End Type="giaothongModel.NguoiLX_HoSo" Role="NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="MaCSDT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_DM_DonViGTVT1">
+          <End Type="giaothongModel.DM_DonViGTVT" Role="DM_DonViGTVT" Multiplicity="1" />
+          <End Type="giaothongModel.NguoiLX_HoSo" Role="NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="MaSoGTVT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_DM_DonViGTVT2">
+          <End Type="giaothongModel.DM_DonViGTVT" Role="DM_DonViGTVT" Multiplicity="1" />
+          <End Type="giaothongModel.NguoiLX_HoSo" Role="NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DonViGTVT">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="MaDVNhanHSo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_DM_HangDT">
+          <End Type="giaothongModel.DM_HangDT" Role="DM_HangDT" Multiplicity="0..1" />
+          <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HangDT">
+              <PropertyRef Name="MaHangDT" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="HangDT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_DM_HangDT">
+          <End Type="giaothongModel.DM_HangDT" Role="DM_HangDT" Multiplicity="0..1" />
+          <End Type="giaothongModel.NguoiLX_HoSo" Role="NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HangDT">
+              <PropertyRef Name="MaHangDT" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="HangDaoTao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_DM_HangGPLX">
+          <End Type="giaothongModel.DM_HangGPLX" Role="DM_HangGPLX" Multiplicity="1" />
+          <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HangGPLX">
+              <PropertyRef Name="MaHang" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="HangGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_GPLX_DM_HangGPLX">
+          <End Type="giaothongModel.DM_HangGPLX" Role="DM_HangGPLX" Multiplicity="1" />
+          <End Type="giaothongModel.NguoiLX_GPLX" Role="NguoiLX_GPLX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HangGPLX">
+              <PropertyRef Name="MaHang" />
+            </Principal>
+            <Dependent Role="NguoiLX_GPLX">
+              <PropertyRef Name="HangGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_DM_HangGPLX">
+          <End Type="giaothongModel.DM_HangGPLX" Role="DM_HangGPLX" Multiplicity="1" />
+          <End Type="giaothongModel.NguoiLX_HoSo" Role="NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HangGPLX">
+              <PropertyRef Name="MaHang" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="HangGPLX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_GiaoVien_GiaoVien">
+          <End Type="giaothongModel.GIAOVIEN" Role="GIAOVIEN" Multiplicity="1" />
+          <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAOVIEN">
+              <PropertyRef Name="MaGV" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="MaGV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KhoaHoc_Gi__MaKH__76619304">
+          <End Type="giaothongModel.KhoaHoc" Role="KhoaHoc" Multiplicity="1" />
+          <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaHoc">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLX_HoSo_KySH">
+          <End Type="giaothongModel.KySH" Role="KySH" Multiplicity="0..1" />
+          <End Type="giaothongModel.NguoiLX_HoSo" Role="NguoiLX_HoSo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KySH">
+              <PropertyRef Name="MaKySH" />
+            </Principal>
+            <Dependent Role="NguoiLX_HoSo">
+              <PropertyRef Name="MaKySH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLXHS_GiayTo_NguoiLX_HoSo">
+          <End Type="giaothongModel.NguoiLX_HoSo" Role="NguoiLX_HoSo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="giaothongModel.NguoiLXHS_GiayTo" Role="NguoiLXHS_GiayTo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiLX_HoSo">
+              <PropertyRef Name="MaDK" />
+            </Principal>
+            <Dependent Role="NguoiLXHS_GiayTo">
+              <PropertyRef Name="MaDK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_GiaoVien_XeTap">
+          <End Type="giaothongModel.XETAPLAI" Role="XETAPLAI" Multiplicity="0..1" />
+          <End Type="giaothongModel.KhoaHoc_GiaoVien" Role="KhoaHoc_GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XETAPLAI">
+              <PropertyRef Name="SoDangKy" />
+            </Principal>
+            <Dependent Role="KhoaHoc_GiaoVien">
+              <PropertyRef Name="BienSoXe" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -568,23 +2089,444 @@ warning 6002: The table/view 'giaothong.dbo.LoaiXe' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HangXes">
-            <EntityTypeMapping TypeName="giaothongModel.HangXe">
-              <MappingFragment StoreEntitySet="HangXe">
-                <ScalarProperty Name="ten" ColumnName="ten" />
-                <ScalarProperty Name="mahx" ColumnName="mahx" />
+          <EntitySetMapping Name="DM_DonViGTVT">
+            <EntityTypeMapping TypeName="giaothongModel.DM_DonViGTVT">
+              <MappingFragment StoreEntitySet="DM_DonViGTVT">
+                <ScalarProperty Name="ROW_VERSION" ColumnName="ROW_VERSION" />
+                <ScalarProperty Name="MaDvOld" ColumnName="MaDvOld" />
+                <ScalarProperty Name="DiaDiemDaoTao" ColumnName="DiaDiemDaoTao" />
+                <ScalarProperty Name="NgayHHGP" ColumnName="NgayHHGP" />
+                <ScalarProperty Name="DienTichSanTap" ColumnName="DienTichSanTap" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
+                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="LanhDao" ColumnName="LanhDao" />
+                <ScalarProperty Name="NgayGP" ColumnName="NgayGP" />
+                <ScalarProperty Name="SoGP" ColumnName="SoGP" />
+                <ScalarProperty Name="LuuLuongDT" ColumnName="LuuLuongDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="CacHangGPLX" ColumnName="CacHangGPLX" />
+                <ScalarProperty Name="LoaiTTSH" ColumnName="LoaiTTSH" />
+                <ScalarProperty Name="CoQuanQL" ColumnName="CoQuanQL" />
+                <ScalarProperty Name="TenDV" ColumnName="TenDV" />
+                <ScalarProperty Name="LoaiDV" ColumnName="LoaiDV" />
+                <ScalarProperty Name="MaDVQL" ColumnName="MaDVQL" />
+                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LoaiXes">
-            <EntityTypeMapping TypeName="giaothongModel.LoaiXe">
-              <MappingFragment StoreEntitySet="LoaiXe">
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="MaLX" ColumnName="MaLX" />
+          <EntitySetMapping Name="DM_HangDT">
+            <EntityTypeMapping TypeName="giaothongModel.DM_HangDT">
+              <MappingFragment StoreEntitySet="DM_HangDT">
+                <ScalarProperty Name="ThoiGianDaoTao" ColumnName="ThoiGianDaoTao" />
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
+                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="MucTieuDT" ColumnName="MucTieuDT" />
+                <ScalarProperty Name="DKSH" ColumnName="DKSH" />
+                <ScalarProperty Name="KmLXAT" ColumnName="KmLXAT" />
+                <ScalarProperty Name="ThamNien" ColumnName="ThamNien" />
+                <ScalarProperty Name="TuoiHV" ColumnName="TuoiHV" />
+                <ScalarProperty Name="SoVBPL" ColumnName="SoVBPL" />
+                <ScalarProperty Name="HangGPLX" ColumnName="HangGPLX" />
+                <ScalarProperty Name="TenHangDT" ColumnName="TenHangDT" />
+                <ScalarProperty Name="MaHangDT" ColumnName="MaHangDT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="DM_HangGPLX">
+            <EntityTypeMapping TypeName="giaothongModel.DM_HangGPLX">
+              <MappingFragment StoreEntitySet="DM_HangGPLX">
+                <ScalarProperty Name="HangDuocLai" ColumnName="HangDuocLai" />
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
+                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="MoTaEN" ColumnName="MoTaEN" />
+                <ScalarProperty Name="MoTaVN" ColumnName="MoTaVN" />
+                <ScalarProperty Name="HanSuDung" ColumnName="HanSuDung" />
+                <ScalarProperty Name="TenHang" ColumnName="TenHang" />
+                <ScalarProperty Name="MaHang" ColumnName="MaHang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InHangDoiGPLXes">
+            <EntityTypeMapping TypeName="giaothongModel.InHangDoiGPLX">
+              <MappingFragment StoreEntitySet="InHangDoiGPLX">
+                <ScalarProperty Name="NgayTT_A11" ColumnName="NgayTT_A11" />
+                <ScalarProperty Name="NgayTT_B15" ColumnName="NgayTT_B15" />
+                <ScalarProperty Name="NgayTT_B14" ColumnName="NgayTT_B14" />
+                <ScalarProperty Name="NgayTT_B13" ColumnName="NgayTT_B13" />
+                <ScalarProperty Name="NgayTT_B12" ColumnName="NgayTT_B12" />
+                <ScalarProperty Name="NgayTT_B11" ColumnName="NgayTT_B11" />
+                <ScalarProperty Name="NguoiNhan" ColumnName="NguoiNhan" />
+                <ScalarProperty Name="NguoiBanGiao" ColumnName="NguoiBanGiao" />
+                <ScalarProperty Name="NgayBanGiao" ColumnName="NgayBanGiao" />
+                <ScalarProperty Name="TrangThaiDongBo" ColumnName="TrangThaiDongBo" />
+                <ScalarProperty Name="NgayTT_FE" ColumnName="NgayTT_FE" />
+                <ScalarProperty Name="NgayTT_FD" ColumnName="NgayTT_FD" />
+                <ScalarProperty Name="NgayTT_FC" ColumnName="NgayTT_FC" />
+                <ScalarProperty Name="NgayTT_FB2" ColumnName="NgayTT_FB2" />
+                <ScalarProperty Name="NgayTT_F" ColumnName="NgayTT_F" />
+                <ScalarProperty Name="NgayTT_E" ColumnName="NgayTT_E" />
+                <ScalarProperty Name="NgayTT_D" ColumnName="NgayTT_D" />
+                <ScalarProperty Name="NgayTT_C" ColumnName="NgayTT_C" />
+                <ScalarProperty Name="NgayTT_B2" ColumnName="NgayTT_B2" />
+                <ScalarProperty Name="NgayTT_B1" ColumnName="NgayTT_B1" />
+                <ScalarProperty Name="NgayTT_A4" ColumnName="NgayTT_A4" />
+                <ScalarProperty Name="NgayTT_A3" ColumnName="NgayTT_A3" />
+                <ScalarProperty Name="NgayTT_A2" ColumnName="NgayTT_A2" />
+                <ScalarProperty Name="NgayTT_A1" ColumnName="NgayTT_A1" />
+                <ScalarProperty Name="MaNguoiKy" ColumnName="MaNguoiKy" />
+                <ScalarProperty Name="MaLo" ColumnName="MaLo" />
+                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
+                <ScalarProperty Name="MaHTCap" ColumnName="MaHTCap" />
+                <ScalarProperty Name="NguoiIn" ColumnName="NguoiIn" />
+                <ScalarProperty Name="NgayIn" ColumnName="NgayIn" />
+                <ScalarProperty Name="TrangThaiIn" ColumnName="TrangThaiIn" />
+                <ScalarProperty Name="VerifyKey" ColumnName="VerifyKey" />
+                <ScalarProperty Name="Verify" ColumnName="Verify" />
+                <ScalarProperty Name="MaIn" ColumnName="MaIn" />
+                <ScalarProperty Name="MoTaEN" ColumnName="MoTaEN" />
+                <ScalarProperty Name="MoTaVN" ColumnName="MoTaVN" />
+                <ScalarProperty Name="NgayTT" ColumnName="NgayTT" />
+                <ScalarProperty Name="NgayHH" ColumnName="NgayHH" />
+                <ScalarProperty Name="AnhConDau" ColumnName="AnhConDau" />
+                <ScalarProperty Name="AnhChuKy" ColumnName="AnhChuKy" />
+                <ScalarProperty Name="NguoiKy_ChuVu" ColumnName="NguoiKy_ChuVu" />
+                <ScalarProperty Name="NguoiKy" ColumnName="NguoiKy" />
+                <ScalarProperty Name="NgayKy" ColumnName="NgayKy" />
+                <ScalarProperty Name="TinhTP" ColumnName="TinhTP" />
+                <ScalarProperty Name="NoiCuTru2" ColumnName="NoiCuTru2" />
+                <ScalarProperty Name="NoiCuTru1" ColumnName="NoiCuTru1" />
+                <ScalarProperty Name="QuocTich" ColumnName="QuocTich" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="AnhChanDung" ColumnName="AnhChanDung" />
+                <ScalarProperty Name="HangGPLX" ColumnName="HangGPLX" />
+                <ScalarProperty Name="SoSeri" ColumnName="SoSeri" />
+                <ScalarProperty Name="SoGPLX" ColumnName="SoGPLX" />
+                <ScalarProperty Name="SoHoSo" ColumnName="SoHoSo" />
+                <ScalarProperty Name="MaDK" ColumnName="MaDK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhoaHocs">
+            <EntityTypeMapping TypeName="giaothongModel.KhoaHoc">
+              <MappingFragment StoreEntitySet="KhoaHoc">
+                <ScalarProperty Name="TT_Xuly" ColumnName="TT_Xuly" />
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
+                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="TongSoNgay" ColumnName="TongSoNgay" />
+                <ScalarProperty Name="SoNgayNghiLe" ColumnName="SoNgayNghiLe" />
+                <ScalarProperty Name="SoNgayThucHoc" ColumnName="SoNgayThucHoc" />
+                <ScalarProperty Name="SoNgayOnKT" ColumnName="SoNgayOnKT" />
+                <ScalarProperty Name="ThoiGianDT" ColumnName="ThoiGianDT" />
+                <ScalarProperty Name="SoHVDuocCapGPLX" ColumnName="SoHVDuocCapGPLX" />
+                <ScalarProperty Name="SoHVTotNghiep" ColumnName="SoHVTotNghiep" />
+                <ScalarProperty Name="TongSoHV" ColumnName="TongSoHV" />
+                <ScalarProperty Name="NgaySH" ColumnName="NgaySH" />
+                <ScalarProperty Name="NgayThi" ColumnName="NgayThi" />
+                <ScalarProperty Name="MucTieuDT" ColumnName="MucTieuDT" />
+                <ScalarProperty Name="NgayBG" ColumnName="NgayBG" />
+                <ScalarProperty Name="NgayKG" ColumnName="NgayKG" />
+                <ScalarProperty Name="NgayQD_KhaiGiang" ColumnName="NgayQD_KhaiGiang" />
+                <ScalarProperty Name="SoQD_KhaiGiang" ColumnName="SoQD_KhaiGiang" />
+                <ScalarProperty Name="HangDT" ColumnName="HangDT" />
+                <ScalarProperty Name="HangGPLX" ColumnName="HangGPLX" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="MaSoGTVT" ColumnName="MaSoGTVT" />
+                <ScalarProperty Name="MaCSDT" ColumnName="MaCSDT" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KySHes">
+            <EntityTypeMapping TypeName="giaothongModel.KySH">
+              <MappingFragment StoreEntitySet="KySH">
+                <ScalarProperty Name="TT_Xuly" ColumnName="TT_Xuly" />
+                <ScalarProperty Name="TenKySH" ColumnName="TenKySH" />
+                <ScalarProperty Name="NgayQDTT" ColumnName="NgayQDTT" />
+                <ScalarProperty Name="SoQDTT" ColumnName="SoQDTT" />
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
+                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="LePhi_CapGPLX" ColumnName="LePhi_CapGPLX" />
+                <ScalarProperty Name="LePhi_ThiDuong" ColumnName="LePhi_ThiDuong" />
+                <ScalarProperty Name="LePhi_ThiHinh" ColumnName="LePhi_ThiHinh" />
+                <ScalarProperty Name="LePhi_LyThuyet" ColumnName="LePhi_LyThuyet" />
+                <ScalarProperty Name="NhanXet" ColumnName="NhanXet" />
+                <ScalarProperty Name="NX_VanDe_Khac" ColumnName="NX_VanDe_Khac" />
+                <ScalarProperty Name="NX_DamBao_AnToan" ColumnName="NX_DamBao_AnToan" />
+                <ScalarProperty Name="NX_CoSo_VCKT" ColumnName="NX_CoSo_VCKT" />
+                <ScalarProperty Name="NX_TrinhDo_CBSH" ColumnName="NX_TrinhDo_CBSH" />
+                <ScalarProperty Name="NX_ThucHien_QuyChe" ColumnName="NX_ThucHien_QuyChe" />
+                <ScalarProperty Name="SHHaiLan" ColumnName="SHHaiLan" />
+                <ScalarProperty Name="SoViPham" ColumnName="SoViPham" />
+                <ScalarProperty Name="TyLeDat" ColumnName="TyLeDat" />
+                <ScalarProperty Name="SoDatSHLanDau" ColumnName="SoDatSHLanDau" />
+                <ScalarProperty Name="SoDuSHLanDau" ColumnName="SoDuSHLanDau" />
+                <ScalarProperty Name="SoVangThiDuong" ColumnName="SoVangThiDuong" />
+                <ScalarProperty Name="SoVangThiHinh" ColumnName="SoVangThiHinh" />
+                <ScalarProperty Name="SoVang" ColumnName="SoVang" />
+                <ScalarProperty Name="SoKhongDat" ColumnName="SoKhongDat" />
+                <ScalarProperty Name="SoDat" ColumnName="SoDat" />
+                <ScalarProperty Name="SoDuSH" ColumnName="SoDuSH" />
+                <ScalarProperty Name="TongSoDK" ColumnName="TongSoDK" />
+                <ScalarProperty Name="UV_ThuKy" ColumnName="UV_ThuKy" />
+                <ScalarProperty Name="UV_ToTruong" ColumnName="UV_ToTruong" />
+                <ScalarProperty Name="UV_GD_TTSH" ColumnName="UV_GD_TTSH" />
+                <ScalarProperty Name="PhoChuTich_HDSH" ColumnName="PhoChuTich_HDSH" />
+                <ScalarProperty Name="ChuTich_HDSH" ColumnName="ChuTich_HDSH" />
+                <ScalarProperty Name="NguoiQD" ColumnName="NguoiQD" />
+                <ScalarProperty Name="NgayQD" ColumnName="NgayQD" />
+                <ScalarProperty Name="SoQD" ColumnName="SoQD" />
+                <ScalarProperty Name="GioSH" ColumnName="GioSH" />
+                <ScalarProperty Name="NgaySH" ColumnName="NgaySH" />
+                <ScalarProperty Name="MaTTSH" ColumnName="MaTTSH" />
+                <ScalarProperty Name="MaKySH" ColumnName="MaKySH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NguoiLX_GPLX">
+            <EntityTypeMapping TypeName="giaothongModel.NguoiLX_GPLX">
+              <MappingFragment StoreEntitySet="NguoiLX_GPLX">
+                <ScalarProperty Name="NgayTT_B15" ColumnName="NgayTT_B15" />
+                <ScalarProperty Name="NgayTT_B14" ColumnName="NgayTT_B14" />
+                <ScalarProperty Name="NgayTT_B13" ColumnName="NgayTT_B13" />
+                <ScalarProperty Name="NgayTT_B12" ColumnName="NgayTT_B12" />
+                <ScalarProperty Name="NgayTT_A12" ColumnName="NgayTT_A12" />
+                <ScalarProperty Name="NgayTT_A11" ColumnName="NgayTT_A11" />
+                <ScalarProperty Name="HanoiViettat" ColumnName="HanoiViettat" />
+                <ScalarProperty Name="Hanoi" ColumnName="Hanoi" />
+                <ScalarProperty Name="NgayTT_B11" ColumnName="NgayTT_B11" />
+                <ScalarProperty Name="MaLo" ColumnName="MaLo" />
+                <ScalarProperty Name="NgayTTIn" ColumnName="NgayTTIn" />
+                <ScalarProperty Name="HangGplxIn" ColumnName="HangGplxIn" />
+                <ScalarProperty Name="HoVaTenIn" ColumnName="HoVaTenIn" />
+                <ScalarProperty Name="NgayTT_FE" ColumnName="NgayTT_FE" />
+                <ScalarProperty Name="NgayTT_FD" ColumnName="NgayTT_FD" />
+                <ScalarProperty Name="NgayTT_FC" ColumnName="NgayTT_FC" />
+                <ScalarProperty Name="NgayTT_FB2" ColumnName="NgayTT_FB2" />
+                <ScalarProperty Name="NgayTT_F" ColumnName="NgayTT_F" />
+                <ScalarProperty Name="NgayTT_E" ColumnName="NgayTT_E" />
+                <ScalarProperty Name="NgayTT_D" ColumnName="NgayTT_D" />
+                <ScalarProperty Name="NgayTT_C" ColumnName="NgayTT_C" />
+                <ScalarProperty Name="NgayTT_B2" ColumnName="NgayTT_B2" />
+                <ScalarProperty Name="NgayTT_B1" ColumnName="NgayTT_B1" />
+                <ScalarProperty Name="NgayTT_A4" ColumnName="NgayTT_A4" />
+                <ScalarProperty Name="NgayTT_A3" ColumnName="NgayTT_A3" />
+                <ScalarProperty Name="NgayTT_A2" ColumnName="NgayTT_A2" />
+                <ScalarProperty Name="NgayTT_A1" ColumnName="NgayTT_A1" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
+                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NoiTra" ColumnName="NoiTra" />
+                <ScalarProperty Name="NguoiTra" ColumnName="NguoiTra" />
+                <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
+                <ScalarProperty Name="NgayIn" ColumnName="NgayIn" />
+                <ScalarProperty Name="NoiIn" ColumnName="NoiIn" />
+                <ScalarProperty Name="SoSeri" ColumnName="SoSeri" />
+                <ScalarProperty Name="SoCMT" ColumnName="SoCMT" />
+                <ScalarProperty Name="NoiCT_MaDVQL" ColumnName="NoiCT_MaDVQL" />
+                <ScalarProperty Name="NoiCT_MaDVHC" ColumnName="NoiCT_MaDVHC" />
+                <ScalarProperty Name="NoiCT" ColumnName="NoiCT" />
+                <ScalarProperty Name="MaQuocTich" ColumnName="MaQuocTich" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="TenNLX" ColumnName="TenNLX" />
+                <ScalarProperty Name="HoTenDem" ColumnName="HoTenDem" />
+                <ScalarProperty Name="DuongDanAnh" ColumnName="DuongDanAnh" />
+                <ScalarProperty Name="NamHocGPLX" ColumnName="NamHocGPLX" />
+                <ScalarProperty Name="NoiHocGPLX" ColumnName="NoiHocGPLX" />
+                <ScalarProperty Name="MaHTCap" ColumnName="MaHTCap" />
+                <ScalarProperty Name="NguoiKy" ColumnName="NguoiKy" />
+                <ScalarProperty Name="MoTaEN" ColumnName="MoTaEN" />
+                <ScalarProperty Name="MoTaVN" ColumnName="MoTaVN" />
+                <ScalarProperty Name="NgayTTGPLX" ColumnName="NgayTTGPLX" />
+                <ScalarProperty Name="NgayHHGPLX" ColumnName="NgayHHGPLX" />
+                <ScalarProperty Name="CoQuanQLGPLX" ColumnName="CoQuanQLGPLX" />
+                <ScalarProperty Name="NgayCapGPLX" ColumnName="NgayCapGPLX" />
+                <ScalarProperty Name="NoiCapGPLX" ColumnName="NoiCapGPLX" />
+                <ScalarProperty Name="SoGPLXCu" ColumnName="SoGPLXCu" />
+                <ScalarProperty Name="SoHoSo" ColumnName="SoHoSo" />
+                <ScalarProperty Name="HangGPLX" ColumnName="HangGPLX" />
+                <ScalarProperty Name="SoGPLX" ColumnName="SoGPLX" />
+                <ScalarProperty Name="MaDK" ColumnName="MaDK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NguoiLX_HoSo">
+            <EntityTypeMapping TypeName="giaothongModel.NguoiLX_HoSo">
+              <MappingFragment StoreEntitySet="NguoiLX_HoSo">
+                <ScalarProperty Name="ROW_VERSION" ColumnName="ROW_VERSION" />
+                <ScalarProperty Name="anhcd" ColumnName="anhcd" />
+                <ScalarProperty Name="DiaChiTrenGPLX_ChiTiet" ColumnName="DiaChiTrenGPLX_ChiTiet" />
+                <ScalarProperty Name="DiaChiTrenGPLX" ColumnName="DiaChiTrenGPLX" />
+                <ScalarProperty Name="MADK2" ColumnName="MADK2" />
+                <ScalarProperty Name="IN_GPLX" ColumnName="IN_GPLX" />
+                <ScalarProperty Name="SOSERI_GPLX_DACO" ColumnName="SOSERI_GPLX_DACO" />
+                <ScalarProperty Name="NgayHHGplxNN" ColumnName="NgayHHGplxNN" />
+                <ScalarProperty Name="MaTrichNgang" ColumnName="MaTrichNgang" />
+                <ScalarProperty Name="NamcapLandau" ColumnName="NamcapLandau" />
+                <ScalarProperty Name="NgayTT" ColumnName="NgayTT" />
+                <ScalarProperty Name="MaLo" ColumnName="MaLo" />
+                <ScalarProperty Name="KQ_BC1_GhiChu" ColumnName="KQ_BC1_GhiChu" />
+                <ScalarProperty Name="KQ_BC1" ColumnName="KQ_BC1" />
+                <ScalarProperty Name="TT_XuLy_Old" ColumnName="TT_XuLy_Old" />
+                <ScalarProperty Name="IDs" ColumnName="IDs" />
+                <ScalarProperty Name="VerifyKey" ColumnName="VerifyKey" />
+                <ScalarProperty Name="VerifyData" ColumnName="VerifyData" />
+                <ScalarProperty Name="NguoiKy" ColumnName="NguoiKy" />
+                <ScalarProperty Name="MaHTCap" ColumnName="MaHTCap" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="ChuKy" ColumnName="ChuKy" />
+                <ScalarProperty Name="GhiChuKQDSTW" ColumnName="GhiChuKQDSTW" />
+                <ScalarProperty Name="KetQuaDoiSanhTW" ColumnName="KetQuaDoiSanhTW" />
+                <ScalarProperty Name="MaIn" ColumnName="MaIn" />
+                <ScalarProperty Name="NguoiKTBC2" ColumnName="NguoiKTBC2" />
+                <ScalarProperty Name="NgayKTBC2" ColumnName="NgayKTBC2" />
+                <ScalarProperty Name="NguoiKTBC1" ColumnName="NguoiKTBC1" />
+                <ScalarProperty Name="NgayKTBC1" ColumnName="NgayKTBC1" />
+                <ScalarProperty Name="SoGPLXTmp" ColumnName="SoGPLXTmp" />
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
+                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NgayQDTT" ColumnName="NgayQDTT" />
+                <ScalarProperty Name="SoQDTT" ColumnName="SoQDTT" />
+                <ScalarProperty Name="KetQuaSH" ColumnName="KetQuaSH" />
+                <ScalarProperty Name="NhanXet_Duong" ColumnName="NhanXet_Duong" />
+                <ScalarProperty Name="KetQua_Duong" ColumnName="KetQua_Duong" />
+                <ScalarProperty Name="NhanXet_Hinh" ColumnName="NhanXet_Hinh" />
+                <ScalarProperty Name="KetQua_Hinh" ColumnName="KetQua_Hinh" />
+                <ScalarProperty Name="NhanXet_LyThuyet" ColumnName="NhanXet_LyThuyet" />
+                <ScalarProperty Name="KetQua_LyThuyet" ColumnName="KetQua_LyThuyet" />
+                <ScalarProperty Name="NgayQDSH" ColumnName="NgayQDSH" />
+                <ScalarProperty Name="SoQDSH" ColumnName="SoQDSH" />
+                <ScalarProperty Name="LanSH" ColumnName="LanSH" />
+                <ScalarProperty Name="SoBD" ColumnName="SoBD" />
+                <ScalarProperty Name="MaKySH" ColumnName="MaKySH" />
+                <ScalarProperty Name="MaLyDoTCBC2" ColumnName="MaLyDoTCBC2" />
+                <ScalarProperty Name="KetQuaBC2" ColumnName="KetQuaBC2" />
+                <ScalarProperty Name="MaBC2" ColumnName="MaBC2" />
+                <ScalarProperty Name="BC1_ThamNien" ColumnName="BC1_ThamNien" />
+                <ScalarProperty Name="BC1_TuoiTS" ColumnName="BC1_TuoiTS" />
+                <ScalarProperty Name="MaBC1" ColumnName="MaBC1" />
+                <ScalarProperty Name="SoCCN" ColumnName="SoCCN" />
+                <ScalarProperty Name="SoGiayCNTN" ColumnName="SoGiayCNTN" />
+                <ScalarProperty Name="HangDaoTao" ColumnName="HangDaoTao" />
+                <ScalarProperty Name="MaKhoaHoc" ColumnName="MaKhoaHoc" />
+                <ScalarProperty Name="NoiDungSH" ColumnName="NoiDungSH" />
+                <ScalarProperty Name="MucDichCapDoi" ColumnName="MucDichCapDoi" />
+                <ScalarProperty Name="LyDoCapDoi" ColumnName="LyDoCapDoi" />
+                <ScalarProperty Name="GiayCNSK" ColumnName="GiayCNSK" />
+                <ScalarProperty Name="SoKmLXAnToan" ColumnName="SoKmLXAnToan" />
+                <ScalarProperty Name="SoNamLX" ColumnName="SoNamLX" />
+                <ScalarProperty Name="HangGPLX" ColumnName="HangGPLX" />
+                <ScalarProperty Name="NamHocLX" ColumnName="NamHocLX" />
+                <ScalarProperty Name="DonViHocLX" ColumnName="DonViHocLX" />
+                <ScalarProperty Name="NgayTTGPLXDaCo" ColumnName="NgayTTGPLXDaCo" />
+                <ScalarProperty Name="NgayHHGPLXDaCo" ColumnName="NgayHHGPLXDaCo" />
+                <ScalarProperty Name="NgayCapGPLXDaCo" ColumnName="NgayCapGPLXDaCo" />
+                <ScalarProperty Name="NoiCapGPLXDaCo" ColumnName="NoiCapGPLXDaCo" />
+                <ScalarProperty Name="DonViCapGPLXDaCo" ColumnName="DonViCapGPLXDaCo" />
+                <ScalarProperty Name="HangGPLXDaCo" ColumnName="HangGPLXDaCo" />
+                <ScalarProperty Name="SoGPLXDaCo" ColumnName="SoGPLXDaCo" />
+                <ScalarProperty Name="NguoiThuNhanAnh" ColumnName="NguoiThuNhanAnh" />
+                <ScalarProperty Name="NgayThuNhanAnh" ColumnName="NgayThuNhanAnh" />
+                <ScalarProperty Name="ChatLuongAnh" ColumnName="ChatLuongAnh" />
+                <ScalarProperty Name="DuongDanAnh" ColumnName="DuongDanAnh" />
+                <ScalarProperty Name="TT_XuLy" ColumnName="TT_XuLy" />
+                <ScalarProperty Name="MaLoaiHs" ColumnName="MaLoaiHs" />
+                <ScalarProperty Name="NgayHenTra" ColumnName="NgayHenTra" />
+                <ScalarProperty Name="NguoiNhanHSo" ColumnName="NguoiNhanHSo" />
+                <ScalarProperty Name="NgayNhanHSo" ColumnName="NgayNhanHSo" />
+                <ScalarProperty Name="MaDVNhanHSo" ColumnName="MaDVNhanHSo" />
+                <ScalarProperty Name="MaSoGTVT" ColumnName="MaSoGTVT" />
+                <ScalarProperty Name="MaCSDT" ColumnName="MaCSDT" />
+                <ScalarProperty Name="SoHoSo" ColumnName="SoHoSo" />
+                <ScalarProperty Name="MaDK" ColumnName="MaDK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NguoiLXHS_GiayTo">
+            <EntityTypeMapping TypeName="giaothongModel.NguoiLXHS_GiayTo">
+              <MappingFragment StoreEntitySet="NguoiLXHS_GiayTo">
+                <ScalarProperty Name="MADK2" ColumnName="MADK2" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TenGT" ColumnName="TenGT" />
+                <ScalarProperty Name="SoHoSo" ColumnName="SoHoSo" />
+                <ScalarProperty Name="MaDK" ColumnName="MaDK" />
+                <ScalarProperty Name="MaGT" ColumnName="MaGT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NguoiLXHS_KQSH">
+            <EntityTypeMapping TypeName="giaothongModel.NguoiLXHS_KQSH">
+              <MappingFragment StoreEntitySet="NguoiLXHS_KQSH">
+                <ScalarProperty Name="DiemToiThieu" ColumnName="DiemToiThieu" />
+                <ScalarProperty Name="VangSH" ColumnName="VangSH" />
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
+                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NhanXetSHV" ColumnName="NhanXetSHV" />
+                <ScalarProperty Name="SatHachVien" ColumnName="SatHachVien" />
+                <ScalarProperty Name="DiemToiDa" ColumnName="DiemToiDa" />
+                <ScalarProperty Name="DiemSH" ColumnName="DiemSH" />
+                <ScalarProperty Name="NgaySH" ColumnName="NgaySH" />
+                <ScalarProperty Name="LoaiSH" ColumnName="LoaiSH" />
+                <ScalarProperty Name="SoBaoDanh" ColumnName="SoBaoDanh" />
+                <ScalarProperty Name="MaKySH" ColumnName="MaKySH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhoaHoc_GiaoVien">
+            <EntityTypeMapping TypeName="giaothongModel.KhoaHoc_GiaoVien">
+              <MappingFragment StoreEntitySet="KhoaHoc_GiaoVien">
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NguoiSua" ColumnName="NguoiSua" />
+                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NgayHetHL" ColumnName="NgayHetHL" />
+                <ScalarProperty Name="NgayHL" ColumnName="NgayHL" />
+                <ScalarProperty Name="SoHV" ColumnName="SoHV" />
+                <ScalarProperty Name="LoaiGV" ColumnName="LoaiGV" />
+                <ScalarProperty Name="BienSoXe" ColumnName="BienSoXe" />
+                <ScalarProperty Name="TenGV" ColumnName="TenGV" />
+                <ScalarProperty Name="MaGV" ColumnName="MaGV" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

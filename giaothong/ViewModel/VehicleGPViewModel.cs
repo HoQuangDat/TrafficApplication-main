@@ -1,4 +1,5 @@
 ﻿using giaothong.Model;
+using Microsoft.Graph.Models;
 using Microsoft.Win32;
 using QuanLyShop.ViewModel;
 using System;
@@ -66,6 +67,7 @@ namespace giaothong.ViewModel
                     SelectedAnhDKiem = SelectedItem.AnhDKiem.Trim();
                     GiayPXTL.AnhDky = SelectedItem.AnhDky.Trim();
                     SelectedAnhDKy = SelectedItem.AnhDky.Trim();
+
                 }
             }
         }

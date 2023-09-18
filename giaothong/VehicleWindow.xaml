@@ -55,18 +55,17 @@
                             <ComboBoxItem Content="Tất cả"></ComboBoxItem>
                             <ComboBoxItem Content="A1"></ComboBoxItem>
                             <ComboBoxItem Content="A2"></ComboBoxItem>
-                            <ComboBoxItem Content="B"></ComboBoxItem>
+                            <ComboBoxItem Content="B1"></ComboBoxItem>
                             <ComboBoxItem Content="C"></ComboBoxItem>
-                            <ComboBoxItem Content="D"></ComboBoxItem>
                             <ComboBoxItem Content="D"></ComboBoxItem>
                             <ComboBoxItem Content="FC"></ComboBoxItem>
                         </ComboBox>
 
                         <TextBox
                           Margin="10 0 0 0"
-                          Width="200"
+                          Width="220"
                           Text="{Binding SearchVehicle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                          materialDesign:HintAssist.Hint="Tìm kiếm theo số đăng ký..."
+                          materialDesign:HintAssist.Hint="Tìm kiếm theo số đăng ký, chủ sở hữu..."
                           Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">

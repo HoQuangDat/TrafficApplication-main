@@ -14,6 +14,12 @@ namespace giaothong.Model
     
     public partial class XETAPLAI
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public XETAPLAI()
+        {
+            this.KhoaHoc_GiaoVien = new HashSet<KhoaHoc_GiaoVien>();
+        }
+    
         public string SoDangKy { get; set; }
         public string TenChuSoHuu { get; set; }
         public string SoGPTL { get; set; }
@@ -31,5 +37,7 @@ namespace giaothong.Model
         public string NguoiCapNhat { get; set; }
     
         public virtual XETAPLAI_GP XETAPLAI_GP { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhoaHoc_GiaoVien> KhoaHoc_GiaoVien { get; set; }
     }
 }
