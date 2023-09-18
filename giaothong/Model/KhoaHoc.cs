@@ -28,9 +28,6 @@ namespace giaothong.Model
         public string HangGPLX { get; set; }
         public string HangDT { get; set; }
         public string SoQD_KhaiGiang { get; set; }
-
-        public string showTrangThai { get; set; }
-
         public Nullable<System.DateTime> NgayQD_KhaiGiang { get; set; }
         public Nullable<System.DateTime> NgayKG { get; set; }
         public Nullable<System.DateTime> NgayBG { get; set; }
@@ -61,5 +58,6 @@ namespace giaothong.Model
         public virtual ICollection<LichHoc> LichHocs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KhoaHoc_GiaoVien> KhoaHoc_GiaoVien { get; set; }
+        public string showTrangThai { get; internal set; }
     }
 }

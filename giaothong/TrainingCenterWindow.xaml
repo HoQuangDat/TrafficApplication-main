@@ -76,7 +76,7 @@
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="10 0 10 0">
-                    <ListView ItemsSource="{Binding ListCenterTraining}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-12,9,12,-9">
+                    <ListView ItemsSource="{Binding ListCenterTraining}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-12,9,12,-9">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn  DisplayMemberBinding="{Binding MaDV}" Header="Mã"/>

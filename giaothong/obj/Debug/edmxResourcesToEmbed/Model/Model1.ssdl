@@ -237,6 +237,7 @@
     <Property Name="MaPD" Type="char" MaxLength="25" />
     <Property Name="MaCD" Type="char" MaxLength="25" />
     <Property Name="MaST" Type="char" MaxLength="25" />
+    <Property Name="NgayBD" Type="date" />
   </EntityType>
   <EntityType Name="KySH">
     <Key>

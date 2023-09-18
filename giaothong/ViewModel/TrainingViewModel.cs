@@ -101,8 +101,12 @@ namespace giaothong.ViewModel
                 Course = new KhoaHoc();
                 StatusFilter = true;
 
-                Course.MaCSDT = TrainingCenterViewModel.SelectedItem.MaDV;
-                NameDV = TrainingCenterViewModel.SelectedItem.TenDV;
+                if(TrainingCenterViewModel.SelectedItem != null)
+                {
+                    Course.MaCSDT = TrainingCenterViewModel.SelectedItem.MaDV;
+                    NameDV = TrainingCenterViewModel.SelectedItem.TenDV;
+                }    
+
 
                 loadTrainingCourse();
             });

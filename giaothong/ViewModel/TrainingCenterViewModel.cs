@@ -48,13 +48,13 @@ namespace giaothong.ViewModel
                 if (SelectedStatusIndex == 0)
                 {
                     StatusSelected = true;
-                    loadCenterTraining(StatusSelected);
                 }
                 else
                 {
                     StatusSelected = false;
-                    loadCenterTraining(StatusSelected);
                 }
+
+                loadCenterTraining(StatusSelected);
             }
         }
 

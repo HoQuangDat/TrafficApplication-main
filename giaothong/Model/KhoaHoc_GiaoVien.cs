@@ -27,6 +27,7 @@ namespace giaothong.Model
         public string MaPD { get; set; }
         public string MaCD { get; set; }
         public string MaST { get; set; }
+        public Nullable<System.DateTime> NgayBD { get; set; }
     
         public virtual CaDay CaDay { get; set; }
         public virtual GIAOVIEN GIAOVIEN { get; set; }

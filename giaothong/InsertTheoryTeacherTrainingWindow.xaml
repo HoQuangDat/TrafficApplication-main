@@ -96,12 +96,13 @@
                                     <GridView>
                                         <GridViewColumn  DisplayMemberBinding="{Binding ID}" Header="STT"/>
                                         <GridViewColumn  DisplayMemberBinding="{Binding GIAOVIEN.FullName}" Header="Họ Tên"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding GIAOVIEN.NgaySinh}" Header="Ngày Sinh"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding GIAOVIEN.NgaySinh, StringFormat=dd/MM/yyyy}" Header="Ngày Sinh"/>
                                         <GridViewColumn  DisplayMemberBinding="{Binding GIAOVIEN.SoCCCD}" Header="CCCD/CMND"/>
                                         <GridViewColumn  DisplayMemberBinding="{Binding KhoaHoc.HangDT}" Header="Hạng ĐT"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding CaDay.MaCD}" Header="Ca"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding PhongDay.MaPD}" Header="Phòng"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding CaDay.CaDay1}" Header="Ca"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding PhongDay.PhongDay1}" Header="Phòng"/>
                                         <GridViewColumn  DisplayMemberBinding="{Binding SoHV}" Header="Số HV"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding NgayBD, StringFormat=dd/MM/yyyy}" Header="Ngày Bắt Đầu"/>
                                     </GridView>
                                 </ListView.View>
                                 <i:Interaction.Triggers>

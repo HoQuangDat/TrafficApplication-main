@@ -598,6 +598,7 @@
     <EntitySetMapping Name="KhoaHoc_GiaoVien">
       <EntityTypeMapping TypeName="giaothongModel.KhoaHoc_GiaoVien">
         <MappingFragment StoreEntitySet="KhoaHoc_GiaoVien">
+          <ScalarProperty Name="NgayBD" ColumnName="NgayBD" />
           <ScalarProperty Name="MaST" ColumnName="MaST" />
           <ScalarProperty Name="MaCD" ColumnName="MaCD" />
           <ScalarProperty Name="MaPD" ColumnName="MaPD" />

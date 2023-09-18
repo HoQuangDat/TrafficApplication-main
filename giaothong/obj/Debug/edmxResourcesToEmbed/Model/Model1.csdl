@@ -1050,6 +1050,7 @@
     <NavigationProperty Name="KhoaHoc" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaST__24E777C3" FromRole="KhoaHoc_GiaoVien" ToRole="KhoaHoc" />
     <NavigationProperty Name="PhongDay" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaPD__26CFC035" FromRole="KhoaHoc_GiaoVien" ToRole="PhongDay" />
     <NavigationProperty Name="SanTap" Relationship="giaothongModel.FK__KhoaHoc_Gi__MaST__28B808A7" FromRole="KhoaHoc_GiaoVien" ToRole="SanTap" />
+    <Property Name="NgayBD" Type="DateTime" Precision="0" />
   </EntityType>
   <Association Name="FK__KhoaHoc_Gi__MaCD__27C3E46E">
     <End Type="giaothongModel.CaDay" Role="CaDay" Multiplicity="0..1" />

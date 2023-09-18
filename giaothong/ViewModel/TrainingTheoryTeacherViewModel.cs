@@ -45,6 +45,11 @@ namespace giaothong.ViewModel
         private string _showPage;
         public string ShowPage { get => _showPage; set { _showPage = value; OnPropertyChanged(); } }
 
+        private bool _selectedWorkTime;
+        public bool SelectedWorkTime { get => _selectedWorkTime; set { _selectedWorkTime = value; OnPropertyChanged(); } }
+
+        private string _sumStudent;
+        public string SumStudent { get => _sumStudent; set { _sumStudent = value; OnPropertyChanged(); } }
 
         private KhoaHoc _course;
         public KhoaHoc Course { get => _course; set { _course = value; ; OnPropertyChanged(); } }
@@ -58,6 +63,16 @@ namespace giaothong.ViewModel
             get => _selectedArrangeTeacherItem; set
             {
                 _selectedArrangeTeacherItem = value;
+
+                if (SelectedArrangeTeacherItem != null)
+                {
+                    if (SelectedArrangeTeacherItem.SoHV == null)
+                    {
+                        SelectedArrangeTeacherItem.SoHV = 0;
+                    }
+                }
+
+
                 OnPropertyChanged();
             }
         }
@@ -69,6 +84,12 @@ namespace giaothong.ViewModel
             set
             {
                 _selectedWorkTimeItem = value;
+
+                if (SelectedWorkTimeItem != null)
+                {
+                    SelectedWorkTime = true;
+                }
+
                 OnPropertyChanged();
 
             }
@@ -93,9 +114,18 @@ namespace giaothong.ViewModel
         public ICommand previewMouseArrange { get; set; }
         public ICommand nextPage { get; set; }
         public ICommand previousPage { get; set; }
+        public ICommand updateScheduleButton { get; set; }
 
         public TrainingTheoryTeacherViewModel()
         {
+            SelectedWorkTime = false;
+
+            updateScheduleButton = new RelayCommand<string>((p) => { return true; }, (p) =>
+            {
+                updateSchedule();
+                sumStudentOfCourse();
+            });
+
             trainingTheoryWindowLoaded = new RelayCommand<string>((p) => { return true; }, (p) =>
             {
                 ListTeacher = new ObservableCollection<GIAOVIEN>();
@@ -113,6 +143,8 @@ namespace giaothong.ViewModel
 
             closeInsertTheoryTeacherWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
+                SelectedWorkTime = false;
+
                 p.Close();
             });
 
@@ -137,9 +169,18 @@ namespace giaothong.ViewModel
 
                     if (MessageBoxResult.OK == messageBox)
                     {
-                        insertTeacherCourse();
-                        listTeacherTraining();
+                        if(checkTeacherExistsCourse())
+                        {
+                            insertTeacherCourse();
+                            listTeacherTraining();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Giáo viên: " + SelectedItem.FullName + " đã dạy 2 buổi trong khóa học: " + Course.TenKH, "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                     }
+
+                    SelectedItem = null;
                 }
             });
 
@@ -148,11 +189,29 @@ namespace giaothong.ViewModel
                 if (SelectedArrangeTeacherItem != null)
                 {
                     p.Hide();
+
                     listOfWorkTime();
                     listRoomWork();
 
+                    if (SelectedArrangeTeacherItem != null)
+                    {
+                        if (SelectedArrangeTeacherItem.MaCD != null)
+                        {
+                            SelectedWorkTimeItem = ListOfWorkTime.Where(c => c.MaCD.Trim() == SelectedArrangeTeacherItem.MaCD.Trim()).FirstOrDefault();
+                        }
+
+                        if (SelectedArrangeTeacherItem.MaPD != null)
+                        {
+                            SelectedRoomWorkItem = ListRoomWorkTime.Where(c => c.MaPD.Trim() == SelectedArrangeTeacherItem.MaPD.Trim()).FirstOrDefault();
+                        }
+                    }
+
+                    sumStudentOfCourse();
+
                     ArrangeTheoryTeacherWindow arrangeTheory = new ArrangeTheoryTeacherWindow();
                     arrangeTheory.ShowDialog();
+
+                    listTeacherTraining();
 
                     p.ShowDialog();
                 }
@@ -179,18 +238,97 @@ namespace giaothong.ViewModel
             });
         }
 
+        private string sumStudentOfCourse()
+        {
+            using (db = new giaothongEntities())
+            {
+                try
+                {
+                    int? sumStudentOfCourse = (from c in db.KhoaHocs where SelectedArrangeTeacherItem.MaKH == c.MaKH select c).Sum(p => p.TongSoHV);
+                    int? sumStudentLearning = (from c in db.KhoaHoc_GiaoVien where SelectedArrangeTeacherItem.MaKH == c.MaKH select c).Sum(p => p.SoHV);
+                    int? sum = sumStudentOfCourse - sumStudentLearning;
+
+                    SumStudent = "Số học viên (Còn lại: " + sum + ")";
+                }
+                catch
+                {
+                }
+
+                return SumStudent;
+            }
+        }
+
+        private bool checkTeacherExistsCourse()
+        {
+            using (db = new giaothongEntities())
+            {
+                try
+                {
+                    var count = (from c in db.KhoaHoc_GiaoVien where c.MaGV == SelectedItem.MaGV select c).Count();
+
+                    if(count >= 2)
+                    {
+                        return false;
+                    }
+                }
+                catch {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        //update information schedule of teacher
+        private void updateSchedule()
+        {
+            using (db = new giaothongEntities())
+            {
+                try
+                {
+                    KhoaHoc_GiaoVien data = db.KhoaHoc_GiaoVien.Find(SelectedArrangeTeacherItem.ID);
+                    data.SoHV = SelectedArrangeTeacherItem.SoHV;
+                    data.MaCD = SelectedWorkTimeItem.MaCD;
+                    data.MaPD = SelectedRoomWorkItem.MaPD;
+                    data.NgayBD = SelectedArrangeTeacherItem.NgayBD;
+
+                    db.SaveChanges();
+
+                    MessageBox.Show("Cập nhật thông tin lịch dạy cho giáo viên: " + SelectedArrangeTeacherItem.GIAOVIEN.FullName + " thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Có lỗi xảy ra trong quá trinh cập nhật thông tin lịch dạy cho giáo viên: " + SelectedArrangeTeacherItem.GIAOVIEN.FullName, "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        //get list room
         private ObservableCollection<PhongDay> listRoomWork()
         {
             using (db = new giaothongEntities())
             {
                 ListRoomWorkTime.Clear();
 
-                var rooms = (from c in db.PhongDays where db.KhoaHoc_GiaoVien.Any(p => p.MaPD != c.MaPD && SelectedArrangeTeacherItem.MaGV != p.MaGV) select c).OrderBy(p => p.MaPD);
-
-                rooms.ToList().ForEach(p =>
+                if (SelectedArrangeTeacherItem != null)
                 {
-                    ListRoomWorkTime.Add(p);
-                });
+                    var teacherExists = (from c in db.KhoaHoc_GiaoVien
+                                         where SelectedArrangeTeacherItem.MaGV == c.MaGV && c.MaKH == SelectedArrangeTeacherItem.MaKH
+                                         select c).FirstOrDefault();
+
+                    var rooms = (from c in db.PhongDays select c).OrderBy(p => p.MaPD);
+
+                    if (teacherExists != null && SelectedRoomWorkItem != null)
+                    {
+                        rooms = rooms.Where(c => db.KhoaHoc_GiaoVien.Any(p => p.MaKH == SelectedArrangeTeacherItem.MaKH
+                                 && p.MaCD != SelectedWorkTimeItem.MaCD && p.MaGV == SelectedArrangeTeacherItem.MaGV)).OrderBy(c => c.MaPD);
+                    }
+
+                    rooms.ToList().ForEach(p =>
+                    {
+                        ListRoomWorkTime.Add(p);
+                    });
+                }
 
                 return ListRoomWorkTime;
             }
@@ -203,7 +341,20 @@ namespace giaothong.ViewModel
             {
                 ListOfWorkTime.Clear();
 
-                var teachs = (from c in db.CaDays where db.KhoaHoc_GiaoVien.Any(p => p.MaCD != c.MaCD && SelectedArrangeTeacherItem.MaGV != p.MaGV) select c).OrderBy(p => p.MaCD);
+                //check teacher is teaching course at time work
+                var teacherExists = (from c in db.KhoaHoc_GiaoVien where SelectedArrangeTeacherItem.MaGV == c.MaGV && c.MaKH == SelectedArrangeTeacherItem.MaKH select c).FirstOrDefault();
+
+                //get all time work
+                var teachs = (from c in db.CaDays select c).OrderBy(p => p.MaCD);
+
+                if (teacherExists != null)
+                {
+                    //get time work is empty
+                    teachs = teachs.Where(p => db.KhoaHoc_GiaoVien.Any(c =>
+                                c.MaKH == SelectedArrangeTeacherItem.MaKH
+                                && SelectedArrangeTeacherItem.MaGV == c.MaGV
+                                && c.MaCD != p.MaCD)).OrderBy(p => p.MaCD);
+                }
 
                 teachs.ToList().ForEach(p =>
                 {
@@ -244,27 +395,33 @@ namespace giaothong.ViewModel
         {
             using (db = new giaothongEntities())
             {
-                ListTeacherTraining.Clear();
-
-                var teachers = (from c in db.KhoaHoc_GiaoVien where c.MaKH == Course.MaKH && c.GIAOVIEN.GV_LT == true select c).OrderBy(p => p.ID).ToList();
-
-                TotalPages = (int)Math.Ceiling((double)teachers.Count / pageSize);
-
-                if (TotalPages == 0)
+                try
                 {
-                    TotalPages = 1;
+                    ListTeacherTraining.Clear();
+
+                    var teachers = (from c in db.KhoaHoc_GiaoVien where c.MaKH == Course.MaKH && c.GIAOVIEN.GV_LT == true select c).OrderBy(p => p.ID).ToList();
+
+                    TotalPages = (int)Math.Ceiling((double)teachers.Count / pageSize);
+
+                    if (TotalPages == 0)
+                    {
+                        TotalPages = 1;
+                    }
+
+                    var listcenter = teachers.Skip((CurrentPage - 1) * pageSize).Take(pageSize);
+
+                    listcenter.ToList().ForEach(p =>
+                    {
+                        p.GIAOVIEN.FullName = p.GIAOVIEN.HoDem + " " + p.GIAOVIEN.TenGV;
+                        p.KhoaHoc.HangDT = Course.HangDT;
+                        p.CaDay = db.CaDays.Find(p.MaCD);
+                        p.PhongDay = db.PhongDays.Find(p.MaPD);
+                        ListTeacherTraining.Add(p);
+                    });
+
+                    getCurrentPage();
                 }
-
-                var listcenter = teachers.Skip((CurrentPage - 1) * pageSize).Take(pageSize);
-
-                listcenter.ToList().ForEach(p =>
-                {
-                    p.GIAOVIEN.FullName = p.GIAOVIEN.HoDem + " " + p.GIAOVIEN.TenGV;
-                    p.KhoaHoc.HangDT = Course.HangDT;
-                    ListTeacherTraining.Add(p);
-                });
-
-                getCurrentPage();
+                catch { }
 
                 return ListTeacherTraining;
             }
