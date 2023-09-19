@@ -169,15 +169,19 @@ namespace giaothong.ViewModel
 
                     if (MessageBoxResult.OK == messageBox)
                     {
-                        if(checkTeacherExistsCourse())
+                        if (checkCourseFullTeacher() == false)
                         {
-                            insertTeacherCourse();
-                            listTeacherTraining();
+                            MessageBox.Show("Khóa học: " + Course.TenKH + " đã đủ giáo viên dạy lý thuyết", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
-                        else
+                        else if(checkTeacherExistsCourse() == false)
                         {
                             MessageBox.Show("Giáo viên: " + SelectedItem.FullName + " đã dạy 2 buổi trong khóa học: " + Course.TenKH, "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
+                        else
+                        {
+                            insertTeacherCourse();
+                            listTeacherTraining();
+                        }    
                     }
 
                     SelectedItem = null;
@@ -246,6 +250,12 @@ namespace giaothong.ViewModel
                 {
                     int? sumStudentOfCourse = (from c in db.KhoaHocs where SelectedArrangeTeacherItem.MaKH == c.MaKH select c).Sum(p => p.TongSoHV);
                     int? sumStudentLearning = (from c in db.KhoaHoc_GiaoVien where SelectedArrangeTeacherItem.MaKH == c.MaKH select c).Sum(p => p.SoHV);
+
+                    if(sumStudentLearning == null)
+                    {
+                        sumStudentLearning = 0;
+                    }    
+
                     int? sum = sumStudentOfCourse - sumStudentLearning;
 
                     SumStudent = "Số học viên (Còn lại: " + sum + ")";
@@ -258,6 +268,28 @@ namespace giaothong.ViewModel
             }
         }
 
+        private bool checkCourseFullTeacher()
+        {
+            using (db = new giaothongEntities())
+            {
+                try
+                {
+                    var count = (from c in db.KhoaHoc_GiaoVien where c.MaKH == Course.MaKH && c.GIAOVIEN.GV_LT == true select c).Count();
+
+                    if (count >= 2)
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
         private bool checkTeacherExistsCourse()
         {
             using (db = new giaothongEntities())
@@ -266,12 +298,13 @@ namespace giaothong.ViewModel
                 {
                     var count = (from c in db.KhoaHoc_GiaoVien where c.MaGV == SelectedItem.MaGV select c).Count();
 
-                    if(count >= 2)
+                    if (count >= 2)
                     {
                         return false;
                     }
                 }
-                catch {
+                catch
+                {
                     return false;
                 }
 
@@ -312,17 +345,15 @@ namespace giaothong.ViewModel
 
                 if (SelectedArrangeTeacherItem != null)
                 {
-                    var teacherExists = (from c in db.KhoaHoc_GiaoVien
-                                         where SelectedArrangeTeacherItem.MaGV == c.MaGV && c.MaKH == SelectedArrangeTeacherItem.MaKH
-                                         select c).FirstOrDefault();
-
-                    var rooms = (from c in db.PhongDays select c).OrderBy(p => p.MaPD);
-
-                    if (teacherExists != null && SelectedRoomWorkItem != null)
-                    {
-                        rooms = rooms.Where(c => db.KhoaHoc_GiaoVien.Any(p => p.MaKH == SelectedArrangeTeacherItem.MaKH
-                                 && p.MaCD != SelectedWorkTimeItem.MaCD && p.MaGV == SelectedArrangeTeacherItem.MaGV)).OrderBy(c => c.MaPD);
-                    }
+                    var rooms = (from c in db.PhongDays
+                                 where SelectedArrangeTeacherItem.MaPD == db.KhoaHoc_GiaoVien.Where(p => p.MaKH == SelectedArrangeTeacherItem.MaKH  
+                                           && p.MaCD == SelectedArrangeTeacherItem.MaCD
+                                           && p.MaPD == p.MaPD).FirstOrDefault().MaPD ||
+                                 c.MaPD != db.KhoaHoc_GiaoVien.Where(p => p.MaKH == SelectedArrangeTeacherItem.MaKH
+                                            && p.MaGV == SelectedArrangeTeacherItem.MaGV
+                                            && p.MaCD == SelectedArrangeTeacherItem.MaCD
+                                            && p.MaPD == p.MaPD).FirstOrDefault().MaPD
+                                 select c).OrderBy(p => p.MaPD);
 
                     rooms.ToList().ForEach(p =>
                     {
@@ -341,20 +372,12 @@ namespace giaothong.ViewModel
             {
                 ListOfWorkTime.Clear();
 
-                //check teacher is teaching course at time work
-                var teacherExists = (from c in db.KhoaHoc_GiaoVien where SelectedArrangeTeacherItem.MaGV == c.MaGV && c.MaKH == SelectedArrangeTeacherItem.MaKH select c).FirstOrDefault();
-
                 //get all time work
-                var teachs = (from c in db.CaDays select c).OrderBy(p => p.MaCD);
-
-                if (teacherExists != null)
-                {
-                    //get time work is empty
-                    teachs = teachs.Where(p => db.KhoaHoc_GiaoVien.Any(c =>
-                                c.MaKH == SelectedArrangeTeacherItem.MaKH
-                                && SelectedArrangeTeacherItem.MaGV == c.MaGV
-                                && c.MaCD != p.MaCD)).OrderBy(p => p.MaCD);
-                }
+                var teachs = (from c in db.CaDays
+                              where SelectedArrangeTeacherItem.MaCD == db.KhoaHoc_GiaoVien.Where(p => p.MaCD == c.MaCD  
+                              && p.MaKH == SelectedArrangeTeacherItem.MaKH).FirstOrDefault().MaCD ||
+                              (c.MaCD != db.KhoaHoc_GiaoVien.Where(p => p.MaCD == c.MaCD  && p.MaKH == SelectedArrangeTeacherItem.MaKH).FirstOrDefault().MaCD)
+                              select c).OrderBy(p => p.MaCD);
 
                 teachs.ToList().ForEach(p =>
                 {
