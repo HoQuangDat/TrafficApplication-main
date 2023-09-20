@@ -122,8 +122,27 @@ namespace giaothong.ViewModel
 
             updateScheduleButton = new RelayCommand<string>((p) => { return true; }, (p) =>
             {
-                updateSchedule();
-                sumStudentOfCourse();
+                if(SelectedWorkTimeItem == null)
+                {
+                    MessageBox.Show("Vui lòng chọn ca dạy cho khóa học này: ", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+                if (SelectedArrangeTeacherItem != null)
+                {
+                    if(SelectedArrangeTeacherItem.SoHV < 0)
+                    {
+                        MessageBox.Show("Số học viên không hợp lệ: ", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else if (SelectedArrangeTeacherItem.SoHV > sumStudentOfCourse())
+                    {
+                        MessageBox.Show("Số học viên vượt quá số lượng đăng ký khóa học: " + sumStudentOfCourse(), "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else
+                    {
+                        updateSchedule();
+                        SumStudent = "Số học viên (Còn lại: " + sumStudentOfCourse() + ")";
+                    }
+                }    
             });
 
             trainingTheoryWindowLoaded = new RelayCommand<string>((p) => { return true; }, (p) =>
@@ -199,6 +218,15 @@ namespace giaothong.ViewModel
 
                     if (SelectedArrangeTeacherItem != null)
                     {
+                        if (SelectedArrangeTeacherItem.GIAOVIEN.HoDem != null && SelectedArrangeTeacherItem.GIAOVIEN.TenGV != null)
+                        {
+                            SelectedArrangeTeacherItem.GIAOVIEN.FullName = SelectedArrangeTeacherItem.GIAOVIEN.HoDem + " " + SelectedArrangeTeacherItem.GIAOVIEN.TenGV;
+                        }
+                        else
+                        {
+                            SelectedArrangeTeacherItem.GIAOVIEN.FullName = SelectedArrangeTeacherItem.GIAOVIEN.TenGV != null ? SelectedArrangeTeacherItem.GIAOVIEN.TenGV : SelectedArrangeTeacherItem.GIAOVIEN.HoDem;
+                        }
+
                         if (SelectedArrangeTeacherItem.MaCD != null)
                         {
                             SelectedWorkTimeItem = ListOfWorkTime.Where(c => c.MaCD.Trim() == SelectedArrangeTeacherItem.MaCD.Trim()).FirstOrDefault();
@@ -210,7 +238,7 @@ namespace giaothong.ViewModel
                         }
                     }
 
-                    sumStudentOfCourse();
+                    SumStudent = "Số học viên (Còn lại: " + sumStudentOfCourse() + ")";
 
                     ArrangeTheoryTeacherWindow arrangeTheory = new ArrangeTheoryTeacherWindow();
                     arrangeTheory.ShowDialog();
@@ -242,29 +270,30 @@ namespace giaothong.ViewModel
             });
         }
 
-        private string sumStudentOfCourse()
+        private int? sumStudentOfCourse()
         {
             using (db = new giaothongEntities())
             {
+                int? sum = 0;
+
                 try
                 {
                     int? sumStudentOfCourse = (from c in db.KhoaHocs where SelectedArrangeTeacherItem.MaKH == c.MaKH select c).Sum(p => p.TongSoHV);
-                    int? sumStudentLearning = (from c in db.KhoaHoc_GiaoVien where SelectedArrangeTeacherItem.MaKH == c.MaKH select c).Sum(p => p.SoHV);
+                    int? sumStudentLearning = (from c in db.KhoaHoc_GiaoVien where SelectedArrangeTeacherItem.MaKH == c.MaKH && c.GIAOVIEN.GV_LT == true select c).Sum(p => p.SoHV);
 
                     if(sumStudentLearning == null)
                     {
                         sumStudentLearning = 0;
-                    }    
+                    }
 
-                    int? sum = sumStudentOfCourse - sumStudentLearning;
+                    sum = sumStudentOfCourse - sumStudentLearning;
 
-                    SumStudent = "Số học viên (Còn lại: " + sum + ")";
+                    return sum;
                 }
                 catch
                 {
+                    return sum;
                 }
-
-                return SumStudent;
             }
         }
 
@@ -376,7 +405,7 @@ namespace giaothong.ViewModel
                 var teachs = (from c in db.CaDays
                               where SelectedArrangeTeacherItem.MaCD == db.KhoaHoc_GiaoVien.Where(p => p.MaCD == c.MaCD  
                               && p.MaKH == SelectedArrangeTeacherItem.MaKH).FirstOrDefault().MaCD ||
-                              (c.MaCD != db.KhoaHoc_GiaoVien.Where(p => p.MaCD == c.MaCD  && p.MaKH == SelectedArrangeTeacherItem.MaKH).FirstOrDefault().MaCD)
+                              (c.MaCD != db.KhoaHoc_GiaoVien.Where(p => p.MaCD == c.MaCD  && p.MaKH == SelectedArrangeTeacherItem.MaKH && p.GIAOVIEN.GV_LT == true).FirstOrDefault().MaCD)
                               select c).OrderBy(p => p.MaCD);
 
                 teachs.ToList().ForEach(p =>

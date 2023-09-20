@@ -48,7 +48,7 @@ namespace giaothong.Model
         public virtual GIAOVIEN_GCN GIAOVIEN_GCN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KhoaHoc_GiaoVien> KhoaHoc_GiaoVien { get; set; }
-        public string FullName { get; internal set; }
-        public string Training { get; internal set; }
+        public string FullName { get;  set; }
+        public string Training { get;  set; }
     }
 }

@@ -91,22 +91,24 @@
                         <StackPanel>
                             <TextBlock Grid.Row="1" Foreground="#08bf96" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Thông Tin Giáo Viên Dạy Thực Hành Trong Khóa Học" FontWeight="SemiBold"></TextBlock>
 
-                            <ListView Margin="0 43 0 0" ItemsSource="{Binding ListTeacherTraining}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                            <ListView Margin="0 43 0 0" ItemsSource="{Binding ListTeacherTraining}" SelectedItem="{Binding SelectedArrangeTeacherItem, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn  DisplayMemberBinding="{Binding ID}" Header="STT"/>
                                         <GridViewColumn  DisplayMemberBinding="{Binding GIAOVIEN.FullName}" Header="Họ Tên"/>
                                         <GridViewColumn  DisplayMemberBinding="{Binding KhoaHoc.HangDT}" Header="Hạng"/>
                                         <GridViewColumn  DisplayMemberBinding="{Binding BienSoXe}" Header="Xe"/>
-                                        <GridViewColumn  DisplayMemberBinding="{Binding SanTap.MaST}" Header="Sân Tập"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding CaDay.CaDay1}" Header="Ca"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding SanTap.SanTap1}" Header="Sân Tập"/>
                                         <GridViewColumn  DisplayMemberBinding="{Binding SoHV}" Header="Số HV"/>
+                                        <GridViewColumn  DisplayMemberBinding="{Binding NgayBD, StringFormat=dd/MM/yyyy}" Header="Ngày Bắt Đầu"/>
                                     </GridView>
                                 </ListView.View>
-                                <!--<i:Interaction.Triggers>
+                                <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                                        <i:InvokeCommandAction CommandParameter="{Binding ElementName=TrainingPracticeTeacherWD}" Command="{Binding previewMouseLeftButtonUp}"></i:InvokeCommandAction>
+                                        <i:InvokeCommandAction CommandParameter="{Binding ElementName=TrainingPracticeTeacherWD}" Command="{Binding previewMouseArrange}"></i:InvokeCommandAction>
                                     </i:EventTrigger>
-                                </i:Interaction.Triggers>-->
+                                </i:Interaction.Triggers>
                             </ListView>
                         </StackPanel>
 
